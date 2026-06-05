@@ -1,0 +1,42 @@
+{
+  "name": "ProfitGuard AI - UAE Cafe Platform",
+  "short_name": "ProfitGuard",
+  "description": "Smart compliance & waste reduction for UAE cafes. Be fine-proof. Save AED on every order.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050d1a",
+  "theme_color": "#1a6cff",
+  "categories": ["business", "productivity", "food"],
+  "lang": "en-AE",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgZmlsbD0iIzFhNmNmZiIgcng9IjQyIi8+PHBhdGggZD0iTTQ4IDEzNUw4NyA4N2wyOSAyOSAzOC01OCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzFhNmNmZiIgcng9IjExMiIvPjxwYXRoIGQ9Ik0xMjggMzYwTDIzMiAyMzJsNzcgNzcgMTAyLTE1NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Log Sales",
+      "short_name": "Sales",
+      "description": "Enter yesterday's sales",
+      "url": "/?tab=sales"
+    },
+    {
+      "name": "Municipality Log",
+      "short_name": "Log",
+      "description": "Daily compliance log",
+      "url": "/?tab=logs"
+    }
+  ]
+}
