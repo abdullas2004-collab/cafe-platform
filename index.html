@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Theme + PWA -->
+    <meta name="theme-color" content="#0a8754" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Kaffelog" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- iOS Home Screen Icon: Kaffelog balance scale on green -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgZmlsbD0iIzBhODc1NCIgcng9IjQyIi8+PHBhdGggZD0iTTk2IDQ0djEwNE0zNiA3MmgxMjBNNTAgNzJsLTE1IDQwYTI1IDI1IDAgMDA1MCAwTDcwIDcyTTEzNiA3MmwtMTUgNDBhMjUgMjUgMCAwMDUwIDBMMTU2IDcyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+" />
+
+    <!-- Browser tab favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBhODc1NCIgcng9IjIyIi8+PHBhdGggZD0iTTUwIDIzdjU0TTE5IDM3aDYyTTI2IDM3bC04IDIxYTEzIDEzIDAgMDAyNiAwTDM2IDM3TTcwIDM3bC04IDIxYTEzIDEzIDAgMDAyNiAwTDgwIDM3IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+" />
+
+    <title>Kaffelog — Balance for UAE Cafés</title>
+    <meta name="description" content="Smart compliance & waste reduction for UAE cafés. Be fine-proof. Save AED on every order. ميزان — balance for your café." />
+  </head>
+  <body style="margin:0;background:#050d1a;">
+    <div id="root"></div>
+    <script type="module" src="/main.jsx"></script>
+
+    <!-- Register the service worker for PWA + offline support -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js")
+            .then(reg => console.log("Kaffelog service worker registered"))
+            .catch(err => console.warn("Service worker registration failed:", err));
+        });
+      }
+    </script>
+  </body>
+</html>
