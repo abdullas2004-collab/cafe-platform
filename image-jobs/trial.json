@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-18T15:11:43.788933Z",
+    "display_name": "GPT Image 2",
+    "id": "393c06f3-2c83-496d-b5f0-4669dc9b7603",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151143_393c06f3-2c83-496d-b5f0-4669dc9b7603_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "Documentary editorial photograph, wide banner crop of an independent café counter in early morning light, stainless steel espresso machine, stacked cups, a receipt printer, warm directional sunlight raking across the dark counter surface, deep shadows, empty of customers, quiet and orderly. Color grade: warm dark browns, soot black, cream, restrained copper-amber accents, muted stainless grey — no bright saturated colors, no lifestyle gloss. Cinematic, tactile, slightly cool morning air against warm light, photorealistic, no people, no text, no logos, wide horizontal composition",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151143_393c06f3-2c83-496d-b5f0-4669dc9b7603.png",
+    "status": "completed"
+  }
+]

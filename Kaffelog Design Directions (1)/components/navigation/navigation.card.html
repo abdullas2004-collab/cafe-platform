@@ -1,0 +1,15 @@
+<!-- @dsCard group="Components" viewport="700x100" name="Navigation" -->
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<div id="root" style="padding:24px; background:var(--color-bg-card);"></div>
+<script type="text/babel">
+const { Tabs } = window.KaffelogDS;
+function Demo() {
+  const [active, setActive] = React.useState('today');
+  return <Tabs items={[{value:'today',label:'Today'},{value:'milk',label:'Milk'},{value:'logs',label:'Logs'},{value:'safevault',label:'SafeVault'},{value:'reports',label:'Reports'}]} active={active} onChange={setActive} />;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>

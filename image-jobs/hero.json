@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-18T15:11:32.326234Z",
+    "display_name": "GPT Image 2",
+    "id": "16e5b15e-c39c-4f79-8cd4-ab308465a3ca",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151132_16e5b15e-c39c-4f79-8cd4-ab308465a3ca_min.webp",
+    "params": {
+      "aspect_ratio": "4:3",
+      "height": 1744,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "Documentary editorial photograph, straight-on evenly lit shot of a focused barista at a stainless steel espresso machine in a small independent UAE café, pulling a shot. Cinematic directional lighting with deep black shadows and warm highlights on brushed stainless steel. Color grade: warm dark browns, soot black, cream, restrained copper-amber accents — no bright saturated colors. Subject wears a plain black shirt and dark apron, practical and understated. Expression is focused and concentrated, not smiling. Tight composition, slightly overhead-adjacent angle, tactile back-of-house realism, no text, no logos, photorealistic, 35mm lens look, low ambient light with one strong warm key light source",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2336
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151132_16e5b15e-c39c-4f79-8cd4-ab308465a3ca.png",
+    "status": "completed"
+  }
+]

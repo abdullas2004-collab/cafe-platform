@@ -1,0 +1,115 @@
+:root {
+  /* primitives */
+  --brown-900: #1E1B18;
+  --brown-800: #26221E;
+  --brown-700: #332E28;
+  --stone-600: #6E675E;
+  --stone-400: #9C9184;
+  --stone-300: #B4ACA0;
+  --stone-200: #C9C4B8;
+  --paper-300: #DAD5C8;
+  --paper-200: #E8E4DB;
+  --paper-100: #F6F3EC;
+  --paper-050: #FDFCF8;
+  --rust-700: #7E3D18;
+  --rust-600: #9A4A1E;
+  --rust-400: #C9762E;
+  --rust-200: #E8B27A;
+  --sage-700: #3E5449;
+  --sage-600: #5C7268;
+  --sage-200: #C7D3CC;
+  --red-700: #8A2E22;
+  --red-600: #B03A2E;
+  --red-200: #E9C3BC;
+
+  /* surfaces */
+  --color-bg-page: var(--paper-200);
+  --color-bg-surface: var(--paper-100);
+  --color-bg-card: var(--paper-050);
+  --color-bg-sunken: var(--paper-300);
+  --color-bg-inverse: var(--brown-900);
+  --color-bg-inverse-raised: var(--brown-800);
+  --color-bg-inverse-sunken: var(--brown-700);
+  --color-bg-overlay-scrim: rgba(30, 27, 24, 0.55);
+
+  /* text */
+  --color-text-primary: var(--brown-900);
+  --color-text-secondary: var(--stone-600);
+  --color-text-tertiary: var(--stone-400);
+  --color-text-disabled: var(--stone-300);
+  --color-text-inverse: var(--paper-100);
+  --color-text-inverse-secondary: var(--stone-400);
+  --color-text-link: var(--rust-600);
+  --color-text-link-hover: var(--rust-400);
+
+  /* borders */
+  --color-border-subtle: rgba(30, 27, 24, 0.1);
+  --color-border-default: rgba(30, 27, 24, 0.18);
+  --color-border-strong: var(--brown-900);
+  --color-border-inverse: rgba(240, 235, 225, 0.16);
+  --color-border-focus: var(--rust-600);
+  --color-border-error: var(--red-600);
+
+  /* brand */
+  --color-brand: var(--rust-600);
+  --color-brand-hover: var(--rust-700);
+  --color-brand-active: #63300F;
+  --color-accent: var(--rust-400);
+
+  /* semantic status — Kaffelog's three states: SAFE / DUE SOON / NEEDS ATTENTION */
+  --color-success-bg: rgba(92, 114, 104, 0.14);
+  --color-success-border: var(--sage-600);
+  --color-success-text: var(--sage-700);
+  --color-warning-bg: rgba(201, 118, 46, 0.16);
+  --color-warning-border: var(--rust-400);
+  --color-warning-text: #8A4E1D;
+  --color-error-bg: rgba(176, 58, 46, 0.14);
+  --color-error-border: var(--red-600);
+  --color-error-text: var(--red-700);
+  --color-neutral-bg: var(--paper-300);
+  --color-neutral-border: var(--stone-200);
+  --color-neutral-text: var(--stone-600);
+
+  /* data viz — categorical (milk types, waste categories) */
+  --chart-1: var(--rust-600);
+  --chart-2: var(--sage-600);
+  --chart-3: var(--rust-400);
+  --chart-4: var(--stone-400);
+  --chart-5: var(--brown-900);
+  --chart-6: var(--red-600);
+
+  /* focus */
+  --focus-ring-color: var(--rust-600);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
+[data-theme="dark"] {
+  --color-bg-page: var(--brown-900);
+  --color-bg-surface: var(--brown-800);
+  --color-bg-card: var(--brown-700);
+  --color-bg-sunken: #17140F;
+  --color-bg-inverse: var(--paper-100);
+  --color-bg-inverse-raised: var(--paper-050);
+  --color-bg-inverse-sunken: var(--paper-200);
+  --color-bg-overlay-scrim: rgba(0, 0, 0, 0.65);
+
+  --color-text-primary: var(--paper-100);
+  --color-text-secondary: var(--stone-400);
+  --color-text-tertiary: #7A7266;
+  --color-text-disabled: #524B42;
+  --color-text-inverse: var(--brown-900);
+  --color-text-inverse-secondary: var(--stone-600);
+  --color-text-link: var(--rust-400);
+  --color-text-link-hover: var(--rust-200);
+
+  --color-border-subtle: rgba(240, 235, 225, 0.08);
+  --color-border-default: rgba(240, 235, 225, 0.16);
+  --color-border-strong: var(--paper-100);
+  --color-border-inverse: rgba(30, 27, 24, 0.2);
+
+  --color-success-bg: rgba(199, 211, 204, 0.12);
+  --color-warning-bg: rgba(201, 118, 46, 0.2);
+  --color-error-bg: rgba(176, 58, 46, 0.2);
+  --color-neutral-bg: rgba(201, 196, 184, 0.1);
+}

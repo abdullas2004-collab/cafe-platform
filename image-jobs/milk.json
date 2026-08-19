@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-18T15:11:35.69297Z",
+    "display_name": "GPT Image 2",
+    "id": "0213a07b-95d5-4e4c-8cde-2ea802e6f7b2",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151135_0213a07b-95d5-4e4c-8cde-2ea802e6f7b2_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "Documentary editorial photograph, café owner standing inside a walk-in milk fridge counting stacked milk cartons by hand, holding a clipboard. Cinematic directional lighting, cool fridge light mixing with warm ambient spill, deep shadows, reflected stainless steel shelving. Color grade: warm dark browns, soot black, cream, restrained copper-amber accents, muted stainless grey — no bright saturated colors. Subject wears a plain black t-shirt, practical dark workwear, expression focused and slightly concerned, analytical, not smiling. Tight crop, vertical portrait composition, tactile back-of-house realism, no text, no logos, photorealistic, shallow depth of field",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 1744
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151135_0213a07b-95d5-4e4c-8cde-2ea802e6f7b2.png",
+    "status": "completed"
+  }
+]

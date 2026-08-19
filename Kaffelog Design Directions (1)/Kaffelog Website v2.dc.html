@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<script src="./image-slot.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+body { margin:0; background:#CFC9BB; color:#1E1B18; font-family:'IBM Plex Sans',sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#9A4A1E; text-decoration:none; } a:hover { color:#C9762E; }
+</style>
+</helmet>
+<div style="display:flex; gap:80px; padding:64px; align-items:flex-start;">
+
+  <!-- ============ HOME ============ -->
+  <div style="width:1240px; flex-shrink:0;" data-screen-label="Home">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/ — HOMEPAGE</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="background:#1E1B18; color:#9C9184; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.18em; padding:8px 28px; display:flex; justify-content:space-between;">
+        <span>KAFFELOG — THE CALM SYSTEM BEHIND THE CAFÉ</span>
+        <span>DUBAI · SHARJAH · AJMAN &nbsp;&nbsp;|&nbsp;&nbsp; EN / ع</span>
+      </div>
+      <div style="display:flex; align-items:stretch; border-bottom:2px solid #1E1B18; background:#F6F3EC;">
+        <div style="display:flex; align-items:center; gap:12px; padding:18px 28px; border-right:1.5px solid #1E1B18;">
+          <div style="width:34px; height:34px; background:#1E1B18; display:flex; align-items:center; justify-content:center; position:relative;"><div style="width:14px; height:8px; border-radius:50%; background:#F6F3EC;"></div><div style="position:absolute; right:5px; bottom:5px; width:8px; height:8px; background:#C9762E;"></div></div>
+          <span style="font-weight:700; font-size:19px; letter-spacing:-0.02em;">KAFFELOG</span>
+        </div>
+        <div style="display:flex; align-items:center; padding:0 26px; border-right:1.5px solid #1E1B18; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em;">HOW IT WORKS</div>
+        <div style="display:flex; align-items:center; padding:0 26px; border-right:1.5px solid #1E1B18; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em;">PRICING</div>
+        <div style="display:flex; align-items:center; padding:0 26px; border-right:1.5px solid #1E1B18; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em;">FAQ</div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; padding:0 34px; background:#9A4A1E; color:#F6F3EC; font-weight:600; font-size:14.5px; border-left:2px solid #1E1B18;">Start Free Trial →</div>
+      </div>
+
+      <div style="background:#1E1B18; color:#F6F3EC; position:relative; overflow:hidden;">
+        <div style="position:absolute; right:-30px; top:-40px; font-family:'Newsreader',serif; font-size:340px; line-height:1; color:rgba(240,235,225,.05); pointer-events:none;">54L</div>
+        <div style="display:grid; grid-template-columns:1.25fr 1fr; gap:40px; padding:72px 56px 64px; position:relative;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.24em; color:#C9762E;">FOR INDEPENDENT CAFÉS IN THE UAE</div>
+            <h1 style="margin:20px 0 0; font-size:60px; font-weight:700; letter-spacing:-0.035em; line-height:1.02;">Know how much milk to order tomorrow.<br><span style="color:#9C9184;">Keep your municipality paperwork ready.</span></h1>
+            <div style="display:flex; gap:14px; margin-top:38px; align-items:center;">
+              <span style="background:#F6F3EC; color:#1E1B18; padding:16px 30px; border-radius:999px; font-weight:700; font-size:15.5px;">Start Free Trial — No Card Needed</span>
+              <span style="border:1.5px solid rgba(240,235,225,.4); padding:16px 30px; border-radius:999px; font-weight:600; font-size:15.5px;">Watch 60-second demo</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:#9C9184; margin-top:20px;">14 DAYS FREE · CANCEL WITH ONE MESSAGE · NO APP STORE</div>
+          </div>
+          <div style="position:relative; min-height:420px;">
+            <div style="position:absolute; inset:0 0 0 -10px;">
+              <image-slot id="home-hero-bg" shape="rect" placeholder="Barista at the machine — straight-on, evenly lit"></image-slot>
+            </div>
+            <div style="position:absolute; right:-8px; bottom:-14px; width:250px; background:#F6F3EC; color:#1E1B18; padding:18px 16px; font-family:'IBM Plex Mono',monospace; transform:rotate(2deg); box-shadow:0 20px 44px rgba(0,0,0,.4); pointer-events:none;">
+              <div style="text-align:center; font-size:9.5px; letter-spacing:.2em; font-weight:600;">TOMORROW'S MILK ORDER</div>
+              <div style="border-top:1px dashed #1E1B18; margin:12px 0;"></div>
+              <div style="display:grid; gap:8px; font-size:11.5px;">
+                <div style="display:flex; justify-content:space-between;"><span>WHOLE MILK</span><span>38 L</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>OAT</span><span>12 L</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>ALMOND</span><span>4 L</span></div>
+              </div>
+              <div style="border-top:1px dashed #1E1B18; margin:12px 0;"></div>
+              <div style="display:flex; justify-content:space-between; align-items:baseline;"><span style="font-size:8px; letter-spacing:.16em; color:#6E675E;">EST. SAVING</span><span style="font-family:'Newsreader',serif; font-size:24px; color:#9A4A1E;">AED 72</span></div>
+              <div style="position:absolute; left:-7px; top:-7px; width:14px; height:14px; background:#C9762E;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(240,235,225,.16); display:flex; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9C9184;">
+          <div style="padding:12px 28px; border-right:1px solid rgba(240,235,225,.16);">MILK ORDERING</div>
+          <div style="padding:12px 28px; border-right:1px solid rgba(240,235,225,.16);">MUNICIPALITY LOGS</div>
+          <div style="padding:12px 28px; border-right:1px solid rgba(240,235,225,.16);">SAFEVAULT</div>
+          <div style="flex:1;"></div>
+          <div style="padding:12px 28px;">اليوم جاهز</div>
+        </div>
+      </div>
+
+      <div style="padding:64px 56px 0;">
+        <div style="display:flex; align-items:baseline; gap:18px; border-bottom:2px solid #1E1B18; padding-bottom:14px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#9A4A1E;">01</span>
+          <span style="font-weight:700; font-size:26px; letter-spacing:-0.02em;">The cost of doing nothing</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6E675E; margin-left:auto;">EVERY MONTH, INVISIBLY</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr);">
+          <div style="padding:34px 32px 38px 0; border-right:1.5px solid #1E1B18;">
+            <div style="font-family:'Newsreader',serif; font-size:56px; line-height:1; letter-spacing:-0.01em;">1,500<span style="font-size:22px; color:#6E675E;">–2,000 AED</span></div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6E675E; margin-top:14px; line-height:1.8;">LOST TO MILK WASTE,<br>EVERY MONTH</div>
+          </div>
+          <div style="padding:34px 32px 38px; border-right:1.5px solid #1E1B18;">
+            <div style="font-family:'Newsreader',serif; font-size:56px; line-height:1; font-style:italic;">Hours</div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6E675E; margin-top:14px; line-height:1.8;">ASSEMBLING PAPERWORK THE MORNING<br>AN INSPECTOR WALKS IN</div>
+          </div>
+          <div style="padding:34px 0 38px 32px;">
+            <div style="font-family:'Newsreader',serif; font-size:56px; line-height:1; color:#B03A2E;">10,000<span style="font-size:22px; color:#6E675E;"> AED</span></div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6E675E; margin-top:14px; line-height:1.8;">IN FINES FROM ONE<br>MISSED RENEWAL DATE</div>
+          </div>
+        </div>
+        <div style="border-top:1px dashed #1E1B18; padding:18px 0 0; font-family:'Newsreader',serif; font-style:italic; font-size:19px; color:#332E28;">None of this is your fault. It's admin competing with running a café — and it always loses.</div>
+      </div>
+
+      <div style="padding:64px 56px 0;">
+        <div style="display:flex; align-items:baseline; gap:18px; border-bottom:2px solid #1E1B18; padding-bottom:14px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#9A4A1E;">02</span>
+          <span style="font-weight:700; font-size:26px; letter-spacing:-0.02em;">Three jobs, one app</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); border:2px solid #1E1B18; border-top:none;">
+          <div style="padding:30px 28px 26px; border-right:1.5px solid #1E1B18; background:#F6F3EC; position:relative;">
+            <div style="position:absolute; right:0; top:0; width:16px; height:16px; background:#5C7268;"></div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:#6E675E;">JOB 01</div>
+            <div style="font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-top:12px;">Milk Ordering</div>
+            <div style="font-size:14px; color:#6E675E; line-height:1.65; margin-top:10px; min-height:66px;">Log yesterday's count in 10 seconds. Get tomorrow's exact order.</div>
+            <div style="border-top:1.5px solid #1E1B18; margin-top:18px; padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9A4A1E;">/MILK-ORDERING →</div>
+          </div>
+          <div style="padding:30px 28px 26px; border-right:1.5px solid #1E1B18; background:#F6F3EC; position:relative;">
+            <div style="position:absolute; right:0; top:0; width:16px; height:16px; background:#C9762E;"></div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:#6E675E;">JOB 02</div>
+            <div style="font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-top:12px;">Compliance Logs</div>
+            <div style="font-size:14px; color:#6E675E; line-height:1.65; margin-top:10px; min-height:66px;">Fridge checks done at the counter. Exports as a Dubai Municipality PDF.</div>
+            <div style="border-top:1.5px solid #1E1B18; margin-top:18px; padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9A4A1E;">/COMPLIANCE →</div>
+          </div>
+          <div style="padding:30px 28px 26px; background:#F6F3EC; position:relative;">
+            <div style="position:absolute; right:0; top:0; width:16px; height:16px; background:#B03A2E;"></div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:#6E675E;">JOB 03</div>
+            <div style="font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-top:12px;">SafeVault</div>
+            <div style="font-size:14px; color:#6E675E; line-height:1.65; margin-top:10px; min-height:66px;">Every licence and expiry in one place. Warned at 30, 14, and 3 days out.</div>
+            <div style="border-top:1.5px solid #1E1B18; margin-top:18px; padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9A4A1E;">/SAFEVAULT →</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:64px 56px 0;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; border:2px solid #1E1B18;">
+          <div style="padding:34px 32px; border-right:1.5px solid #1E1B18;">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; color:#9A4A1E;">03 — FITS WHAT YOU USE</div>
+            <div style="font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-top:14px; line-height:1.25;">Kaffelog sits beside your POS. It never touches payments.</div>
+            <div style="font-size:14.5px; color:#6E675E; line-height:1.7; margin-top:12px;">Import sales from Foodics, or type one number a day if you don't use a POS. No new hardware. No staff training beyond "tick the list."</div>
+          </div>
+          <div style="padding:34px 32px; background:#1E1B18; color:#F6F3EC;">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; color:#C9762E;">04 — BUILT FOR HERE</div>
+            <div style="font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-top:14px; line-height:1.25;">Toast and Square handle sales. They don't know what a Dubai Municipality hygiene log looks like.</div>
+            <div style="font-size:14.5px; color:#9C9184; line-height:1.7; margin-top:12px;">5,000+ independent cafés in the UAE. Built for this market specifically — Dubai, Sharjah, Ajman.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:64px 56px 0;">
+        <div style="display:flex; align-items:baseline; gap:18px; border-bottom:2px solid #1E1B18; padding-bottom:14px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#9A4A1E;">05</span>
+          <span style="font-weight:700; font-size:26px; letter-spacing:-0.02em;">Pricing</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#6E675E; margin-left:auto;">FULL TABLE → /PRICING</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:40px; padding:30px 0;">
+          <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px; line-height:1.35; max-width:20ch;">AED 99/month is less than one wasted carton of milk a day.</div>
+          <div style="display:flex; margin-left:auto;">
+            <div style="border:2px solid #1E1B18; background:#F6F3EC; padding:20px 28px; text-align:center;"><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6E675E;">STARTER</div><div style="font-family:'Newsreader',serif; font-size:32px; margin-top:6px;">99</div></div>
+            <div style="border:2px solid #1E1B18; margin-left:-2px; background:#1E1B18; color:#F6F3EC; padding:20px 28px; text-align:center; position:relative;"><div style="position:absolute; right:0; top:0; width:12px; height:12px; background:#C9762E;"></div><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; color:#9C9184;">PRO</div><div style="font-family:'Newsreader',serif; font-size:32px; margin-top:6px;">199</div></div>
+            <div style="border:2px solid #1E1B18; margin-left:-2px; background:#F6F3EC; padding:20px 28px; text-align:center;"><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6E675E;">CHAIN</div><div style="font-family:'Newsreader',serif; font-size:32px; margin-top:6px;">499</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin:40px 56px 0; border:2px solid #1E1B18; background:#F6F3EC; display:flex; align-items:center; gap:26px; padding:28px 32px;">
+        <div style="width:84px; height:84px; flex-shrink:0;">
+          <image-slot id="founder-photo" shape="circle" placeholder="Abdulla"></image-slot>
+        </div>
+        <div style="font-size:15px; color:#332E28; line-height:1.7; max-width:72ch;">Built by <strong>Abdulla in Mirdif, Dubai</strong> — after talking to café owners across the emirate and hearing the same three complaints in every conversation: milk waste, inspection panic, missed renewals. Kaffelog answers exactly those three things. Nothing more.</div>
+        <div style="margin-left:auto; flex-shrink:0; border:1.5px solid #1E1B18; padding:10px 14px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; color:#6E675E; transform:rotate(-3deg);">MIRDIF · DUBAI<br>EST. 2026</div>
+      </div>
+
+      <div style="margin-top:64px; background:#1E1B18; color:#F6F3EC; padding:56px; display:flex; align-items:center; justify-content:space-between; position:relative; overflow:hidden;">
+        <div style="position:absolute; left:0; top:0; width:22px; height:22px; background:#C9762E;"></div>
+        <div>
+          <div style="font-weight:700; font-size:34px; letter-spacing:-0.03em;">Start free. No card.<br>Cancel with one message.</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#9C9184; margin-top:14px;">14 DAYS FREE · ENGLISH &amp; ARABIC · اليوم جاهز</div>
+        </div>
+        <span style="background:#F6F3EC; color:#1E1B18; padding:18px 36px; border-radius:999px; font-weight:700; font-size:16px;">Start Free Trial →</span>
+      </div>
+      <div style="display:flex; border-top:2px solid #1E1B18; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:#6E675E; background:#E8E4DB;">
+        <div style="padding:14px 28px; border-right:1.5px solid #1E1B18;">KAFFELOG · BASED IN DUBAI, UAE</div>
+        <div style="padding:14px 28px; border-right:1.5px solid #1E1B18;">WHATSAPP</div>
+        <div style="padding:14px 28px; border-right:1.5px solid #1E1B18;">INFO@KAFFELOG.COM</div>
+        <div style="padding:14px 28px; border-right:1.5px solid #1E1B18;">@KAFFELOG</div>
+        <div style="flex:1;"></div>
+        <div style="padding:14px 28px;">EN / ع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MILK ORDERING ============ -->
+  <div style="width:1240px; flex-shrink:0;" data-screen-label="Milk Ordering">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/MILK-ORDERING</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="display:flex; align-items:stretch; border-bottom:2px solid #1E1B18; background:#F6F3EC;">
+        <div style="display:flex; align-items:center; gap:12px; padding:16px 28px; border-right:1.5px solid #1E1B18;"><span style="font-weight:700; font-size:18px;">KAFFELOG</span></div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; padding:0 30px; background:#9A4A1E; color:#F6F3EC; font-weight:600; font-size:14px; border-left:2px solid #1E1B18;">Start Free Trial →</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1.2fr 1fr;">
+        <div style="padding:64px 48px 56px 56px; border-right:2px solid #1E1B18;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.24em; color:#9A4A1E;">JOB 01 — MILK ORDERING</div>
+          <h1 style="margin:18px 0 0; font-size:54px; font-weight:700; letter-spacing:-0.035em; line-height:1.04;">Stop guessing how much milk to order.</h1>
+          <p style="margin:18px 0 0; font-size:17px; color:#6E675E; line-height:1.65; max-width:44ch;">Log yesterday's count. Get tomorrow's exact order, in litres, by milk type.</p>
+          <span style="display:inline-block; margin-top:30px; background:#1E1B18; color:#F6F3EC; padding:15px 30px; border-radius:999px; font-weight:700; font-size:15px;">Start Free Trial</span>
+        </div>
+        <div style="background:#1E1B18; padding:44px 40px; display:flex; align-items:center; justify-content:center;">
+          <div style="width:280px; background:#F6F3EC; padding:22px 20px; font-family:'IBM Plex Mono',monospace; transform:rotate(-1.5deg); box-shadow:0 24px 48px rgba(0,0,0,.45); position:relative;">
+            <div style="position:absolute; left:-8px; top:-8px; width:16px; height:16px; background:#5C7268;"></div>
+            <div style="text-align:center; font-size:10px; letter-spacing:.2em; font-weight:600;">TOMORROW'S MILK ORDER</div>
+            <div style="text-align:center; font-size:8px; color:#6E675E; margin-top:4px;">WED 19 AUG · MIRDIF · 06:00</div>
+            <div style="border-top:1px dashed #1E1B18; margin:14px 0;"></div>
+            <div style="display:grid; gap:10px; font-size:13px;">
+              <div style="display:flex; justify-content:space-between;"><span>WHOLE MILK</span><span>38 L</span></div>
+              <div style="display:flex; justify-content:space-between;"><span>OAT</span><span>12 L</span></div>
+              <div style="display:flex; justify-content:space-between;"><span>ALMOND</span><span>4 L</span></div>
+            </div>
+            <div style="border-top:1px dashed #1E1B18; margin:14px 0;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline;"><span style="font-size:9px; letter-spacing:.16em; color:#6E675E;">EST. SAVING</span><span style="font-family:'Newsreader',serif; font-size:26px; color:#9A4A1E;">AED 72</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:2px solid #1E1B18; display:grid; grid-template-columns:1fr 1fr; background:#1E1B18; color:#F6F3EC;">
+        <div style="padding:44px 48px 44px 56px; border-right:1px solid rgba(240,235,225,.18);">
+          <div style="font-family:'Newsreader',serif; font-size:58px; line-height:1;">1,500–2,000<span style="font-size:20px; color:#9C9184;"> AED/MO</span></div>
+          <div style="font-size:15px; color:#C9C4B8; margin-top:14px; line-height:1.65; max-width:40ch;">Waste doesn't show up on any receipt. That's why it never gets fixed.</div>
+        </div>
+        <div style="padding:44px 56px 44px 48px;">
+          <div style="font-family:'Newsreader',serif; font-size:58px; line-height:1; color:#E8B27A;">60–90<span style="font-size:20px; color:#9C9184;"> AED/DAY</span></div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#9C9184; margin-top:16px;">TYPICAL SAVING ONCE THE PATTERN SETTLES</div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-top:2px solid #1E1B18;">
+        <div style="border-right:1.5px solid #1E1B18; min-height:260px;">
+          <image-slot id="milk-human" shape="rect" placeholder="Owner counting cartons in the milk fridge"></image-slot>
+        </div>
+        <div style="padding:34px 30px; border-right:1.5px solid #1E1B18; background:#F6F3EC;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A4A1E;">WHY TRUST THE NUMBER</div>
+          <div style="font-size:15px; line-height:1.75; color:#332E28; margin-top:14px;">It reads your rolling pattern — slow Wednesdays, busy weekends, Ramadan hours — not a generic average. It learns <em>your</em> café, not "a café."</div>
+        </div>
+        <div style="padding:34px 30px; background:#F6F3EC;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A4A1E;">THE 10-SECOND HABIT</div>
+          <div style="font-size:15px; line-height:1.75; color:#332E28; margin-top:14px;"><strong>Before:</strong> guess, over-order, throw away — or under-order and turn people away.<br><strong>After:</strong> type one number, get one answer.</div>
+        </div>
+      </div>
+      <div style="border-top:2px solid #1E1B18; background:#1E1B18; color:#F6F3EC; padding:40px 56px; display:flex; align-items:center; justify-content:space-between; position:relative;">
+        <div style="position:absolute; left:0; top:0; width:18px; height:18px; background:#5C7268;"></div>
+        <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px;">Less than one wasted carton a day.</div>
+        <span style="background:#F6F3EC; color:#1E1B18; padding:15px 30px; border-radius:999px; font-weight:700; font-size:15px;">Start Free Trial →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <div style="width:1240px; flex-shrink:0;" data-screen-label="Compliance">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/COMPLIANCE</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="display:flex; align-items:stretch; border-bottom:2px solid #1E1B18; background:#F6F3EC;">
+        <div style="display:flex; align-items:center; gap:12px; padding:16px 28px; border-right:1.5px solid #1E1B18;"><span style="font-weight:700; font-size:18px;">KAFFELOG</span></div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; padding:0 30px; background:#9A4A1E; color:#F6F3EC; font-weight:600; font-size:14px; border-left:2px solid #1E1B18;">Start Free Trial →</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1.15fr 1fr;">
+        <div style="padding:64px 48px 56px 56px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.24em; color:#9A4A1E;">JOB 02 — MUNICIPALITY LOGS</div>
+          <h1 style="margin:18px 0 0; font-size:52px; font-weight:700; letter-spacing:-0.035em; line-height:1.05;">Inspection-ready in 30 seconds, <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">not the morning of.</span></h1>
+          <p style="margin:18px 0 0; font-size:17px; color:#6E675E; line-height:1.65; max-width:48ch;">Fridge temps, cleaning schedules, and receiving checks — logged at the counter as they happen.</p>
+          <div style="margin-top:26px; border-left:4px solid #C9762E; background:#F6F3EC; padding:18px 22px; font-size:14.5px; color:#332E28; line-height:1.7; max-width:56ch;">You know the scene: the paper folder, filled in retroactively, often the morning an inspector walks in. It's not a personal failing — it's universal. It's also fixable.</div>
+        </div>
+        <div style="border-left:2px solid #1E1B18; min-height:420px;">
+          <image-slot id="compliance-hero" shape="rect" placeholder="Barista ticking the checklist at the counter"></image-slot>
+        </div>
+      </div>
+      <div style="border-top:2px solid #1E1B18; display:grid; grid-template-columns:1.2fr 1fr; background:#1E1B18;">
+        <div style="padding:48px 44px 48px 56px; display:flex; align-items:center;">
+          <div style="background:#FDFCF8; width:100%; padding:26px; box-shadow:0 20px 44px rgba(0,0,0,.4); position:relative;">
+            <div style="position:absolute; right:-8px; top:-8px; width:16px; height:16px; background:#C9762E;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #1E1B18; padding-bottom:12px;">
+              <div style="font-weight:700; font-size:16px;">Hygiene Log — August 2026</div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:#6E675E;">DUBAI MUNICIPALITY FORMAT · PDF</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; margin-top:14px; display:grid; gap:8px;">
+              <div style="display:grid; grid-template-columns:70px 1fr 60px 60px; gap:8px; color:#6E675E; font-size:9px; letter-spacing:.12em;"><span>DATE</span><span>CHECK</span><span>VALUE</span><span>SIGNED</span></div>
+              <div style="display:grid; grid-template-columns:70px 1fr 60px 60px; gap:8px; border-top:1px solid rgba(30,27,24,.14); padding-top:8px;"><span>01 AUG</span><span>Fridge 1 — display</span><span>3.4°C</span><span>L.H.</span></div>
+              <div style="display:grid; grid-template-columns:70px 1fr 60px 60px; gap:8px; border-top:1px solid rgba(30,27,24,.14); padding-top:8px;"><span>01 AUG</span><span>Fridge 2 — milk store</span><span>4.1°C</span><span>L.H.</span></div>
+              <div style="display:grid; grid-template-columns:70px 1fr 60px 60px; gap:8px; border-top:1px solid rgba(30,27,24,.14); padding-top:8px;"><span>01 AUG</span><span>Clean-down — counter</span><span>06:15</span><span>A.R.</span></div>
+              <div style="display:grid; grid-template-columns:70px 1fr 60px 60px; gap:8px; border-top:1px solid rgba(30,27,24,.14); padding-top:8px;"><span>01 AUG</span><span>Receiving — dairy</span><span>07:28</span><span>A.R.</span></div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:#6E675E; margin-top:14px; border-top:1px dashed #1E1B18; padding-top:10px; display:flex; justify-content:space-between;"><span>31 PAGES · COMPLETE</span><span>EXPORTED 31 AUG 18:04</span></div>
+          </div>
+        </div>
+        <div style="padding:48px 56px 48px 44px; color:#F6F3EC; border-left:1px solid rgba(240,235,225,.18); display:flex; flex-direction:column; justify-content:center; gap:28px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#C9762E;">WHAT THE BARISTA SEES</div>
+            <div style="font-size:15.5px; line-height:1.7; margin-top:10px; color:#C9C4B8;">A checklist. Nothing more. Tick fridge temps and clean-downs at the counter, between customers.</div>
+          </div>
+          <div style="border-top:1px dashed rgba(240,235,225,.3); padding-top:28px;">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#C9762E;">WHAT THE OWNER SEES</div>
+            <div style="font-size:15.5px; line-height:1.7; margin-top:10px; color:#C9C4B8;">A month of records — dated, signed, complete. Exportable anytime. Shown above, not just claimed.</div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:2px solid #1E1B18; padding:40px 56px; display:flex; align-items:center; justify-content:space-between; background:#F6F3EC;">
+        <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px;">Tick the list. Kaffelog handles the paperwork.</div>
+        <span style="background:#1E1B18; color:#F6F3EC; padding:15px 30px; border-radius:999px; font-weight:700; font-size:15px;">Start Free Trial →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SAFEVAULT ============ -->
+  <div style="width:1240px; flex-shrink:0;" data-screen-label="SafeVault">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/SAFEVAULT</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="display:flex; align-items:stretch; border-bottom:2px solid #1E1B18; background:#F6F3EC;">
+        <div style="display:flex; align-items:center; gap:12px; padding:16px 28px; border-right:1.5px solid #1E1B18;"><span style="font-weight:700; font-size:18px;">KAFFELOG</span></div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; padding:0 30px; background:#9A4A1E; color:#F6F3EC; font-weight:600; font-size:14px; border-left:2px solid #1E1B18;">Start Free Trial →</div>
+      </div>
+      <div style="background:#1E1B18; color:#F6F3EC; padding:64px 56px; position:relative; overflow:hidden;">
+        <div style="position:absolute; right:-20px; bottom:-60px; font-family:'Newsreader',serif; font-size:260px; line-height:1; color:rgba(176,58,46,.16); pointer-events:none;">10K</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.24em; color:#C9762E;">JOB 03 — SAFEVAULT</div>
+        <h1 style="margin:18px 0 0; font-size:54px; font-weight:700; letter-spacing:-0.035em; line-height:1.05; max-width:19ch; position:relative;">One missed renewal date. Up to <span style="color:#B03A2E; background:#F6F3EC; padding:0 12px;">AED 10,000.</span></h1>
+        <p style="margin:18px 0 0; font-size:17px; color:#9C9184; line-height:1.65; position:relative;">Every licence, tracked. Warned at 30 days, 14 days, and 3 days out.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:1.15fr 1fr; border-top:2px solid #1E1B18;">
+        <div style="padding:44px 40px 44px 56px; border-right:2px solid #1E1B18;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A4A1E; margin-bottom:16px;">WHAT SAFEVAULT TRACKS</div>
+          <div style="display:flex; border:2px solid #1E1B18;"><div style="width:10px; background:#5C7268;"></div><div style="flex:1; padding:13px 16px; display:flex; justify-content:space-between; align-items:center;"><div><div style="font-weight:600; font-size:14.5px;">Trade Licence</div><div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6E675E; margin-top:3px;">28 days remaining</div></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; padding:5px 10px; background:rgba(92,114,104,.14); color:#3E5449; border:1px solid #5C7268;">SAFE</span></div></div>
+          <div style="display:flex; border:2px solid #1E1B18; margin-top:-2px;"><div style="width:10px; background:#C9762E;"></div><div style="flex:1; padding:13px 16px; display:flex; justify-content:space-between; align-items:center;"><div><div style="font-weight:600; font-size:14.5px;">Ahmed — Food Handler Card</div><div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6E675E; margin-top:3px;">14 days remaining</div></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; padding:5px 10px; background:rgba(201,118,46,.16); color:#8A4E1D; border:1px solid #C9762E;">DUE SOON</span></div></div>
+          <div style="display:flex; border:2px solid #1E1B18; margin-top:-2px; box-shadow:0 10px 24px rgba(176,58,46,.18);"><div style="width:10px; background:#B03A2E;"></div><div style="flex:1; padding:13px 16px; display:flex; justify-content:space-between; align-items:center; background:#FDFCF8;"><div><div style="font-weight:600; font-size:14.5px;">Pest Control Contract</div><div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#B03A2E; margin-top:3px;">3 days remaining</div></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; padding:5px 10px; background:rgba(176,58,46,.14); color:#8A2E22; border:1px solid #B03A2E;">NEEDS ATTENTION</span></div></div>
+          <div style="display:flex; border:2px solid #1E1B18; margin-top:-2px;"><div style="width:10px; background:#5C7268;"></div><div style="flex:1; padding:13px 16px; display:flex; justify-content:space-between; align-items:center;"><div><div style="font-weight:600; font-size:14.5px;">Halal Certificate</div><div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6E675E; margin-top:3px;">111 days remaining</div></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; padding:5px 10px; background:rgba(92,114,104,.14); color:#3E5449; border:1px solid #5C7268;">SAFE</span></div></div>
+          <div style="display:flex; border:2px solid #1E1B18; margin-top:-2px;"><div style="width:10px; background:#5C7268;"></div><div style="flex:1; padding:13px 16px; display:flex; justify-content:space-between; align-items:center;"><div><div style="font-weight:600; font-size:14.5px;">Tenancy Contract</div><div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6E675E; margin-top:3px;">144 days remaining</div></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; padding:5px 10px; background:rgba(92,114,104,.14); color:#3E5449; border:1px solid #5C7268;">SAFE</span></div></div>
+        </div>
+        <div style="padding:44px 56px 44px 40px; display:flex; flex-direction:column; justify-content:center; gap:32px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A4A1E;">THIS HAPPENS TO CAREFUL OWNERS TOO</div>
+            <div style="font-family:'Newsreader',serif; font-style:italic; font-size:22px; line-height:1.45; margin-top:12px; color:#332E28;">It isn't carelessness. It's just a date nobody was watching — while you were running a café.</div>
+          </div>
+          <div style="border:2px solid #1E1B18; background:#FDFCF8; padding:24px;">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#6E675E;">THE THREE WARNINGS</div>
+            <div style="display:flex; align-items:center; gap:0; margin-top:20px;">
+              <div style="flex:1; height:3px; background:#5C7268;"></div>
+              <div style="width:14px; height:14px; background:#5C7268; flex-shrink:0;"></div>
+              <div style="flex:1; height:3px; background:#C9762E;"></div>
+              <div style="width:14px; height:14px; background:#C9762E; flex-shrink:0;"></div>
+              <div style="flex:.6; height:3px; background:#B03A2E;"></div>
+              <div style="width:14px; height:14px; background:#B03A2E; flex-shrink:0;"></div>
+              <div style="flex:.3; height:3px; background:#B03A2E;"></div>
+              <div style="width:18px; height:18px; border:2.5px solid #1E1B18; background:#F6F3EC; flex-shrink:0;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.1em; color:#6E675E; margin-top:12px;">
+              <span>30 DAYS</span><span>14 DAYS</span><span>3 DAYS</span><span>RENEWAL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:2px solid #1E1B18; background:#1E1B18; color:#F6F3EC; padding:40px 56px; display:flex; align-items:center; justify-content:space-between; position:relative;">
+        <div style="position:absolute; left:0; top:0; width:18px; height:18px; background:#B03A2E;"></div>
+        <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px;">Never watch a date again.</div>
+        <span style="background:#F6F3EC; color:#1E1B18; padding:15px 30px; border-radius:999px; font-weight:700; font-size:15px;">Start Free Trial →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PRICING ============ -->
+  <div style="width:1240px; flex-shrink:0;" data-screen-label="Pricing">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/PRICING</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="display:flex; align-items:stretch; border-bottom:2px solid #1E1B18; background:#F6F3EC;">
+        <div style="display:flex; align-items:center; gap:12px; padding:16px 28px; border-right:1.5px solid #1E1B18;"><span style="font-weight:700; font-size:18px;">KAFFELOG</span></div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; padding:0 30px; background:#9A4A1E; color:#F6F3EC; font-weight:600; font-size:14px; border-left:2px solid #1E1B18;">Start Free Trial →</div>
+      </div>
+      <div style="padding:60px 56px 40px; text-align:center;">
+        <h1 style="margin:0 auto; font-size:44px; font-weight:700; letter-spacing:-0.035em; line-height:1.12; max-width:24ch;">AED 99/month is less than <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">one wasted carton of milk a day.</span></h1>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#6E675E; margin-top:16px;">14-DAY FREE TRIAL · NO CARD REQUIRED · CANCEL WITH ONE MESSAGE</div>
+      </div>
+      <div style="padding:0 56px 52px; display:grid; grid-template-columns:repeat(3,1fr);">
+        <div style="border:2px solid #1E1B18; background:#F6F3EC; padding:34px 30px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#6E675E;">STARTER</div>
+          <div style="font-family:'Newsreader',serif; font-size:58px; margin-top:14px; line-height:1;">AED 99</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:#6E675E; margin-top:6px;">PER MONTH</div>
+          <div style="border-top:1px dashed #1E1B18; margin:22px 0;"></div>
+          <div style="font-size:14.5px; line-height:2.1;">One branch<br>All three core tools<br>English &amp; Arabic</div>
+          <div style="margin-top:26px; border:2px solid #1E1B18; text-align:center; padding:12px; border-radius:999px; font-weight:700; font-size:14px;">Start Free Trial</div>
+        </div>
+        <div style="border:2px solid #1E1B18; margin-left:-2px; background:#1E1B18; color:#F6F3EC; padding:34px 30px; position:relative; transform:translateY(-14px); box-shadow:0 18px 40px rgba(30,27,24,.3);">
+          <div style="position:absolute; top:0; right:0; background:#C9762E; color:#1E1B18; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; padding:6px 12px;">MOST CAFÉS START HERE</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9C9184;">PRO</div>
+          <div style="font-family:'Newsreader',serif; font-size:58px; margin-top:14px; line-height:1; color:#E8B27A;">AED 199</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:#9C9184; margin-top:6px;">PER MONTH</div>
+          <div style="border-top:1px dashed rgba(240,235,225,.3); margin:22px 0;"></div>
+          <div style="font-size:14.5px; line-height:2.1;">Everything in Starter<br>Staff accounts &amp; roles<br>Foodics import<br>Priority support</div>
+          <div style="margin-top:26px; background:#F6F3EC; color:#1E1B18; text-align:center; padding:12px; border-radius:999px; font-weight:700; font-size:14px;">Start Free Trial</div>
+        </div>
+        <div style="border:2px solid #1E1B18; margin-left:-2px; background:#F6F3EC; padding:34px 30px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#6E675E;">CHAIN</div>
+          <div style="font-family:'Newsreader',serif; font-size:58px; margin-top:14px; line-height:1;">AED 499</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:#6E675E; margin-top:6px;">PER MONTH</div>
+          <div style="border-top:1px dashed #1E1B18; margin:22px 0;"></div>
+          <div style="font-size:14.5px; line-height:2.1;">Up to 5 branches<br>Cross-branch reports<br>Onboarding call</div>
+          <div style="margin-top:26px; border:2px solid #1E1B18; text-align:center; padding:12px; border-radius:999px; font-weight:700; font-size:14px;">Start Free Trial</div>
+        </div>
+      </div>
+      <div style="margin:0 56px; border-left:4px solid #5C7268; background:#F6F3EC; padding:16px 22px; font-size:14.5px; max-width:72ch;">Every plan includes all three core tools — milk ordering, compliance logs, and SafeVault. <strong>Starter isn't a stripped demo.</strong></div>
+      <div style="padding:36px 56px 52px; display:grid; grid-template-columns:repeat(4,1fr); border-bottom:2px solid #1E1B18;">
+        <div style="border-right:1.5px solid rgba(30,27,24,.2); padding-right:22px;"><div style="font-weight:700; font-size:14px;">What happens after the trial?</div><div style="font-size:13px; color:#6E675E; line-height:1.65; margin-top:8px;">Pick a plan or walk away. Your records export either way.</div></div>
+        <div style="border-right:1.5px solid rgba(30,27,24,.2); padding:0 22px;"><div style="font-weight:700; font-size:14px;">Do I need a card to start?</div><div style="font-size:13px; color:#6E675E; line-height:1.65; margin-top:8px;">No. Café name and a phone number.</div></div>
+        <div style="border-right:1.5px solid rgba(30,27,24,.2); padding:0 22px;"><div style="font-weight:700; font-size:14px;">Can I cancel anytime?</div><div style="font-size:13px; color:#6E675E; line-height:1.65; margin-top:8px;">One WhatsApp message. That's it.</div></div>
+        <div style="padding-left:22px;"><div style="font-weight:700; font-size:14px;">More than 5 branches?</div><div style="font-size:13px; color:#6E675E; line-height:1.65; margin-top:8px;">Talk to us — we'll price it honestly.</div></div>
+      </div>
+      <div style="background:#1E1B18; color:#F6F3EC; padding:40px 56px; display:flex; align-items:center; justify-content:space-between; position:relative;">
+        <div style="position:absolute; left:0; top:0; width:18px; height:18px; background:#C9762E;"></div>
+        <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px;">Start free. Decide later.</div>
+        <span style="background:#F6F3EC; color:#1E1B18; padding:15px 30px; border-radius:999px; font-weight:700; font-size:15px;">Start Free Trial →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TRIAL ============ -->
+  <div style="width:820px; flex-shrink:0;" data-screen-label="Trial">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.22em; color:#6E675E; margin-bottom:14px;">/TRIAL — ZERO EXITS</div>
+    <div style="border:2px solid #1E1B18; background:#E8E4DB; box-shadow:0 24px 60px rgba(30,27,24,.18);">
+      <div style="padding:16px 28px; border-bottom:2px solid #1E1B18; background:#F6F3EC; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-weight:700; font-size:18px;">KAFFELOG</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; color:#6E675E;">FORM NO. KF-TRIAL-01</span>
+      </div>
+      <div style="height:180px; border-bottom:2px solid #1E1B18; position:relative;">
+        <image-slot id="trial-banner" shape="rect" placeholder="Café counter, morning light — wide banner crop"></image-slot>
+        <div style="position:absolute; left:24px; bottom:-16px; background:#C9762E; color:#1E1B18; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.16em; padding:8px 14px; pointer-events:none;">14 DAYS · FREE</div>
+      </div>
+      <div style="padding:52px 64px 60px;">
+        <h1 style="margin:0; font-size:40px; font-weight:700; letter-spacing:-0.035em; line-height:1.1;">Start free. No card. <span style="font-family:'Newsreader',serif; font-style:italic; font-weight:400;">Cancel with one message.</span></h1>
+        <div style="margin-top:34px; display:grid; gap:20px; max-width:440px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#6E675E; margin-bottom:7px;">CAFÉ NAME</div>
+            <div style="border:2px solid #1E1B18; background:#FDFCF8; padding:13px 15px; font-size:15px; color:#9C9184;">e.g. Mirdif Roast House</div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#6E675E; margin-bottom:7px;">PHONE OR EMAIL</div>
+            <div style="border:2px solid #1E1B18; background:#FDFCF8; padding:13px 15px; font-size:15px; color:#9C9184;">05x xxx xxxx</div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#6E675E; margin-bottom:7px;">BRANCHES</div>
+            <div style="display:flex; font-family:'IBM Plex Mono',monospace; font-size:12.5px;">
+              <span style="border:2px solid #1E1B18; background:#1E1B18; color:#F6F3EC; padding:11px 26px;">1</span>
+              <span style="border:2px solid #1E1B18; margin-left:-2px; background:#FDFCF8; padding:11px 26px;">2–5</span>
+              <span style="border:2px solid #1E1B18; margin-left:-2px; background:#FDFCF8; padding:11px 26px;">5+</span>
+            </div>
+          </div>
+          <div style="background:#9A4A1E; color:#F6F3EC; text-align:center; padding:16px; border-radius:999px; font-weight:700; font-size:16px; margin-top:8px;">Start My Free Trial →</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:#6E675E; text-align:center;">14 DAYS FREE · NO CREDIT CARD · ENGLISH &amp; ARABIC</div>
+        </div>
+        <div style="margin-top:48px; border-top:1px dashed #1E1B18; padding-top:26px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A4A1E;">WHAT HAPPENS NEXT</div>
+          <div style="display:grid; gap:10px; margin-top:14px;">
+            <div style="display:flex; gap:14px; align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9A4A1E;">01</span><span style="font-size:14.5px;">You're in your dashboard in under a minute</span></div>
+            <div style="display:flex; gap:14px; align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9A4A1E;">02</span><span style="font-size:14.5px;">Log today's milk count</span></div>
+            <div style="display:flex; gap:14px; align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9A4A1E;">03</span><span style="font-size:14.5px;">We start learning your pattern from day one</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

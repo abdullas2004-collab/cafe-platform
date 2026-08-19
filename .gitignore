@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+
+# build output (Vercel builds this itself)
+dist/
+
+# credentials — never commit
+key.txt
+.env
+.env.*
+Supabase.docx
+
+# business-confidential — lead lists, outreach playbooks, internal sheets
+Kaffelog_UAE_Cafe_Database.xlsx
+Book1.xlsx
+Kaffelog_Cold_Email_Hooks.docx
+Kaffelog_Content_Calendar.docx
+Kaffelog_Instagram_DM_Hooks.docx
+Kaffelog_Instagram_Outreach_Playbook.docx
+
+# stale code archive
+files.zip
+
+# local tooling
+.claude/
+.agents/
+skills-lock.json
+
+# OS noise
+Thumbs.db
+.DS_Store
+desktop.ini

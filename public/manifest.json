@@ -1,0 +1,42 @@
+{
+  "name": "Kaffelog — Smart logs for UAE cafés",
+  "short_name": "Kaffelog",
+  "description": "Smart compliance & waste reduction for UAE cafés. Be fine-proof. Save AED on every order.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf6f0",
+  "theme_color": "#6b4423",
+  "categories": ["business", "productivity", "food"],
+  "lang": "en-AE",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/kaffelog_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/kaffelog_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Log Sales",
+      "short_name": "Sales",
+      "description": "Enter yesterday's sales",
+      "url": "/?tab=sales"
+    },
+    {
+      "name": "Municipality Log",
+      "short_name": "Log",
+      "description": "Daily compliance log",
+      "url": "/?tab=logs"
+    }
+  ]
+}

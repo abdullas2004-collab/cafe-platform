@@ -1,0 +1,23 @@
+[
+  {
+    "created_at": "2026-08-18T15:11:39.410205Z",
+    "display_name": "GPT Image 2",
+    "id": "338d8bb9-7262-4f82-befb-115d62304168",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151139_338d8bb9-7262-4f82-befb-115d62304168_min.webp",
+    "params": {
+      "aspect_ratio": "3:4",
+      "height": 2336,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "Documentary editorial photograph, barista at a café counter ticking a paper hygiene checklist on a clipboard next to a digital fridge thermometer, phone resting nearby. Cinematic directional light through a window, warm highlights, deep shadow falloff, dark countertop, reflected stainless steel. Color grade: warm dark browns, soot black, cream paper tones, restrained copper-amber accents — no bright saturated colors. Subject wears a plain black shirt and dark apron, expression attentive and focused, not smiling. Vertical portrait composition, tight crop on hands and clipboard with barista partially in frame, tactile back-of-house realism, no text, no logos, photorealistic",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 1744
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CaSXycQ00IxaG8L5Lv9FxiTJUS/hf_20260818_151139_338d8bb9-7262-4f82-befb-115d62304168.png",
+    "status": "completed"
+  }
+]

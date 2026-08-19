@@ -1,0 +1,27 @@
+<!-- @dsCard group="Components" viewport="700x220" name="Button" -->
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<div id="root" style="padding:24px; background:var(--color-bg-surface);"></div>
+<script type="text/babel">
+const { Button } = window.KaffelogDS;
+function Demo() {
+  return (
+    <div style={{display:'flex', flexWrap:'wrap', gap:16, alignItems:'center'}}>
+      <Button variant="primary">Confirm order</Button>
+      <Button variant="secondary">Export PDF</Button>
+      <Button variant="outline">View details</Button>
+      <Button variant="ghost">Dismiss</Button>
+      <Button variant="destructive">Delete</Button>
+      <Button variant="link">Skip for now</Button>
+      <Button variant="primary" size="sm">Small</Button>
+      <Button variant="primary" size="lg">Large</Button>
+      <Button variant="primary" disabled>Disabled</Button>
+      <Button variant="primary" loading>Loading</Button>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
