@@ -283,7 +283,47 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 ::-webkit-scrollbar-thumb{background:var(--text-3);border-radius:4px}
 
 /* ── shell ── */
-.pg-shell{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto}
+.pg-shell{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto;padding-bottom:76px}
+
+/* ── bottom tab bar (mobile) ── */
+.kf-tabbar{position:fixed;bottom:0;left:0;right:0;z-index:120;max-width:480px;margin:0 auto;background:var(--navy-card);border-top:2px solid var(--border-blue);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px calc(14px + env(safe-area-inset-bottom,6px))}
+.kf-tab{background:none;border:none;cursor:pointer;text-align:center;padding:0;color:var(--text-1)}
+.kf-tab-ic{width:22px;height:22px;margin:0 auto;border:1.5px solid var(--border-blue);background:transparent;display:flex;align-items:center;justify-content:center;transition:background .15s ease-out}
+.kf-tab.active .kf-tab-ic{background:var(--blue);color:var(--navy)}
+.kf-tab-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;margin-top:5px;color:var(--text-1)}
+.kf-tab:not(.active){opacity:.45}
+
+/* ── more sheet ── */
+.kf-more-backdrop{position:fixed;inset:0;background:rgba(30,27,24,.5);z-index:190;opacity:0;pointer-events:none;transition:opacity .18s ease-out}
+.kf-more-backdrop.open{opacity:1;pointer-events:all}
+.kf-more-sheet{position:fixed;left:0;right:0;bottom:0;z-index:195;max-width:480px;margin:0 auto;background:var(--navy-card);border-top:2px solid var(--border-blue);border-radius:14px 14px 0 0;padding:14px 0 calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .22s ease-out}
+.kf-more-backdrop.open .kf-more-sheet{transform:translateY(0)}
+.kf-more-handle{width:44px;height:4px;background:var(--navy-mid);border-radius:99px;margin:0 auto}
+.kf-more-title{padding:16px 22px 6px;font-family:var(--font-m);font-size:9.5px;letter-spacing:.18em;color:var(--text-2)}
+.kf-more-row{display:flex;justify-content:space-between;align-items:center;width:100%;padding:15px 22px;border:none;border-top:1px solid var(--border);background:none;cursor:pointer;text-align:left;font-family:var(--font-b)}
+.kf-more-row:hover{background:var(--navy)}
+.kf-more-name{font-weight:600;font-size:15.5px;color:var(--text-1)}
+.kf-more-name.danger{color:#8A2E22}
+.kf-more-meta{font-family:var(--font-m);font-size:10px;color:var(--text-2);letter-spacing:.06em}
+
+.kf-main{width:100%;display:flex;flex-direction:column;align-items:center}
+.kf-main>*{width:100%}
+
+/* ── desktop sidebar ── */
+.kf-sidebar{display:none}
+@media (min-width:1024px){
+  .pg-shell{max-width:none;margin:0;padding-bottom:0;flex-direction:row;align-items:stretch}
+  .kf-tabbar{display:none}
+  .kf-sidebar{display:flex;flex-direction:column;width:216px;flex-shrink:0;border-right:2px solid var(--border-blue);background:var(--navy-card);position:sticky;top:0;height:100vh}
+  .kf-side-logo{display:flex;align-items:center;gap:10px;padding:19px 18px;border-bottom:1.5px solid var(--border-blue)}
+  .kf-side-nav{padding:12px 0;display:grid}
+  .kf-side-item{display:flex;align-items:center;gap:11px;padding:12px 18px;font-size:14px;font-weight:500;color:var(--text-2);background:none;border:none;cursor:pointer;text-align:left;font-family:var(--font-b)}
+  .kf-side-item.active{background:var(--blue);color:var(--navy);font-weight:600}
+  .kf-side-item:not(.active):hover{background:var(--navy)}
+  .kf-side-foot{margin-top:auto;border-top:1.5px solid var(--border-blue)}
+  .kf-main{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}
+  .kf-main>*{width:100%;max-width:760px}
+}
 
 /* ── nav ── */
 .pg-nav{width:100%;display:flex;background:var(--navy-card);border-bottom:2px solid var(--border-blue);position:sticky;top:0;z-index:80;overflow-x:auto;padding:0 6px;gap:2px}
@@ -5119,6 +5159,7 @@ export default function Kaffelog(){
   });
   const [authSess, setAuthSess] = useState(getSession());
   const [tab,      setTab]      = useState("dashboard");
+  const [moreOpen, setMoreOpen] = useState(false);
   const [aView,    setAView]    = useState("weekly");
   const [logOpen,  setLogOpen]  = useState(false);
   const [proOpen,  setProOpen]  = useState(false);
@@ -5153,15 +5194,22 @@ export default function Kaffelog(){
   const handleLogClose   = ()=>{ setLogOpen(false); };
   const handleLogSuccess = ()=>{ setToast(true); setTimeout(()=>setToast(false),3200); };
 
-  const NAV=[
-    {id:"dashboard",icon:<LayoutDashboard size={12}/>,label:"Dashboard"},
-    {id:"sales",    icon:<TrendingUp size={12}/>,    label:"Sales Entry"},
-    {id:"logs",     icon:<Clipboard size={12}/>,     label:"Logs"},
-    {id:"analytics", icon:<BarChart3 size={12}/>,     label:"Analytics"},
-    {id:"vault",     icon:<Lock size={12}/>,           label:"SafeVault"},
-    {id:"settings",  icon:<Settings2 size={12}/>,     label:"AI Settings"},
-    {id:"tools",     icon:<Wrench size={12}/>,         label:"Tools"},
+  // Primary destinations live on the bottom bar; Analytics, AI Settings,
+  // Tools and Log out move into the More sheet (Operations Desk nav spec).
+  const PRIMARY_NAV=[
+    {id:"dashboard",icon:<LayoutDashboard size={13}/>,label:"TODAY"},
+    {id:"sales",    icon:<TrendingUp size={13}/>,     label:"LOG"},
+    {id:"vault",    icon:<Lock size={13}/>,           label:"VAULT"},
+    {id:"logs",     icon:<Clipboard size={13}/>,      label:"LOGS"},
   ];
+  const MORE_TABS=["analytics","settings","tools"];
+  const SIDE_NAV=[
+    ...PRIMARY_NAV.map(n=>({...n,label:{dashboard:"Today",sales:"Log yesterday",vault:"SafeVault",logs:"Logs"}[n.id]})),
+    {id:"analytics",icon:<BarChart3 size={13}/>,label:"Analytics"},
+    {id:"settings", icon:<Settings2 size={13}/>,label:"AI Settings"},
+    {id:"tools",    icon:<Wrench size={13}/>,   label:"Tools"},
+  ];
+  const pickTab=(id)=>{ setTab(id); setMoreOpen(false); };
 
   // ── Screen routing (after all hooks) ─────────────────────
   if (screen==="landing")    return <><InstallPrompt/><KaffelogLandingV2 onGoLogin={()=>setScreen("login")} onGoSignup={()=>setScreen("signup")}/></>;
@@ -5176,23 +5224,30 @@ export default function Kaffelog(){
       {/* PWA Install banner - appears once for first-time visitors */}
       <InstallPrompt/>
 
-      {/* NAV */}
-      <nav className="pg-nav">
-        {NAV.map(({id,icon,label})=>(
-          <button key={id} className={`pg-nav-tab ${tab===id?"active":""}`} onClick={()=>setTab(id)}>
-            {icon}{label}
+      {/* DESKTOP SIDEBAR (≥1024px) */}
+      <aside className="kf-sidebar">
+        <div className="kf-side-logo">
+          <div style={{width:28,height:28,background:"var(--blue)",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",flexShrink:0}}>
+            <div style={{width:12,height:7,borderRadius:"50%",background:"var(--navy)"}}/>
+            <div style={{position:"absolute",right:-2,bottom:-2,width:7,height:7,background:"var(--gold)"}}/>
+          </div>
+          <span style={{fontWeight:700,fontSize:16,letterSpacing:"-0.02em"}}>KAFFELOG</span>
+        </div>
+        <div className="kf-side-nav">
+          {SIDE_NAV.map(({id,icon,label})=>(
+            <button key={id} className={`kf-side-item ${tab===id?"active":""}`} onClick={()=>pickTab(id)}>
+              {icon}{label}
+            </button>
+          ))}
+        </div>
+        <div className="kf-side-foot">
+          <button className="kf-side-item" onClick={handleLogout} style={{color:"#8A2E22",width:"100%"}}>
+            Log out
           </button>
-        ))}
-        {screen==="app"&&authSess&&(
-          <button className="pg-nav-tab" onClick={handleLogout}
-            style={{minWidth:44,color:"var(--red)",flexShrink:0}}
-            title="Sign out">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <path d="M5 2H3a1 1 0 00-1 1v8a1 1 0 001 1h2M9 10l3-3-3-3M12 7H5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        )}
-      </nav>
+        </div>
+      </aside>
+
+      <div className="kf-main">
 
       {/* ── DASHBOARD ── */}
       {tab==="dashboard"&&(
@@ -5337,6 +5392,45 @@ export default function Kaffelog(){
 
       {/* ── TOOLS ── */}
       {tab==="tools"&&<ToolsTab arabic={arabic} setArabic={setArabic}/>}
+
+      </div>{/* /kf-main */}
+
+      {/* MOBILE BOTTOM TAB BAR */}
+      <nav className="kf-tabbar">
+        {PRIMARY_NAV.map(({id,icon,label})=>(
+          <button key={id} className={`kf-tab ${tab===id&&!moreOpen?"active":""}`} onClick={()=>pickTab(id)}>
+            <div className="kf-tab-ic">{icon}</div>
+            <div className="kf-tab-lbl">{label}</div>
+          </button>
+        ))}
+        <button className={`kf-tab ${moreOpen||MORE_TABS.includes(tab)?"active":""}`} onClick={()=>setMoreOpen(o=>!o)}>
+          <div className="kf-tab-ic" style={{fontSize:12,fontWeight:700}}>⋯</div>
+          <div className="kf-tab-lbl">MORE</div>
+        </button>
+      </nav>
+
+      {/* MORE SHEET */}
+      <div className={`kf-more-backdrop ${moreOpen?"open":""}`} onClick={()=>setMoreOpen(false)}>
+        <div className="kf-more-sheet" onClick={e=>e.stopPropagation()}>
+          <div className="kf-more-handle"/>
+          <div className="kf-more-title">MORE</div>
+          <button className="kf-more-row" onClick={()=>pickTab("analytics")}>
+            <span className="kf-more-name">Analytics</span>
+            <span className="kf-more-meta">WEEKLY · MONTHLY</span>
+          </button>
+          <button className="kf-more-row" onClick={()=>pickTab("settings")}>
+            <span className="kf-more-name">AI Assistant &amp; recipes</span>
+            <span className="kf-more-meta">→</span>
+          </button>
+          <button className="kf-more-row" onClick={()=>pickTab("tools")}>
+            <span className="kf-more-name">Tools</span>
+            <span className="kf-more-meta">SUPPLIERS · WHATSAPP · ع</span>
+          </button>
+          <button className="kf-more-row" onClick={handleLogout}>
+            <span className="kf-more-name danger">Log out</span>
+          </button>
+        </div>
+      </div>
 
       {/* Municipality Log */}
       <MunicipalityLog open={logOpen} onClose={handleLogClose} arabic={arabic} onSuccess={handleLogSuccess}/>
