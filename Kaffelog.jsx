@@ -833,10 +833,13 @@ const DOCS = [
   { name:"Food Safety Permit",   expiry:"31 Dec 2026", daysLeft:240, status:"valid"    },
 ];
 
+// Fixed status vocabulary — SAFE / DUE SOON / NEEDS ATTENTION / EXPIRED,
+// never rephrased per-screen (Operations Desk content rule)
 const DOC_CFG = {
-  valid:    { label:"Valid",    bg:"rgba(92,114,104,.1)",  border:"rgba(92,114,104,.25)",  text:"#5C7268" },
-  expiring: { label:"Expiring", bg:"rgba(201,118,46,.1)", border:"rgba(201,118,46,.25)", text:"#C9762E" },
-  urgent:   { label:"Urgent",   bg:"rgba(176,58,46,.1)",  border:"rgba(176,58,46,.25)",  text:"#B03A2E" },
+  valid:    { label:"Safe",            bg:"rgba(92,114,104,.14)",  border:"#5C7268", text:"#3E5449", bar:"#5C7268" },
+  expiring: { label:"Due soon",        bg:"rgba(201,118,46,.16)",  border:"#C9762E", text:"#8A4E1D", bar:"#C9762E" },
+  urgent:   { label:"Needs attention", bg:"rgba(176,58,46,.14)",   border:"#B03A2E", text:"#8A2E22", bar:"#B03A2E" },
+  expired:  { label:"Expired",         bg:"#1E1B18",               border:"#1E1B18", text:"#F6F3EC", bar:"#1E1B18" },
 };
 
 const VIOLATIONS = [
@@ -1746,13 +1749,13 @@ function SafeVault(){
     <div className="sv-body">
       {/* header */}
       <div className="sv-hdr">
-        <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
-          <div style={{width:"40px",height:"40px",borderRadius:"11px",background:"rgba(30,27,24,.12)",border:".5px solid rgba(30,27,24,.28)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 0 14px rgba(30,27,24,.2)"}}>
+        <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
+          <div style={{width:"40px",height:"40px",background:"rgba(240,235,225,.08)",border:"1px solid rgba(240,235,225,.2)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
             <Lock size={18} color="#C9762E"/>
           </div>
           <div>
-            <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"700",color:"var(--text-1)"}}>SafeVault</div>
-            <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"1px"}}>Document compliance · Renewals · Audit trail</div>
+            <div style={{fontSize:"18px",fontWeight:"700",color:"#F0EBE1",letterSpacing:"-0.02em"}}>SafeVault</div>
+            <div style={{fontFamily:"var(--font-m)",fontSize:"9px",letterSpacing:".12em",color:"#A3998B",marginTop:"3px",textTransform:"uppercase"}}>Documents · Renewals · Audit trail</div>
           </div>
         </div>
       </div>
@@ -1760,10 +1763,10 @@ function SafeVault(){
       {/* kpi strip */}
       <div className="sv-kpi">
         {[
-          {val:docs.length,lbl:"Total Docs",color:"var(--text-1)"},
-          {val:valid.length,lbl:"Valid",color:"var(--emerald)"},
-          {val:expiring.length,lbl:"Expiring",color:"var(--gold)"},
-          {val:urgent.length,lbl:"Urgent",color:"var(--red)"},
+          {val:docs.length,lbl:"Tracked",color:"var(--text-1)"},
+          {val:valid.length,lbl:"Safe",color:"var(--emerald-mid)"},
+          {val:expiring.length,lbl:"Due soon",color:"#8A4E1D"},
+          {val:urgent.length,lbl:"Attention",color:"var(--red)"},
         ].map(({val,lbl,color})=>(
           <div key={lbl} className="sv-kpi-card">
             <div className="sv-kpi-val" style={{color}}>{val}</div>
@@ -1780,12 +1783,11 @@ function SafeVault(){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div className="dh-sect">Documents &amp; Licences</div>
           <button onClick={() => setShowAddStaff(true)} style={{
-            background:"rgba(30,27,24,.12)",color:"#1E1B18",
-            border:".5px solid rgba(30,27,24,.3)",borderRadius:8,
-            padding:"5px 11px",fontSize:10,fontWeight:700,
-            letterSpacing:".06em",textTransform:"uppercase",cursor:"pointer",
-            fontFamily:"var(--font-d)",display:"flex",alignItems:"center",gap:5
-          }}>+ Add Staff</button>
+            background:"transparent",color:"var(--text-1)",
+            border:"1.5px solid var(--border-blue)",borderRadius:999,
+            padding:"7px 14px",fontSize:12,fontWeight:600,cursor:"pointer",
+            fontFamily:"var(--font-b)",display:"flex",alignItems:"center",gap:5
+          }}>+ Add staff</button>
         </div>
 
         {showAddStaff && (
@@ -1832,7 +1834,7 @@ function SafeVault(){
           const cfg=DOC_CFG[doc.status];
           const pct=Math.min(100,(doc.daysLeft/365)*100);
           return(
-            <div key={doc.name} className="doc-card">
+            <div key={doc.name} className="doc-card" style={{borderLeft:`6px solid ${cfg.bar}`}}>
               <div style={{flex:1}}>
                 <div style={{display:"flex",alignItems:"center",gap:"7px",marginBottom:"4px"}}>
                   <FileText size={12} color="var(--text-2)"/>
@@ -1849,8 +1851,7 @@ function SafeVault(){
                   <div className="doc-bar-fill" style={{width:`${pct}%`,background:cfg.text}}/>
                 </div>
                 <div style={{marginTop:"5px"}}>
-                  <span className="doc-chip" style={{background:cfg.bg,border:`.5px solid ${cfg.border}`,color:cfg.text}}>
-                    <div style={{width:"4px",height:"4px",borderRadius:"50%",background:cfg.text,animation:doc.status==="urgent"?"pulse 1.2s infinite":"none"}}/>
+                  <span className="doc-chip" style={{background:cfg.bg,border:`1px solid ${cfg.border}`,color:cfg.text}}>
                     {cfg.label}
                   </span>
                 </div>
@@ -1875,12 +1876,12 @@ function SafeVault(){
       {renewConfirm&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:210,display:"flex",alignItems:"center",justifyContent:"center",padding:"18px"}}
           onClick={()=>setRenewConfirm(null)}>
-          <div style={{background:"#0b1829",border:".5px solid var(--border-blue)",borderRadius:"var(--r-xl)",padding:"24px",width:"100%",maxWidth:"340px"}} onClick={e=>e.stopPropagation()}>
-            <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"700",color:"var(--text-1)",marginBottom:"8px"}}>Renew with PRO Partner</div>
-            <div style={{fontSize:"12px",color:"var(--text-2)",marginBottom:"18px",lineHeight:"1.5"}}><strong style={{color:"var(--text-1)"}}>{renewConfirm}</strong> renewal will be handled by a DHA/DM certified PRO agent. Typical turnaround: 24–48 hours.</div>
-            <button style={{width:"100%",background:"var(--blue)",color:"#fff",border:"none",borderRadius:"var(--r-md)",padding:"13px",fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"700",letterSpacing:".08em",textTransform:"uppercase",cursor:"pointer",boxShadow:"0 4px 18px var(--blue-glow)"}}
+          <div style={{background:"var(--navy-card)",border:"2px solid var(--border-blue)",padding:"24px",width:"100%",maxWidth:"340px"}} onClick={e=>e.stopPropagation()}>
+            <div style={{fontSize:"17px",fontWeight:"700",color:"var(--text-1)",marginBottom:"8px",letterSpacing:"-0.02em"}}>Renew with PRO Partner</div>
+            <div style={{fontSize:"13px",color:"var(--text-2)",marginBottom:"18px",lineHeight:"1.55"}}><strong style={{color:"var(--text-1)"}}>{renewConfirm}</strong> renewal will be handled by a DHA/DM certified PRO agent. Typical turnaround: 24–48 hours.</div>
+            <button style={{width:"100%",background:"var(--blue)",color:"var(--navy)",border:"none",borderRadius:999,padding:"14px",fontFamily:"var(--font-b)",fontSize:"14.5px",fontWeight:"700",cursor:"pointer"}}
               onClick={()=>setRenewConfirm(null)}>
-              Confirm Renewal Request
+              Confirm renewal request
             </button>
           </div>
         </div>
@@ -4010,117 +4011,83 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
 
       {/* CALCULATION RESULT */}
       {calc && (
-        <div className="fade-in" style={{
-          background: "linear-gradient(135deg, rgba(92,114,104,.12), rgba(92,114,104,.04))",
-          border: ".5px solid rgba(92,114,104,.3)", borderRadius: 16,
-          padding: "18px 16px", marginBottom: 14
-        }}>
+        <div className="fade-in" style={{ marginBottom: 14 }}>
+          {/* THE RECEIPT REVEAL — the app's signature moment */}
           <div style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12
+            margin: "4px 8px 0", background: "var(--navy-card)", padding: "20px 18px",
+            fontFamily: "var(--font-m)", boxShadow: "0 16px 36px rgba(30,27,24,.22)",
+            position: "relative", color: "var(--text-1)"
           }}>
-            <div style={{
-              fontSize: 11, fontWeight: 600, letterSpacing: ".08em",
-              textTransform: "uppercase", color: "var(--emerald)"
-            }}>
-              <Sparkles size={11} style={{ marginRight: 5, verticalAlign: "middle" }} />
-              AI Recommendation
+            <div style={{ position: "absolute", left: -7, top: -7, width: 14, height: 14, background: "var(--emerald)" }} />
+            <div style={{ textAlign: "center", fontSize: 10, letterSpacing: ".2em", fontWeight: 600 }}>TODAY'S MILK ORDER</div>
+            <div style={{ textAlign: "center", fontSize: 8, color: "var(--text-2)", marginTop: 4 }}>
+              {calc.totalDrinks} DRINKS LOGGED · {calc.milkUsedL}L USED YESTERDAY
             </div>
-            <div style={{ fontSize: 10, color: "var(--text-3)" }}>
-              {calc.totalDrinks} drinks · {calc.milkUsedL}L used
+            <div style={{ borderTop: "1px dashed var(--border-blue)", margin: "13px 0" }} />
+            <div style={{ display: "grid", gap: 9, fontSize: 13 }}>
+              {calc.breakdown.map((b, i) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ textTransform: "uppercase" }}>{b.qty} × {b.name}</span>
+                  <span style={{ fontWeight: 600 }}>{b.milk_L.toFixed(1)} L</span>
+                </div>
+              ))}
+              <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-2)" }}>
+                <span>+10% STEAM · +5L SAFETY</span>
+                <span/>
+              </div>
             </div>
-          </div>
-
-          {/* The Big Number */}
-          <div style={{ textAlign: "center", marginBottom: 14 }}>
-            <div style={{
-              fontFamily: "var(--font-d)", fontSize: 12,
-              color: "var(--text-2)", marginBottom: 4
-            }}>
-              Order Today
-            </div>
-            <div style={{
-              fontFamily: "var(--font-d)", fontSize: 48, fontWeight: 800,
-              color: "var(--emerald)", lineHeight: 1, letterSpacing: "-.04em"
-            }}>
-              {calc.recommendedOrder}<span style={{ fontSize: 24, marginLeft: 4 }}>L milk</span>
+            <div style={{ borderTop: "1px dashed var(--border-blue)", margin: "13px 0" }} />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span style={{ fontSize: 9, letterSpacing: ".14em", color: "var(--text-2)" }}>ORDER TODAY</span>
+              <span style={{ fontFamily: "var(--font-serif)", fontSize: 30 }}>{calc.recommendedOrder} L</span>
             </div>
             {calc.litresSaved > 0 && (
-              <div style={{ fontSize: 13, color: "var(--text-2)", marginTop: 8 }}>
-                Instead of {calc.standardOrder}L · <strong style={{ color: "var(--emerald)" }}>save AED {calc.aedSaved}</strong>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 8 }}>
+                <span style={{ fontSize: 9, letterSpacing: ".14em", color: "var(--text-2)" }}>EST. SAVING VS {calc.standardOrder}L</span>
+                <span style={{ fontFamily: "var(--font-serif)", fontSize: 24, color: "var(--rust)" }}>AED {calc.aedSaved}</span>
               </div>
             )}
+            <div style={{ textAlign: "center", fontSize: 9, color: "var(--text-2)", marginTop: 12 }}>اليوم جاهز</div>
           </div>
 
-          {/* Breakdown */}
-          <div style={{
-            background: "rgba(0,0,0,.2)", borderRadius: 10, padding: "10px 12px",
-            marginBottom: 12
-          }}>
-            <div style={{
-              fontSize: 10, fontWeight: 600, letterSpacing: ".06em",
-              textTransform: "uppercase", color: "var(--text-3)", marginBottom: 6
-            }}>
-              The math
-            </div>
-            {calc.breakdown.map((b, i) => (
-              <div key={i} style={{
-                display: "flex", justifyContent: "space-between",
-                fontSize: 12, color: "var(--text-2)", padding: "2px 0"
-              }}>
-                <span>{b.qty} × {b.name}</span>
-                <span style={{ fontFamily: "monospace" }}>{b.milk_L.toFixed(1)}L</span>
-              </div>
-            ))}
-            <div style={{
-              borderTop: ".5px solid var(--border)", marginTop: 6, paddingTop: 6,
-              display: "flex", justifyContent: "space-between",
-              fontSize: 12, color: "var(--text-1)", fontWeight: 600
-            }}>
-              <span>+ 10% steam buffer + 5L safety</span>
-              <span style={{ fontFamily: "monospace" }}>{calc.recommendedOrder}L</span>
-            </div>
+          <div style={{ padding: "18px 8px 0", display: "grid", gap: 10 }}>
+            <button
+              onClick={handleSendWhatsApp}
+              style={{
+                width: "100%", padding: 15,
+                background: whatsappOpened ? "var(--emerald)" : "var(--blue)",
+                color: whatsappOpened ? "#F0EBE1" : "var(--navy)",
+                border: "none", borderRadius: 999,
+                fontFamily: "var(--font-b)", fontSize: 15, fontWeight: 700,
+                cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                transition: "background .15s ease-out"
+              }}
+            >
+              {whatsappOpened ? <><Check size={15} /> Opened in WhatsApp</> : <>Send to supplier on WhatsApp</>}
+            </button>
+            <button
+              onClick={handleReset}
+              style={{
+                width: "100%", padding: "8px 0",
+                background: "transparent", color: "var(--text-2)",
+                border: "none", cursor: "pointer", fontSize: 13.5,
+                fontFamily: "var(--font-b)"
+              }}
+            >
+              Adjust the order
+            </button>
           </div>
-
-          {/* WhatsApp Send Button */}
-          <button
-            onClick={handleSendWhatsApp}
-            style={{
-              width: "100%", padding: 14,
-              background: whatsappOpened ? "rgba(92,114,104,.2)" : "#25D366",
-              color: whatsappOpened ? "var(--emerald)" : "white",
-              border: "none", borderRadius: 12,
-              fontFamily: "var(--font-d)", fontSize: 12, fontWeight: 700,
-              letterSpacing: ".1em", textTransform: "uppercase", cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              transition: "all .2s",
-              boxShadow: whatsappOpened ? "none" : "0 4px 16px rgba(37,211,102,.3)"
-            }}
-          >
-            {whatsappOpened ? <><Check size={14} /> Opened in WhatsApp</> : <><MessageSquare size={14} /> Send via WhatsApp</>}
-          </button>
-
-          <button
-            onClick={handleReset}
-            style={{
-              width: "100%", padding: "10px 0", marginTop: 8,
-              background: "transparent", color: "var(--text-3)",
-              border: "none", cursor: "pointer", fontSize: 12,
-              fontFamily: "var(--font-b)"
-            }}
-          >
-            ↻ Start over
-          </button>
         </div>
       )}
 
       {/* HELPER TIP */}
       {!calc && (
         <div style={{
-          background: "rgba(30,27,24,.06)", border: ".5px solid rgba(30,27,24,.18)",
-          borderRadius: 12, padding: "11px 13px", display: "flex", gap: 8
+          background: "var(--navy-card)", borderLeft: "4px solid var(--rust)",
+          padding: "12px 14px", display: "flex", gap: 8
         }}>
-          <Info size={13} color="#C9762E" style={{ flexShrink: 0, marginTop: 1 }} />
-          <div style={{ fontSize: 11, color: "var(--text-2)", lineHeight: 1.5 }}>
+          <div style={{ fontSize: 12, color: "var(--text-2)", lineHeight: 1.55 }}>
             <strong style={{ color: "var(--text-1)" }}>Why this works:</strong> Yesterday's sales × your recipes = exact milk used. Add 10% steam loss + 5L safety = today's order. No guessing.
           </div>
         </div>
@@ -5357,68 +5324,75 @@ export default function Kaffelog(){
       {/* ── DASHBOARD ── */}
       {tab==="dashboard"&&(
         <>
-          <div className="pg-header">
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"22px"}}>
-              <div>
-                <div style={{fontFamily:"var(--font-d)",fontSize:"20px",fontWeight:"800",color:"var(--text-1)",letterSpacing:"-0.3px",marginBottom:"2px"}}>Kaffelog</div>
-                <div className="pg-brand-sub">{getCafe()?.name || "Smart logs for UAE cafés"}</div>
-              </div>
-              <div className="pg-location"><div className="pg-dot"/><MapPin size={9}/>Dubai, AE</div>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"5px"}}>
-              <div className="pg-heading">Smart Orders,<br/><span>Zero Waste.</span></div>
-              <div style={{fontSize:"10px",color:"var(--text-2)",paddingTop:"4px"}}>{today}</div>
-            </div>
-            <div className="pg-subhead">Smart procurement &amp; compliance for your café — updated daily.</div>
-            <button className="pg-cta" onClick={()=>setLogOpen(true)}>
-              <Clipboard size={15}/>Log Municipality Data
-            </button>
-            <button onClick={()=>setTab("sales")} style={{
-              width:"100%",marginTop:8,background:"transparent",
-              color:"var(--text-1)",border:"1px solid var(--border-blue)",
-              borderRadius:"var(--r-md)",padding:"14px 24px",cursor:"pointer",
-              fontFamily:"var(--font-b)",fontSize:12,fontWeight:600,
-              letterSpacing:".1em",textTransform:"uppercase",
-              display:"flex",alignItems:"center",justifyContent:"center",gap:10
-            }}>
-              <TrendingUp size={14}/>Enter Yesterday's Sales · Get Today's Order
-            </button>
+          <div style={{width:"100%",padding:"16px 18px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1.5px solid var(--border-blue)"}}>
+            <span style={{fontWeight:700,fontSize:20,letterSpacing:"-0.02em"}}>Today</span>
+            <span style={{fontFamily:"var(--font-m)",fontSize:9,letterSpacing:".14em",color:"var(--text-2)",textTransform:"uppercase"}}>
+              {(getCafe()?.name||"Your café").toUpperCase()} · {today.toUpperCase()}
+            </span>
           </div>
 
           <div className="pg-body">
-            {/* stats */}
-            <div className="stat-row fade-in">
-              <div className="stat-card blue"><div className="stat-n">30L</div><div className="stat-l">Milk saved today</div></div>
-              <div className="stat-card green"><div className="stat-n">120</div><div className="stat-l">Lattes sold</div></div>
-              <div className="stat-card gold"><div className="stat-n">92%</div><div className="stat-l">Prediction match</div></div>
+            {/* Tomorrow's milk — the hero number */}
+            <div className="fade-in" style={{background:"var(--blue)",color:"#F0EBE1",padding:20,position:"relative"}}>
+              <div style={{position:"absolute",right:0,top:0,width:14,height:14,background:"var(--emerald)"}}/>
+              <div style={{fontFamily:"var(--font-m)",fontSize:9,letterSpacing:".16em",color:"#9C9184"}}>TOMORROW'S MILK</div>
+              <div style={{fontFamily:"var(--font-serif)",fontSize:52,lineHeight:1,marginTop:6}}>54 <span style={{fontSize:19,color:"#9C9184"}}>L</span></div>
+              <div style={{fontFamily:"var(--font-m)",fontSize:10,color:"#9C9184",marginTop:8}}>WHOLE 38 · OAT 12 · ALMOND 4</div>
+              <button onClick={()=>setTab("sales")} style={{marginTop:14,background:"var(--paper-100,#F6F3EC)",backgroundColor:"#F6F3EC",color:"#1E1B18",border:"none",borderRadius:999,padding:"10px 20px",fontWeight:700,fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
+                Log yesterday's count →
+              </button>
             </div>
 
-            {/* LIVE STOCK CARD on dashboard */}
-            <div className="fade-in" style={{animationDelay:".06s"}}>
-              <div className="pg-sect" style={{color:"#6680aa"}}>Live Stock</div>
-              <StockTracker stock={stock} setStock={setStock} compact={true}/>
+            {/* stat tiles */}
+            <div className="fade-in" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,animationDelay:".05s"}}>
+              <div style={{background:"var(--navy-card)",border:"1.5px solid var(--border-blue)",padding:14}}>
+                <div style={{fontFamily:"var(--font-m)",fontSize:8.5,letterSpacing:".12em",color:"var(--text-2)"}}>SAVED THIS WEEK</div>
+                <div style={{fontFamily:"var(--font-serif)",fontSize:28,marginTop:4,color:"var(--rust)"}}>AED 418</div>
+              </div>
+              <div style={{background:"var(--navy-card)",border:"1.5px solid var(--border-blue)",padding:14}}>
+                <div style={{fontFamily:"var(--font-m)",fontSize:8.5,letterSpacing:".12em",color:"var(--text-2)"}}>FINE RISK</div>
+                <div style={{display:"flex",gap:3,marginTop:12}}>
+                  <div style={{flex:1,height:10,background:"var(--emerald)"}}/>
+                  <div style={{flex:1,height:10,background:"var(--navy-mid)"}}/>
+                  <div style={{flex:1,height:10,background:"var(--navy-mid)"}}/>
+                </div>
+                <div style={{fontFamily:"var(--font-m)",fontSize:9.5,color:"var(--emerald-mid)",marginTop:6}}>LOW</div>
+              </div>
             </div>
 
-            {/* savings */}
+            {/* needs-attention rows */}
             <div className="fade-in" style={{animationDelay:".08s"}}>
-              <div className="pg-sect" style={{color:"#6e9e82"}}>Daily Savings Summary</div>
-              <div className="sav-card">
-                <div className="sav-badge">↑ 12% vs yesterday</div>
-                <div className="sav-eyebrow">Savings Today</div>
-                <div className="sav-amt"><span className="cur">AED </span>184.50</div>
-                <div className="sav-lbl">Avoided waste · Tuesday optimization</div>
-                <div className="sav-grid">
-                  <div className="sav-item"><div className="sav-num">30 L</div><div className="sav-desc">Milk not ordered</div></div>
-                  <div className="sav-item"><div className="sav-num">AED 6.15</div><div className="sav-desc">Per litre rate</div></div>
-                  <div className="sav-item"><div className="sav-num">↓ 50%</div><div className="sav-desc">Order reduction</div></div>
-                  <div className="sav-item"><div className="sav-num">7.5 kg</div><div className="sav-desc">CO₂ avoided</div></div>
+              <div style={{display:"flex",border:"1.5px solid var(--border-blue)",background:"var(--navy-card)"}}>
+                <div style={{width:9,background:"var(--gold)"}}/>
+                <div style={{flex:1,padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}}>
+                  <div>
+                    <div style={{fontWeight:600,fontSize:14}}>Municipality log</div>
+                    <div style={{fontFamily:"var(--font-m)",fontSize:10,color:"var(--text-2)",marginTop:3}}>PENDING — DUE BY CLOSE</div>
+                  </div>
+                  <button onClick={()=>setLogOpen(true)} style={{border:"1.5px solid var(--border-blue)",background:"transparent",padding:"8px 16px",borderRadius:999,fontWeight:600,fontSize:12.5,cursor:"pointer",fontFamily:"inherit",color:"var(--text-1)"}}>Do it now</button>
+                </div>
+              </div>
+              <div style={{display:"flex",border:"1.5px solid var(--border-blue)",borderTop:"none",background:"var(--navy-card)"}}>
+                <div style={{width:9,background:"var(--gold)"}}/>
+                <div style={{flex:1,padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}}>
+                  <div>
+                    <div style={{fontWeight:600,fontSize:14}}>Ahmed — Food Handler Card</div>
+                    <div style={{fontFamily:"var(--font-m)",fontSize:10,color:"var(--text-2)",marginTop:3}}>14 DAYS REMAINING</div>
+                  </div>
+                  <button onClick={()=>setTab("vault")} style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".1em",padding:"5px 10px",background:"rgba(201,118,46,.16)",color:"#8A4E1D",border:"1px solid var(--gold)",cursor:"pointer"}}>DUE SOON</button>
                 </div>
               </div>
             </div>
 
+            {/* LIVE STOCK CARD on dashboard */}
+            <div className="fade-in" style={{animationDelay:".12s"}}>
+              <div className="pg-sect">Live Stock</div>
+              <StockTracker stock={stock} setStock={setStock} compact={true}/>
+            </div>
+
             {/* AI insight */}
             <div className="fade-in" style={{animationDelay:".16s"}}>
-              <div className="pg-sect" style={{color:"#6680aa"}}>Smart Recommendation</div>
+              <div className="pg-sect">Smart Recommendation</div>
               <div className="card-white" style={{padding:"18px"}}>
                 <div style={{display:"flex",alignItems:"center",gap:"9px",marginBottom:"12px"}}>
                   <div className="ai-chip"><div className="ai-blink"/>Smart Insight</div>
