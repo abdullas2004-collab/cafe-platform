@@ -4,7 +4,7 @@
 //  offline-ready, Arabic/Urdu/Malayalam, all review fixes applied
 // ─────────────────────────────────────────────────────────────
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import KaffelogLandingV2 from "./KaffelogLandingV2.jsx";
 import {
 
@@ -819,7 +819,7 @@ const MONTHLY_DATA = [
 ];
 
 const WASTE_CAUSES = [
-  { label:"Over-Prep",  pct:54, color:"#0a8754" },
+  { label:"Over-Prep",  pct:54, color:"#5C7268" },
   { label:"Expiry",     pct:31, color:"#5C7268"  },
   { label:"Spill/Loss", pct:10, color:"#C9762E"  },
   { label:"Other",      pct:5,  color:"#9C9184"  },
@@ -1133,8 +1133,8 @@ const INGREDIENTS = [
   { id:2, name:"Oat Milk",         nameAr:"حليب الشوفان",     batch:"BC-2026-389", icon:<Milk size={12} color="#C9762E"/>,     iconBg:"#fff8e6", expiry:"12 Jun 2026", daysLeft:26, halal:true,  status:"expiring" },
   { id:3, name:"Croissants",       nameAr:"كرواسان",           batch:"BK-0501-22",  icon:<Wheat size={12} color="#8b5e3c"/>,   iconBg:"#f5ede5", expiry:"18 May 2026", daysLeft:1,  halal:true,  status:"urgent"   },
   { id:4, name:"Coffee Beans",     nameAr:"حبوب القهوة",       batch:"CB-2026-119", icon:<Coffee size={12} color="#5a3e28"/>,  iconBg:"#f0ebe5", expiry:"31 Aug 2026", daysLeft:106, halal:true, status:"valid"    },
-  { id:5, name:"Fresh Cream",      nameAr:"كريمة طازجة",      batch:"FC-0429-07",  icon:<Apple size={12} color="#ff6b6b"/>,   iconBg:"#fff0f0", expiry:"20 May 2026", daysLeft:3,  halal:false, status:"urgent"   },
-  { id:6, name:"Vanilla Syrup",    nameAr:"شراب الفانيليا",    batch:"VS-2026-055", icon:<ShoppingCart size={12} color="#9b59b6"/>, iconBg:"#f3eaff", expiry:"15 Dec 2026", daysLeft:227, halal:true, status:"valid" },
+  { id:5, name:"Fresh Cream",      nameAr:"كريمة طازجة",      batch:"FC-0429-07",  icon:<Apple size={12} color="#C75448"/>,   iconBg:"#fff0f0", expiry:"20 May 2026", daysLeft:3,  halal:false, status:"urgent"   },
+  { id:6, name:"Vanilla Syrup",    nameAr:"شراب الفانيليا",    batch:"VS-2026-055", icon:<ShoppingCart size={12} color="#6E675E"/>, iconBg:"#f3eaff", expiry:"15 Dec 2026", daysLeft:227, halal:true, status:"valid" },
 ];
 
 const EXPIRY_CFG = {
@@ -1232,7 +1232,7 @@ function DonutChart({ slices }) {
   return(
     <svg viewBox="0 0 160 160" width="150" height="150" style={{flexShrink:0}}>
       {paths.map((p,i)=><path key={i} d={p.d} fill={p.color} opacity=".9"/>)}
-      <circle cx={cx} cy={cy} r={ir-2} fill="#0f2038"/>
+      <circle cx={cx} cy={cy} r={ir-2} fill="#26221E"/>
       <text x={cx} y={cy-5} textAnchor="middle" fill="#E8E4DB" fontSize="17" fontWeight="700" fontFamily="Syne,sans-serif">54%</text>
       <text x={cx} y={cy+11} textAnchor="middle" fill="#9C9184" fontSize="9" fontFamily="DM Sans,sans-serif">Over-Prep</text>
     </svg>
@@ -1256,7 +1256,7 @@ function FineRiskGauge({score}){
     <svg viewBox="0 0 180 148" width="174" height="148">
       <path d={trackD} fill="none" stroke="rgba(255,255,255,.07)" strokeWidth="10" strokeLinecap="round"/>
       <path d={fillD} fill="none" stroke={gc} strokeWidth="10" strokeLinecap="round" style={{filter:`drop-shadow(0 0 5px ${gc}88)`}}/>
-      <circle cx={cx} cy={cy} r={r-14} fill="#0f2038"/>
+      <circle cx={cx} cy={cy} r={r-14} fill="#26221E"/>
       <text x={cx} y={cy+8} textAnchor="middle" fill="#E8E4DB" fontSize="26" fontWeight="800" fontFamily="Syne,sans-serif">{score}</text>
       <text x={cx} y={cy+23} textAnchor="middle" fill="#9C9184" fontSize="9" fontFamily="DM Sans,sans-serif">/ 100</text>
       <text x={cx} y={136} textAnchor="middle" fill={gc} fontSize="10" fontWeight="600" fontFamily="DM Sans,sans-serif">{rl}</text>
@@ -1268,7 +1268,7 @@ function FineRiskGauge({score}){
 
 function RangeSlider({value,min,max,onChange,color="#5C7268"}){
   const pct=((value-min)/(max-min))*100;
-  const bg=`linear-gradient(to right, ${color} ${pct}%, rgba(255,255,255,.1) ${pct}%)`;
+  const bg=`linear-gradient(to right, ${color} ${pct}%, var(--navy-mid) ${pct}%)`;
   return(
     <input type="range" className="range-input" min={min} max={max} value={value}
       onChange={e=>onChange(Number(e.target.value))}
@@ -2057,7 +2057,7 @@ function MonthlyAnalyticsContent(){
             </div>
             <div style={{textAlign:"right"}}>
               <div style={{fontFamily:"var(--font-d)",fontSize:"10px",fontWeight:"700",color:"#1E1B18",letterSpacing:".06em"}}>{refNum}</div>
-              <div style={{fontSize:"9px",color:"#5566aa",marginTop:"2px"}}>Generated {new Date().toLocaleDateString("en-AE",{day:"numeric",month:"long",year:"numeric"})}</div>
+              <div style={{fontSize:"9px",color:"#6E675E",marginTop:"2px"}}>Generated {new Date().toLocaleDateString("en-AE",{day:"numeric",month:"long",year:"numeric"})}</div>
               <div style={{marginTop:"6px"}}><span className="audit-badge" style={{fontSize:"8px"}}>Audit Ready</span></div>
             </div>
           </div>
@@ -2068,15 +2068,15 @@ function MonthlyAnalyticsContent(){
             <div key={item.name} className="inv-line" style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1.1fr"}}>
               <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
                 <div style={{width:"26px",height:"26px",borderRadius:"7px",background:item.iconBg,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:"14px"}}>{item.icon}</div>
-                <div><div style={{fontSize:"13px",fontWeight:"500",color:"#0a1628"}}>{item.name}</div><div style={{fontSize:"10px",color:"#9C9184",marginTop:"1px"}}>{item.sub}</div></div>
+                <div><div style={{fontSize:"13px",fontWeight:"500",color:"#1E1B18"}}>{item.name}</div><div style={{fontSize:"10px",color:"#9C9184",marginTop:"1px"}}>{item.sub}</div></div>
               </div>
-              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:"#1a2840"}}>{item.qty}</div><div style={{fontSize:"9px",color:"#9C9184",marginTop:"1px"}}>{item.unit}</div></div>
+              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:"#1E1B18"}}>{item.qty}</div><div style={{fontSize:"9px",color:"#9C9184",marginTop:"1px"}}>{item.unit}</div></div>
               <div>
                 <div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:item.color}}>{item.pct}%</div>
                 <div style={{height:"3px",background:"#edf1f9",borderRadius:"2px",marginTop:"4px",overflow:"hidden"}}><div style={{height:"100%",borderRadius:"2px",width:`${item.pct}%`,background:item.color}}/></div>
               </div>
               <div style={{textAlign:"right"}}>
-                <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#007a46"}}>{fmt(item.recovered)}</div>
+                <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#3E5449"}}>{fmt(item.recovered)}</div>
                 <div style={{fontSize:"9px",color:"#5C7268",marginTop:"1px"}}>{item.note}</div>
               </div>
             </div>
@@ -2085,15 +2085,15 @@ function MonthlyAnalyticsContent(){
             {INGREDIENT_RECOVERY.map(item=>(
               <div key={item.name} style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
                 <span style={{fontSize:"10px",color:"#9C9184"}}>Subtotal ({item.name})</span>
-                <span style={{fontSize:"11px",color:"#1a2840",fontWeight:"600",fontFamily:"var(--font-d)"}}>AED {fmt(item.recovered)}</span>
+                <span style={{fontSize:"11px",color:"#1E1B18",fontWeight:"600",fontFamily:"var(--font-d)"}}>AED {fmt(item.recovered)}</span>
               </div>
             ))}
             <div className="inv-grand">
-              <span style={{fontFamily:"var(--font-d)",fontSize:"11px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color:"#09182e"}}>Total Recovered</span>
-              <span style={{fontFamily:"var(--font-d)",fontSize:"19px",fontWeight:"800",color:"#007a46",letterSpacing:"-.03em"}}>AED {fmt(totalRec)}</span>
+              <span style={{fontFamily:"var(--font-d)",fontSize:"11px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color:"#1E1B18"}}>Total Recovered</span>
+              <span style={{fontFamily:"var(--font-d)",fontSize:"19px",fontWeight:"800",color:"#3E5449",letterSpacing:"-.03em"}}>AED {fmt(totalRec)}</span>
             </div>
             <div className="inv-stamp">
-              <Lock size={10} color="#aab4cc"/>
+              <Lock size={10} color="#9C9184"/>
               <span>Encrypted · Signed · Submitted to DM audit trail · Ref {refNum}</span>
             </div>
           </div>
@@ -2802,7 +2802,7 @@ function useTheme() {
       document.documentElement.setAttribute("data-theme", actual);
       // Update PWA theme-color meta tag so iOS status bar updates
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", actual === "dark" ? "#1a1612" : "#F6F3EC");
+      if (meta) meta.setAttribute("content", actual === "dark" ? "#1E1B18" : "#F6F3EC");
     };
 
     applyTheme();
@@ -3657,7 +3657,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             <div style={{
               marginTop: 9, padding: "7px 10px",
               background: "rgba(176,58,46,.08)", border: ".5px solid rgba(176,58,46,.25)",
-              borderRadius: 7, fontSize: 10, color: "#ff7a7a", lineHeight: 1.45
+              borderRadius: 7, fontSize: 10, color: "#C75448", lineHeight: 1.45
             }}>
               {csvError}
             </div>
@@ -4123,13 +4123,13 @@ function LogsTab({ cafeName = "Your Cafe" }) {
     const timeStr = ts.toLocaleTimeString("en-AE", { hour:"2-digit", minute:"2-digit", second:"2-digit" });
 
     const checklistRows = Object.entries(log.checklist || {})
-      .map(([k, v]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;">${k.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:${v?"#5C7268":"#cc0000"};font-weight:600;">${v ? "✓ COMPLETED" : "✗ NOT DONE"}</td></tr>`)
+      .map(([k, v]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;">${k.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:${v?"#5C7268":"#B03A2E"};font-weight:600;">${v ? "✓ COMPLETED" : "✗ NOT DONE"}</td></tr>`)
       .join("");
 
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Municipality Log — ${log.ref_number}</title></head>
 <body style="font-family:Arial,sans-serif;max-width:720px;margin:40px auto;padding:30px;color:#222;">
-  <div style="border-bottom:3px solid #0a8754;padding-bottom:20px;margin-bottom:24px;">
-    <h1 style="margin:0;color:#0b1829;font-size:24px;">${cafeName}</h1>
+  <div style="border-bottom:3px solid #5C7268;padding-bottom:20px;margin-bottom:24px;">
+    <h1 style="margin:0;color:#1E1B18;font-size:24px;">${cafeName}</h1>
     <div style="color:#666;font-size:13px;margin-top:6px;">Dubai Municipality Daily Inspection Log</div>
   </div>
 
@@ -4138,7 +4138,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
     <tr><td style="padding:6px 0;color:#666;">Date</td><td style="padding:6px 0;">${dateStr}</td></tr>
     <tr><td style="padding:6px 0;color:#666;">Time</td><td style="padding:6px 0;">${timeStr}</td></tr>
     <tr><td style="padding:6px 0;color:#666;">Logged By</td><td style="padding:6px 0;font-weight:600;">${log.staff_name}</td></tr>
-    <tr><td style="padding:6px 0;color:#666;">Fridge Temperature</td><td style="padding:6px 0;color:${log.temp_compliant?"#5C7268":"#cc0000"};font-weight:600;">${log.fridge_temp_c}°C ${log.temp_compliant?"✓ Compliant":"✗ Above 4°C limit"}</td></tr>
+    <tr><td style="padding:6px 0;color:#666;">Fridge Temperature</td><td style="padding:6px 0;color:${log.temp_compliant?"#5C7268":"#B03A2E"};font-weight:600;">${log.fridge_temp_c}°C ${log.temp_compliant?"✓ Compliant":"✗ Above 4°C limit"}</td></tr>
     <tr><td style="padding:6px 0;color:#666;">Status</td><td style="padding:6px 0;color:${log.all_clear?"#5C7268":"#C9762E"};font-weight:600;">${log.all_clear ? "ALL CLEAR — Inspector Ready" : "PARTIAL COMPLIANCE"}</td></tr>
   </table>
 
@@ -4178,7 +4178,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;">${ts.toLocaleDateString("en-AE")}</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;">${ts.toLocaleTimeString("en-AE",{hour:"2-digit",minute:"2-digit"})}</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;font-weight:600;">${log.staff_name}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.temp_compliant?"#5C7268":"#cc0000"};">${log.fridge_temp_c}°C</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.temp_compliant?"#5C7268":"#B03A2E"};">${log.fridge_temp_c}°C</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;text-align:center;">${log.tasks_completed}/${log.tasks_total}</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.all_clear?"#5C7268":"#C9762E"};font-weight:600;">${log.all_clear ? "Clear" : "Partial"}</td>
       </tr>`;
@@ -4186,13 +4186,13 @@ function LogsTab({ cafeName = "Your Cafe" }) {
 
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Audit Trail — ${cafeName}</title></head>
 <body style="font-family:Arial,sans-serif;max-width:1000px;margin:30px auto;padding:30px;color:#222;">
-  <div style="border-bottom:3px solid #0a8754;padding-bottom:20px;margin-bottom:24px;">
-    <h1 style="margin:0;color:#0b1829;">${cafeName}</h1>
+  <div style="border-bottom:3px solid #5C7268;padding-bottom:20px;margin-bottom:24px;">
+    <h1 style="margin:0;color:#1E1B18;">${cafeName}</h1>
     <div style="color:#666;font-size:13px;margin-top:6px;">Municipality Compliance Audit Trail — ${filteredLogs.length} log${filteredLogs.length===1?"":"s"}</div>
     <div style="color:#999;font-size:11px;margin-top:4px;">Exported ${new Date().toLocaleString("en-AE")}</div>
   </div>
   <table style="width:100%;border-collapse:collapse;font-size:13px;">
-    <thead><tr style="background:#0a8754;color:white;">
+    <thead><tr style="background:#5C7268;color:white;">
       <th style="padding:10px;text-align:left;">Reference</th>
       <th style="padding:10px;text-align:left;">Date</th>
       <th style="padding:10px;text-align:left;">Time</th>
@@ -4463,7 +4463,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           }}>
             Daily operations<br/>
             for cafés that<br/>
-            <em style={{ color: "#2d7d4e", fontStyle: "italic" }}>actually run.</em>
+            <em style={{ color: "#3E5449", fontStyle: "italic" }}>actually run.</em>
           </h1>
 
           <p style={{
@@ -4501,7 +4501,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
       <section style={{
         borderTop: "1px solid #DAD5C8",
         borderBottom: "1px solid #DAD5C8",
-        background: "#ebe7df"
+        background: "#E8E4DB"
       }}>
         <div style={{
           maxWidth: "1100px", margin: "0 auto",
@@ -4574,7 +4574,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           lineHeight: 1.1, marginBottom: "56px",
           color: "#1E1B18", maxWidth: "640px"
         }}>
-          Three things every UAE café fights every week. <em style={{color: "#2d7d4e"}}>Solved.</em>
+          Three things every UAE café fights every week. <em style={{color: "#3E5449"}}>Solved.</em>
         </h2>
 
         <div style={{
@@ -4718,7 +4718,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             }}>
               <div style={{
                 position: "absolute", top: "0", left: "0", right: "0",
-                background: "#2d7d4e", color: "#F6F3EC",
+                background: "#3E5449", color: "#F6F3EC",
                 fontSize: "9px", fontWeight: 500, textAlign: "center",
                 padding: "4px 0", letterSpacing: "0.15em",
                 textTransform: "uppercase"
@@ -5223,7 +5223,59 @@ function OnboardingFlow({ session, onComplete }) {
 
 // ─── MAIN APP ─────────────────────────────────────────────────
 
-export default function Kaffelog(){
+// ─── ERROR BOUNDARY — the global crash screen ─────────────────
+// One crash in a live demo used to mean a white screen. Now it means this.
+class KaffelogErrorBoundary extends React.Component {
+  constructor(props){ super(props); this.state = { err: null }; }
+  static getDerivedStateFromError(err){ return { err }; }
+  componentDidCatch(err, info){ console.error("Kaffelog crash:", err, info); }
+  render(){
+    if (!this.state.err) return this.props.children;
+    return (
+      <div style={{minHeight:"100vh",background:"#F6F3EC",color:"#1E1B18",display:"flex",flexDirection:"column",fontFamily:"'IBM Plex Sans',system-ui,sans-serif"}}>
+        <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:32,textAlign:"center"}}>
+          <div style={{width:56,height:56,background:"#1E1B18",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+            <div style={{width:24,height:14,borderRadius:"50%",background:"#F6F3EC"}}/>
+            <div style={{position:"absolute",right:7,bottom:7,width:14,height:14,background:"#B03A2E"}}/>
+          </div>
+          <div style={{fontWeight:700,fontSize:22,marginTop:20,letterSpacing:"-0.02em"}}>Something broke on our side</div>
+          <div style={{fontSize:14.5,color:"#6E675E",lineHeight:1.65,marginTop:8,maxWidth:"30ch"}}>
+            Your data is saved. Reload and you'll be exactly where you were.
+          </div>
+          <button onClick={()=>window.location.reload()}
+            style={{marginTop:24,background:"#1E1B18",color:"#F6F3EC",padding:"15px 32px",borderRadius:999,fontWeight:600,fontSize:15,border:"none",cursor:"pointer",fontFamily:"inherit"}}>
+            Reload Kaffelog
+          </button>
+          <a href="https://wa.me/9710000000000" style={{marginTop:12,fontSize:13.5,color:"#9A4A1E",fontWeight:600,textDecoration:"none"}}>
+            Message us on WhatsApp
+          </a>
+        </div>
+        <div style={{padding:14,textAlign:"center",fontFamily:"'IBM Plex Mono',monospace",fontSize:9,letterSpacing:".14em",color:"#9C9184"}}>
+          NOTHING WAS LOST · YOUR LOGS ARE SAFE ON THIS DEVICE
+        </div>
+      </div>
+    );
+  }
+}
+
+// ─── OFFLINE BANNER ───────────────────────────────────────────
+function OfflineBanner(){
+  const [online, setOnline] = useState(typeof navigator === "undefined" ? true : navigator.onLine);
+  const [since] = useState(() => new Date().toLocaleTimeString("en-AE",{hour:"2-digit",minute:"2-digit"}));
+  useEffect(()=>{
+    const on = ()=>setOnline(true), off = ()=>setOnline(false);
+    window.addEventListener("online", on); window.addEventListener("offline", off);
+    return ()=>{ window.removeEventListener("online", on); window.removeEventListener("offline", off); };
+  },[]);
+  if (online) return null;
+  return (
+    <div style={{width:"100%",background:"#332E28",color:"#E8E4DB",fontFamily:"var(--font-m)",fontSize:10.5,letterSpacing:".12em",padding:"9px 14px",display:"flex",justifyContent:"space-between"}}>
+      <span>OFFLINE — SHOWING SAVED DATA</span><span>LAST UPDATED {since}</span>
+    </div>
+  );
+}
+
+function Kaffelog(){
   // ── ALL HOOKS MUST BE AT THE TOP — before any early returns ──
   // If session exists in localStorage, skip login screen
   const [screen,   setScreen]   = useState(() => {
@@ -5320,6 +5372,8 @@ export default function Kaffelog(){
       </aside>
 
       <div className="kf-main">
+
+      <OfflineBanner/>
 
       {/* ── DASHBOARD ── */}
       {tab==="dashboard"&&(
@@ -5526,5 +5580,14 @@ export default function Kaffelog(){
         Municipality data logged & timestamped
       </div>
     </div>
+  );
+}
+
+// ─── ROOT EXPORT — app wrapped in the crash-screen boundary ──
+export default function KaffelogRoot(){
+  return (
+    <KaffelogErrorBoundary>
+      <Kaffelog/>
+    </KaffelogErrorBoundary>
   );
 }
