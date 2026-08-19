@@ -63,6 +63,22 @@ const sb = {
       headers: this._headers(token),
     });
   },
+  async recover(email) {
+    const r = await fetch(`${this._url}/auth/v1/recover`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": this._key },
+      body: JSON.stringify({ email }),
+    });
+    return r.ok ? {} : r.json();
+  },
+  async resendConfirmation(email) {
+    const r = await fetch(`${this._url}/auth/v1/resend`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": this._key },
+      body: JSON.stringify({ type: "signup", email }),
+    });
+    return r.ok ? {} : r.json();
+  },
 
   // ── DATABASE ──────────────────────────────────────────────
   async insert(table, data, token) {
@@ -4885,19 +4901,25 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 }
 
 function LoginScreen({ onLogin, onGoSignup }) {
+  const [mode,     setMode]     = useState("login"); // login | forgot
   const [email,    setEmail]    = useState("");
   const [pass,     setPass]     = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading,  setLoading]  = useState(false);
   const [error,    setError]    = useState("");
+  const [unconfirmed, setUnconfirmed] = useState(false);
+  const [resent,   setResent]   = useState(false);
+  const [resetSent,setResetSent]= useState(false);
 
   const handleLogin = async () => {
     if (!email || !pass) return;
-    setLoading(true); setError("");
+    setLoading(true); setError(""); setUnconfirmed(false);
     try {
       const res = await sb.signIn(email, pass);
       if (res.error || !res.access_token) {
-        setError(res.error?.message || "Invalid email or password.");
+        const msg = res.error?.message || res.error_description || "Invalid email or password.";
+        if (/confirm/i.test(msg)) { setUnconfirmed(true); }
+        else setError(msg);
       } else {
         setSession(res);
         const cafes = await sb.select("cafes", { "owner_user_id=eq.": res.user.id }, res.access_token);
@@ -4908,18 +4930,73 @@ function LoginScreen({ onLogin, onGoSignup }) {
     setLoading(false);
   };
 
+  const handleResend = async () => {
+    if (!email) return;
+    await sb.resendConfirmation(email).catch(()=>{});
+    setResent(true);
+  };
+
+  const handleReset = async () => {
+    if (!email) return;
+    setLoading(true); setError("");
+    try { await sb.recover(email); setResetSent(true); }
+    catch { setError("Couldn't send the reset email. Try again."); }
+    setLoading(false);
+  };
+
+  const Mark = () => (
+    <div style={{width:40,height:40,background:"var(--blue)",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",margin:"0 auto 14px"}}>
+      <div style={{width:17,height:10,borderRadius:"50%",background:"var(--navy)"}}/>
+      <div style={{position:"absolute",right:-2,bottom:-2,width:10,height:10,background:"var(--gold)"}}/>
+    </div>
+  );
+
+  if (mode === "forgot") return (
+    <div className="auth-shell fade-in">
+      <div className="auth-card">
+        <button className="auth-switch-btn" onClick={()=>{setMode("login");setResetSent(false);}}
+          style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".14em",marginBottom:16}}>← BACK TO LOGIN</button>
+        <div className="auth-title">Reset your password</div>
+        <div className="auth-sub">Enter your email and we'll send a reset link.</div>
+        {error && <div className="auth-error">{error}</div>}
+        <label className="auth-label">Email</label>
+        <div className="auth-input-wrap">
+          <input className="auth-input" type="email" placeholder="you@cafe.com"
+            value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleReset()}/>
+        </div>
+        <button className="auth-btn" onClick={handleReset} disabled={!email||loading}>
+          {loading?<div className="spin-sm"/>:null}
+          {loading?"Sending…":"Send reset link"}
+        </button>
+        {resetSent && (
+          <div className="auth-success" style={{marginTop:16,marginBottom:0}}>
+            <strong>Sent.</strong> Check your inbox — the link works for 24 hours.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div className="auth-shell fade-in">
       <div style={{textAlign:"center",marginBottom:"24px"}}>
-        <div style={{fontFamily:"var(--font-d)",fontSize:"28px",fontWeight:"800",color:"var(--text-1)",letterSpacing:"-0.5px",marginBottom:"6px"}}>Welcome to Kaffelog</div>
-        <div style={{fontSize:"12px",color:"var(--text-2)",letterSpacing:"0.05em"}}>Smart logs for UAE cafés</div>
+        <Mark/>
+        <div style={{fontSize:"26px",fontWeight:700,color:"var(--text-1)",letterSpacing:"-0.03em",marginBottom:"6px"}}>Welcome back</div>
+        <div className="auth-tagline" style={{marginBottom:0}}>THE CALM SYSTEM BEHIND THE CAFÉ</div>
       </div>
 
       <div className="auth-card">
-        <div className="auth-title">Welcome back</div>
-        <div className="auth-sub">Sign in to your cafe dashboard</div>
+        {unconfirmed && (
+          <div style={{borderLeft:"4px solid var(--gold)",background:"rgba(201,118,46,.12)",padding:"14px 16px",marginBottom:16}}>
+            <div style={{fontWeight:600,fontSize:14}}>Your email isn't confirmed yet</div>
+            <div style={{fontSize:13,color:"var(--text-2)",lineHeight:1.6,marginTop:4}}>Find the link we sent, or get a fresh one:</div>
+            {resent
+              ? <div style={{fontSize:13,color:"var(--emerald-mid)",fontWeight:600,marginTop:10}}>Sent — check your inbox.</div>
+              : <button onClick={handleResend} style={{marginTop:10,border:"1.5px solid var(--border-blue)",background:"var(--navy-card)",padding:"10px 18px",borderRadius:999,fontWeight:600,fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>Resend confirmation</button>}
+          </div>
+        )}
         {error && <div className="auth-error">{error}</div>}
-        <label className="auth-label">Email address</label>
+        <label className="auth-label">Email</label>
         <div className="auth-input-wrap">
           <input className="auth-input" type="email" placeholder="you@yourcafe.ae"
             value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleLogin()}/>
@@ -4934,9 +5011,12 @@ function LoginScreen({ onLogin, onGoSignup }) {
           </button>
         </div>
         <button className="auth-btn" onClick={handleLogin} disabled={!email||!pass||loading}>
-          {loading?<div className="spin-sm"/>:<ChevronRight size={15}/>}
-          {loading?"Signing in…":"Sign In"}
+          {loading?<div className="spin-sm"/>:null}
+          {loading?"Signing in…":"Log in"}
         </button>
+        <div style={{textAlign:"center",marginTop:14}}>
+          <button className="auth-switch-btn" onClick={()=>{setMode("forgot");setError("");}}>Forgot password?</button>
+        </div>
       </div>
 
       <div className="auth-switch">
@@ -4944,10 +5024,9 @@ function LoginScreen({ onLogin, onGoSignup }) {
         <button className="auth-switch-btn" onClick={onGoSignup}>Start 14-day free trial</button>
       </div>
       <div className="auth-trust">
-        {[["🔒","Encrypted","AWS Bahrain"],["🇦🇪","DM 2025","UAE compliant"],["⚡","10-min setup","No tech needed"],["📱","7am reports","WhatsApp daily"]].map(([icon,t,s])=>(
+        {[["Encrypted","AWS BAHRAIN"],["DM format","UAE COMPLIANT"],["10-min setup","NO TECH NEEDED"],["Daily reports","WHATSAPP 7AM"]].map(([t,s])=>(
           <div key={t} className="auth-trust-item">
-            <span style={{fontSize:16}}>{icon}</span>
-            <div><div style={{fontSize:10,fontWeight:600,color:"var(--text-1)"}}>{t}</div><div style={{fontSize:9,color:"var(--text-3)"}}>{s}</div></div>
+            <div><div style={{fontSize:11,fontWeight:600,color:"var(--text-1)",fontFamily:"var(--font-b)",letterSpacing:0,textTransform:"none"}}>{t}</div><div style={{fontSize:8.5,marginTop:2}}>{s}</div></div>
           </div>
         ))}
       </div>
@@ -4963,6 +5042,8 @@ function SignupScreen({ onSignup, onGoLogin }) {
   const [showPass, setShowPass] = useState(false);
   const [loading,  setLoading]  = useState(false);
   const [error,    setError]    = useState("");
+  const [awaitConfirm, setAwaitConfirm] = useState(false); // account made, email confirmation pending
+  const [resent,   setResent]   = useState(false);
   const strong = pass.length >= 8;
 
   const handleSignup = async () => {
@@ -4981,8 +5062,8 @@ function SignupScreen({ onSignup, onGoLogin }) {
       // (bypasses Supabase's "confirm email" requirement)
       const signinRes = await sb.signIn(email, pass);
       if (signinRes.error || !signinRes.access_token) {
-        // If signin fails, email confirmation is required — let user know nicely
-        setError("Account created. Please check your email to confirm, then sign in.");
+        // Email confirmation required — this is a SUCCESS moment, not an error
+        setAwaitConfirm(true);
         setLoading(false);
         return;
       }
@@ -4994,16 +5075,44 @@ function SignupScreen({ onSignup, onGoLogin }) {
     setLoading(false);
   };
 
+  // "Check your email" — unmistakably good, never a red box
+  if (awaitConfirm) return (
+    <div className="auth-shell fade-in">
+      <div style={{textAlign:"center",display:"flex",flexDirection:"column",alignItems:"center"}}>
+        <div style={{width:64,height:64,background:"var(--emerald)",display:"flex",alignItems:"center",justifyContent:"center",color:"#F0EBE1",fontSize:30}}>✓</div>
+        <div style={{fontWeight:700,fontSize:26,letterSpacing:"-0.02em",marginTop:22,color:"var(--text-1)"}}>Check your email</div>
+        <div style={{fontSize:15,color:"var(--text-2)",lineHeight:1.65,marginTop:10,maxWidth:"30ch"}}>
+          We sent a confirmation link to <strong style={{color:"var(--text-1)"}}>{email}</strong>. Tap it and you're in.
+        </div>
+        {resent
+          ? <div style={{marginTop:26,fontSize:14,fontWeight:600,color:"var(--emerald-mid)"}}>Sent again — check your inbox.</div>
+          : <button onClick={async()=>{await sb.resendConfirmation(email).catch(()=>{});setResent(true);}}
+              style={{marginTop:26,border:"1.5px solid var(--border-blue)",background:"var(--navy-card)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:14,cursor:"pointer",fontFamily:"inherit",color:"var(--text-1)"}}>
+              Resend email
+            </button>}
+        <div style={{fontFamily:"var(--font-m)",fontSize:9.5,letterSpacing:".12em",color:"var(--text-3)",marginTop:18}}>
+          WRONG ADDRESS?{" "}
+          <button onClick={()=>{setAwaitConfirm(false);setResent(false);}} style={{background:"none",border:"none",color:"var(--rust)",cursor:"pointer",fontFamily:"inherit",fontSize:"inherit",letterSpacing:"inherit",padding:0}}>EDIT EMAIL</button>
+        </div>
+        <div style={{marginTop:14}}>
+          <button className="auth-switch-btn" onClick={onGoLogin}>Already confirmed? Log in</button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="auth-shell fade-in">
       <div style={{textAlign:"center",marginBottom:"24px"}}>
-        <div style={{fontFamily:"var(--font-d)",fontSize:"28px",fontWeight:"800",color:"var(--text-1)",letterSpacing:"-0.5px",marginBottom:"6px"}}>Welcome to Kaffelog</div>
-        <div style={{fontSize:"12px",color:"var(--text-2)",letterSpacing:"0.05em"}}>14-day free trial · No credit card needed</div>
+        <div style={{width:40,height:40,background:"var(--blue)",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",margin:"0 auto 14px"}}>
+          <div style={{width:17,height:10,borderRadius:"50%",background:"var(--navy)"}}/>
+          <div style={{position:"absolute",right:-2,bottom:-2,width:10,height:10,background:"var(--gold)"}}/>
+        </div>
+        <div style={{fontSize:"26px",fontWeight:700,color:"var(--text-1)",letterSpacing:"-0.03em",marginBottom:"6px"}}>Create your account</div>
+        <div className="auth-tagline" style={{marginBottom:0}}>14 DAYS FREE · NO CARD</div>
       </div>
 
       <div className="auth-card">
-        <div className="auth-title">Create your account</div>
-        <div className="auth-sub">Takes 2 minutes · Full setup in 10</div>
         {error && <div className="auth-error">{error}</div>}
         <label className="auth-label">Work email</label>
         <div className="auth-input-wrap">
@@ -5080,7 +5189,7 @@ function OnboardingFlow({ session, onComplete }) {
 
   const stepContent = [null,
     // Step 1
-    <><div className="ob-title">Tell us about<br/>your cafe ☕</div>
+    <><div className="ob-title">Tell us about<br/>your cafe</div>
     <div className="ob-sub">We'll set up your compliance calendar and waste tracker based on your location and licence.</div>
     <label className="ob-label">Cafe name</label>
     <input className="ob-input" placeholder="e.g. Nightjar Coffee Al Quoz" value={cafeName} onChange={e=>setCafeName(e.target.value)}/>
@@ -5100,25 +5209,25 @@ function OnboardingFlow({ session, onComplete }) {
     <div className="ob-grid">{STAFF_OPTS.map(s=><div key={s} className={`ob-opt ${staffSize===s?"sel":""}`} style={{padding:"11px 12px"}} onClick={()=>setStaff(s)}><div className="ob-opt-name" style={{fontSize:13}}>{s}</div></div>)}</div></>,
 
     // Step 3
-    <><div className="ob-title">Documents<br/>&amp; WhatsApp 📋</div>
+    <><div className="ob-title">Documents<br/>&amp; WhatsApp</div>
     <div className="ob-sub">We'll alert you before anything expires. You can add all documents inside the app — this just gets you started.</div>
     <label className="ob-label">Trade licence expiry date</label>
-    <input className="ob-input" type="date" style={{colorScheme:"dark"}} value={tradeExp} onChange={e=>setTradeExp(e.target.value)}/>
+    <input className="ob-input" type="date" style={{colorScheme:"light"}} value={tradeExp} onChange={e=>setTradeExp(e.target.value)}/>
     <label className="ob-label">Owner WhatsApp <span style={{color:"var(--text-3)",fontWeight:400,textTransform:"none"}}>(receives 7am daily report)</span></label>
     <input className="ob-input" type="tel" placeholder="+971 50 XXX XXXX" value={phone} onChange={e=>setPhone(e.target.value)}/>
     <div style={{marginTop:14,background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.18)",borderRadius:"var(--r-md)",padding:"11px 13px",fontSize:12,color:"var(--text-2)",lineHeight:1.5}}>
-      <span style={{color:"#1E1B18",fontWeight:600}}>📱 Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
+      <span style={{color:"#1E1B18",fontWeight:600}}>Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
     </div></>,
 
     // Step 4
     <div className="ob-success">
       <div className="ob-success-ring"><CheckCircle2 size={36} color="var(--emerald)"/></div>
-      <div className="ob-title" style={{textAlign:"center"}}>{cafeName||"Your cafe"} is ready! 🎉</div>
+      <div className="ob-title" style={{textAlign:"center"}}>{cafeName||"Your cafe"} is ready.</div>
       <div className="ob-sub" style={{textAlign:"center",marginBottom:22}}>Your 14-day free trial starts now. Compliance calendar, SafeVault, and AI waste tracker are live.</div>
       <div style={{width:"100%",display:"flex",flexDirection:"column",gap:9}}>
-        {[["✅","Municipality Log","Train your barista on the daily checklist — 2 minutes"],["📄","SafeVault","Add staff health card expiry dates"],["🥛","Waste Tracker","Enter yesterday's sales for your first AI recommendation"]].map(([icon,t,d])=>(
-          <div key={t} style={{background:"var(--navy-card)",borderRadius:"var(--r-md)",border:".5px solid var(--border)",padding:"12px 14px",display:"flex",gap:11,alignItems:"flex-start"}}>
-            <span style={{fontSize:18,flexShrink:0}}>{icon}</span>
+        {[["var(--emerald)","Municipality Log","Train your barista on the daily checklist — 2 minutes"],["var(--gold)","SafeVault","Add staff health card expiry dates"],["var(--rust)","Waste Tracker","Enter yesterday's sales for your first AI recommendation"]].map(([tone,t,d])=>(
+          <div key={t} style={{background:"var(--navy-card)",border:"1.5px solid var(--border-blue)",padding:"12px 14px",display:"flex",gap:11,alignItems:"flex-start"}}>
+            <span style={{width:10,height:10,background:tone,flexShrink:0,marginTop:4}}/>
             <div><div style={{fontSize:13,fontWeight:600,color:"var(--text-1)",marginBottom:2}}>{t}</div><div style={{fontSize:11,color:"var(--text-2)",lineHeight:1.4}}>{d}</div></div>
           </div>
         ))}
@@ -5170,16 +5279,12 @@ export default function Kaffelog(){
   const today          = new Date().toLocaleDateString("en-AE",{weekday:"short",day:"numeric",month:"short"});
   const projectedAnnual= (4259.45*12).toLocaleString("en-AE",{maximumFractionDigits:0});
 
-  // inject styles + font once
+  // inject styles once (fonts load from index.html)
   useEffect(()=>{
-    const link = document.createElement("link");
-    link.rel   = "stylesheet";
-    link.href  = "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap";
-    document.head.appendChild(link);
     const s = document.createElement("style");
     s.textContent = STYLES;
     document.head.appendChild(s);
-    return()=>{ document.head.removeChild(s); document.head.removeChild(link); };
+    return()=>{ document.head.removeChild(s); };
   },[]);
 
   // ── Auth handlers ──────────────────────────────────────────
