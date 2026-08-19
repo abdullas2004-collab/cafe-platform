@@ -222,51 +222,57 @@ const STYLES = `
 
 :root,
 :root[data-theme="light"]{
-  /* LIGHT THEME (default) — warm bone & ink */
-  --navy:#f5f3ee;          /* Main background — bone */
-  --navy-mid:#ebe7df;      /* Surface slightly recessed */
-  --navy-card:#faf7f1;     /* Card background — slightly lighter */
-  --blue:#1a1a18;          /* Primary action — ink black */
-  --blue-glow:rgba(26,26,24,.12);
-  --emerald:#2d7d4e;       /* Sage green for positive states */
-  --emerald-mid:#1f5c39;
-  --gold:#b8501f;          /* Rust */
-  --red:#a83020;           /* Deeper red */
-  --purple:#5a4b73;        /* Muted dusty purple */
-  --text-1:#1a1a18;        /* Ink black */
-  --text-2:#6b6863;        /* Warm grey */
-  --text-3:#9a958c;        /* Lighter warm grey */
-  --border:rgba(26,26,24,.12);
-  --border-blue:rgba(26,26,24,.2);
-  --border-green:rgba(45,125,78,.25);
-  --white:#1a1a18;         /* Inverted use — text on bright backgrounds */
-  --font-d:'Fraunces','Playfair Display',Georgia,serif;
-  --font-b:'Inter','DM Sans',-apple-system,sans-serif;
-  --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:10px;
+  /* OPERATIONS DESK — LIGHT (paper & soot) */
+  --navy:#F6F3EC;          /* Page background — paper-100 */
+  --navy-mid:#E8E4DB;      /* Recessed surface — paper-200 */
+  --navy-card:#FDFCF8;     /* Card background — paper-050 */
+  --blue:#1E1B18;          /* Primary action — soot */
+  --blue-glow:rgba(30,27,24,.12);
+  --emerald:#5C7268;       /* Sage — safe / success */
+  --emerald-mid:#3E5449;
+  --gold:#C9762E;          /* Amber — due soon / warning */
+  --rust:#9A4A1E;          /* Rust — brand accent, money figures */
+  --red:#B03A2E;           /* Needs attention */
+  --purple:#6E675E;        /* Retired — mapped to stone */
+  --text-1:#1E1B18;        /* Soot */
+  --text-2:#6E675E;        /* Stone-600 */
+  --text-3:#9C9184;        /* Stone-400 */
+  --border:rgba(30,27,24,.14);      /* Hairline separators */
+  --border-blue:#1E1B18;            /* Hard rule — cards, regions */
+  --border-green:#5C7268;
+  --white:#1E1B18;         /* Inverted use — text on bright backgrounds */
+  --font-d:'IBM Plex Sans',system-ui,sans-serif;
+  --font-b:'IBM Plex Sans',system-ui,sans-serif;
+  --font-m:'IBM Plex Mono',ui-monospace,monospace;
+  --font-serif:'Newsreader',Georgia,serif;
+  --r-sm:0px; --r-md:0px; --r-lg:0px; --r-xl:0px;
 }
 
 :root[data-theme="dark"]{
-  /* DARK THEME — espresso & cream (NOT generic tech-startup dark) */
-  --navy:#1a1612;          /* Background — warm dark espresso, not pure black */
-  --navy-mid:#221d18;      /* Surface slightly raised */
-  --navy-card:#2a2520;     /* Card background — espresso, slightly lighter */
-  --blue:#f5f3ee;          /* Primary action — bone (inverted) */
-  --blue-glow:rgba(245,243,238,.12);
-  --emerald:#4eaa75;       /* Sage but brighter for dark mode contrast */
-  --emerald-mid:#3a8a5d;
-  --gold:#d97757;          /* Rust but warmer */
-  --red:#d65a4a;           /* Less saturated red for dark */
-  --purple:#9485b0;        /* Lighter dusty purple */
-  --text-1:#f5f3ee;        /* Bone for main text */
-  --text-2:#b5b1a8;        /* Lighter warm grey */
-  --text-3:#7a766f;        /* Mid warm grey */
-  --border:rgba(245,243,238,.1);
-  --border-blue:rgba(245,243,238,.18);
-  --border-green:rgba(78,170,117,.25);
-  --white:#f5f3ee;         /* Bone — main contrast color */
-  --font-d:'Fraunces','Playfair Display',Georgia,serif;
-  --font-b:'Inter','DM Sans',-apple-system,sans-serif;
-  --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:10px;
+  /* OPERATIONS DESK — DARK (soot & paper, pending its own design pass) */
+  --navy:#1E1B18;
+  --navy-mid:#26221E;
+  --navy-card:#26221E;
+  --blue:#F6F3EC;
+  --blue-glow:rgba(240,235,225,.12);
+  --emerald:#7A9A8C;
+  --emerald-mid:#5C7268;
+  --gold:#C9762E;
+  --rust:#C9762E;
+  --red:#C75448;
+  --purple:#9C9184;
+  --text-1:#F0EBE1;
+  --text-2:#A3998B;
+  --text-3:#6E675E;
+  --border:rgba(240,235,225,.16);
+  --border-blue:rgba(240,235,225,.4);
+  --border-green:#5C7268;
+  --white:#F0EBE1;
+  --font-d:'IBM Plex Sans',system-ui,sans-serif;
+  --font-b:'IBM Plex Sans',system-ui,sans-serif;
+  --font-m:'IBM Plex Mono',ui-monospace,monospace;
+  --font-serif:'Newsreader',Georgia,serif;
+  --r-sm:0px; --r-md:0px; --r-lg:0px; --r-xl:0px;
 }
 
 html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','ss02'}
@@ -280,34 +286,32 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .pg-shell{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;align-items:center;max-width:480px;margin:0 auto}
 
 /* ── nav ── */
-.pg-nav{width:100%;display:flex;background:var(--navy-card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:80;overflow-x:auto;padding:0 6px;gap:2px}
+.pg-nav{width:100%;display:flex;background:var(--navy-card);border-bottom:2px solid var(--border-blue);position:sticky;top:0;z-index:80;overflow-x:auto;padding:0 6px;gap:2px}
 .pg-nav::-webkit-scrollbar{height:0}
-.pg-nav-tab{flex:0 0 auto;min-width:84px;padding:13px 12px;font-family:var(--font-d);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;transition:color .18s,border-color .18s}
-.pg-nav-tab.active{color:var(--text-1);border-bottom-color:var(--blue)}
+.pg-nav-tab{flex:0 0 auto;min-width:84px;padding:13px 12px;font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;transition:color .15s ease-out,border-color .15s ease-out}
+.pg-nav-tab.active{color:var(--text-1);border-bottom-color:var(--rust)}
 
 /* ── header ── */
-.pg-header{width:100%;background:linear-gradient(155deg,#0c1f3a 0%,var(--navy) 100%);padding:34px 22px 34px;position:relative;overflow:hidden}
-.pg-header::before{content:'';position:absolute;top:-80px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(10,135,84,.12) 0%,transparent 70%);pointer-events:none}
-.pg-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(10,135,84,.38),transparent)}
+.pg-header{width:100%;background:var(--navy);padding:28px 22px 24px;position:relative;border-bottom:1.5px solid var(--border-blue)}
 
 .pg-wordmark{display:flex;align-items:center;gap:9px;margin-bottom:3px}
-.pg-logo{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px var(--blue-glow);flex-shrink:0}
-.pg-brand{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--text-1);letter-spacing:-.01em}
-.pg-brand-sub{font-size:10px;color:var(--text-2);letter-spacing:.12em;text-transform:uppercase}
-.pg-location{display:flex;align-items:center;gap:6px;background:rgba(10,135,84,.1);border:.5px solid rgba(10,135,84,.28);border-radius:20px;padding:4px 11px;font-size:11px;color:#7aadff;font-weight:500}
-.pg-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 5px rgba(0,184,107,.7);animation:pulse 2s ease-in-out infinite}
+.pg-logo{width:30px;height:30px;background:var(--blue);border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.pg-logo::after{content:'';position:absolute;right:-2px;bottom:-2px;width:9px;height:9px;background:var(--gold)}
+.pg-brand{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--text-1);letter-spacing:-.02em}
+.pg-brand-sub{font-family:var(--font-m);font-size:9px;color:var(--text-2);letter-spacing:.16em;text-transform:uppercase}
+.pg-location{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border-blue);border-radius:999px;padding:4px 11px;font-family:var(--font-m);font-size:10px;color:var(--text-2);font-weight:500;letter-spacing:.08em}
+.pg-dot{width:6px;height:6px;border-radius:0;background:var(--emerald)}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
 
-.pg-heading{font-family:var(--font-d);font-size:23px;font-weight:800;color:var(--text-1);line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
-.pg-heading span{color:#5599ff}
-.pg-subhead{font-size:12px;color:var(--text-2);font-weight:300;margin-bottom:26px;line-height:1.5}
+.pg-heading{font-family:var(--font-d);font-size:24px;font-weight:700;color:var(--text-1);line-height:1.15;letter-spacing:-.03em;margin-bottom:6px}
+.pg-heading span{color:var(--rust)}
+.pg-subhead{font-size:13px;color:var(--text-2);font-weight:400;margin-bottom:22px;line-height:1.55}
 
 /* main cta button */
-.pg-cta{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;transition:transform .14s,box-shadow .14s;box-shadow:0 4px 18px rgba(26,26,24,.14)}
-[data-theme="dark"] .pg-cta{box-shadow:0 4px 18px rgba(245,243,238,.1)}
-.pg-cta::before{content:'';position:absolute;inset:0;pointer-events:none}
-.pg-cta:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(26,26,24,.2)}
-[data-theme="dark"] .pg-cta:hover{box-shadow:0 6px 22px rgba(245,243,238,.15)}
+.pg-cta{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:15px;font-weight:700;letter-spacing:.01em;text-transform:none;border:1.5px solid var(--blue);border-radius:999px;padding:15px 20px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;transition:background .15s ease-out}
+.pg-cta::before{content:none}
+.pg-cta:hover{background:#332E28;border-color:#332E28}
+[data-theme="dark"] .pg-cta:hover{box-shadow:0 6px 22px rgba(240,235,225,.15)}
 .pg-cta:active{transform:scale(.98)}
 .pg-cta:disabled{opacity:.5;pointer-events:none}
 .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .65s linear infinite}
@@ -315,208 +319,211 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 
 /* ── body ── */
 .pg-body{width:100%;padding:22px 18px 80px;display:flex;flex-direction:column;gap:16px}
-.pg-sect{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
+.pg-sect{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
 
 /* ── cards ── */
-.card{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.card-white{background:var(--white);border-radius:var(--r-lg);border:.5px solid rgba(0,0,0,.08);box-shadow:0 2px 18px rgba(0,0,0,.06);overflow:hidden}
+.card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.card-white{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
 
 /* stat row */
 .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
-.stat-card{background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);padding:13px 10px;text-align:center;position:relative;overflow:hidden}
-.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
+.stat-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);padding:13px 10px;text-align:center;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;top:0;right:0;width:10px;height:10px}
 .stat-card.blue::after{background:var(--blue)}.stat-card.green::after{background:var(--emerald)}.stat-card.gold::after{background:var(--gold)}
-.stat-n{font-family:var(--font-d);font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:3px;letter-spacing:-.02em}
-.stat-l{font-size:9px;color:var(--text-2);letter-spacing:.04em;line-height:1.3}
+.stat-n{font-family:var(--font-serif);font-size:20px;font-weight:500;color:var(--text-1);margin-bottom:3px;letter-spacing:-.01em}
+.stat-l{font-family:var(--font-m);font-size:8.5px;color:var(--text-2);letter-spacing:.1em;text-transform:uppercase;line-height:1.4}
 
 /* savings card */
-.sav-card{background:#e8f0e8;border:.5px solid var(--border-green);border-radius:var(--r-xl);padding:22px;position:relative;overflow:hidden;border:1px solid var(--border-green)}
-.sav-card::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(0,184,107,.17) 0%,transparent 70%);pointer-events:none}
-.sav-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-mid);margin-bottom:7px;display:flex;align-items:center;gap:5px}
-.sav-eyebrow::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 7px rgba(0,184,107,.6)}
-.sav-amt{font-family:var(--font-d);font-size:40px;font-weight:800;color:#004d2e;letter-spacing:-.03em;line-height:1;margin-bottom:3px}
-.sav-amt .cur{font-size:18px;font-weight:600;vertical-align:super;color:#006b40}
-.sav-lbl{font-size:12px;color:#2d7a57;margin-bottom:16px}
+.sav-card{background:var(--blue);border-radius:0;padding:22px;position:relative;overflow:hidden;border:1.5px solid var(--blue)}
+.sav-card::before{content:'';position:absolute;top:0;right:0;width:14px;height:14px;background:var(--emerald)}
+.sav-eyebrow{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A3998B;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.sav-amt{font-family:var(--font-serif);font-size:44px;font-weight:400;color:#F0EBE1;letter-spacing:-.01em;line-height:1;margin-bottom:3px}
+.sav-amt .cur{font-size:18px;font-weight:400;vertical-align:super;color:#A3998B}
+.sav-lbl{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:#A3998B;margin-bottom:16px}
 .sav-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.sav-item{background:rgba(0,100,60,.1);border-radius:9px;padding:8px 10px;border:.5px solid rgba(0,184,107,.18)}
-.sav-num{font-family:var(--font-d);font-size:14px;font-weight:700;color:#004d2e;margin-bottom:1px}
-.sav-desc{font-size:10px;color:#3d9a6e}
-.sav-badge{position:absolute;top:18px;right:18px;background:var(--emerald);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.sav-item{background:rgba(240,235,225,.06);border-radius:0;padding:8px 10px;border:1px solid rgba(240,235,225,.18)}
+.sav-num{font-family:var(--font-serif);font-size:15px;font-weight:400;color:#F0EBE1;margin-bottom:1px}
+.sav-desc{font-family:var(--font-m);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#A3998B}
+.sav-badge{position:absolute;top:18px;right:26px;background:transparent;color:#C9762E;font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.12em;padding:3px 9px;border:1px solid #C9762E;border-radius:0}
 
 /* AI insight */
-.ai-chip{display:flex;align-items:center;gap:5px;background:#eef3ff;border:.5px solid rgba(10,135,84,.2);border-radius:20px;padding:4px 11px;font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
-.ai-blink{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 1.4s ease-in-out infinite}
+.ai-chip{display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--border-blue);border-radius:0;padding:4px 11px;font-family:var(--font-m);font-size:9px;font-weight:500;color:var(--text-1);letter-spacing:.12em;text-transform:uppercase}
+.ai-blink{width:5px;height:5px;border-radius:0;background:var(--rust);animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.ai-text{font-style:italic;font-size:13px;font-weight:300;color:#1a2840;line-height:1.7;margin-bottom:14px;padding-left:12px;border-left:2px solid var(--blue)}
-.ai-text strong{font-weight:500;font-style:normal;color:#0a1628}
-.tag{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid}
-.tag.a{background:#fff8e6;border-color:rgba(240,180,41,.4);color:#9a7000}
-.tag.b{background:#e8f2ff;border-color:rgba(10,135,84,.25);color:#1a5cd0}
-.tag.c{background:#fde8f0;border-color:rgba(220,50,100,.2);color:#b02060}
+.ai-text{font-family:var(--font-serif);font-style:italic;font-size:14.5px;font-weight:400;color:var(--text-1);line-height:1.65;margin-bottom:14px;padding-left:12px;border-left:3px solid var(--rust)}
+.ai-text strong{font-weight:500;font-style:normal;color:var(--text-1)}
+.tag{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.08em;padding:3px 9px;border-radius:0;border:1px solid}
+.tag.a{background:rgba(201,118,46,.14);border-color:var(--gold);color:#8A4E1D}
+.tag.b{background:rgba(92,114,104,.12);border-color:var(--emerald);color:var(--emerald-mid)}
+.tag.c{background:rgba(176,58,46,.12);border-color:var(--red);color:#8A2E22}
 
 /* projection */
-.proj{background:#08111f;border-radius:var(--r-md);border:.5px solid rgba(0,184,107,.2);padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
-.proj::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--emerald) 0%,var(--blue) 100%)}
-.proj-icon{width:38px;height:38px;border-radius:11px;background:rgba(0,184,107,.1);border:.5px solid rgba(0,184,107,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.proj-val{font-family:var(--font-d);font-size:22px;font-weight:800;color:var(--emerald);letter-spacing:-.03em;line-height:1;margin-bottom:3px}
-.proj-sub{font-size:10px;color:var(--text-2)}
+.proj{background:var(--blue);border-radius:0;border:none;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.proj::before{content:'';position:absolute;left:0;top:0;width:12px;height:12px;background:var(--gold)}
+.proj-icon{width:38px;height:38px;border-radius:0;background:rgba(240,235,225,.08);border:1px solid rgba(240,235,225,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.proj-val{font-family:var(--font-serif);font-size:24px;font-weight:400;color:#E8B27A;letter-spacing:-.01em;line-height:1;margin-bottom:3px}
+.proj-sub{font-family:var(--font-m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#A3998B}
 
 /* ── AI ASSISTANT ── */
-.ai-assistant{background:var(--navy-card);border-radius:var(--r-xl);border:.5px solid var(--border-blue);overflow:hidden}
-.ai-head{padding:16px 18px;border-bottom:.5px solid var(--border-blue);display:flex;align-items:center;gap:10px}
-.ai-avatar{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue) 0%,var(--purple) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(10,135,84,.3)}
+.ai-assistant{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.ai-head{padding:16px 18px;border-bottom:1.5px solid var(--border-blue);display:flex;align-items:center;gap:10px}
+.ai-avatar{width:34px;height:34px;border-radius:0;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.ai-avatar::after{content:'';position:absolute;right:-2px;bottom:-2px;width:9px;height:9px;background:var(--gold)}
 .ai-msgs{padding:14px;display:flex;flex-direction:column;gap:10px;max-height:280px;overflow-y:auto}
-.ai-bubble{max-width:90%;border-radius:14px;padding:10px 13px;font-size:12px;line-height:1.6}
-.ai-bubble.bot{background:rgba(10,135,84,.1);border:.5px solid var(--border-blue);color:var(--text-1);align-self:flex-start;border-radius:4px 14px 14px 14px}
-.ai-bubble.user{background:var(--blue);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
-.ai-bubble.loading{background:rgba(10,135,84,.06);border:.5px solid var(--border-blue);padding:12px 14px;align-self:flex-start}
+.ai-bubble{max-width:90%;border-radius:0;padding:10px 13px;font-size:13px;line-height:1.6}
+.ai-bubble.bot{background:var(--navy);border:1px solid var(--border);color:var(--text-1);align-self:flex-start}
+.ai-bubble.user{background:var(--blue);color:var(--navy);align-self:flex-end}
+.ai-bubble.loading{background:var(--navy);border:1px solid var(--border);padding:12px 14px;align-self:flex-start}
 .ai-dots{display:flex;gap:4px;align-items:center}
-.ai-dot-anim{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:dotpulse 1.2s ease-in-out infinite}
+.ai-dot-anim{width:5px;height:5px;border-radius:0;background:var(--text-2);animation:dotpulse 1.2s ease-in-out infinite}
 .ai-dot-anim:nth-child(2){animation-delay:.2s}.ai-dot-anim:nth-child(3){animation-delay:.4s}
 @keyframes dotpulse{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1);opacity:1}}
-.ai-input-row{display:flex;gap:8px;padding:12px 14px;border-top:.5px solid var(--border);background:rgba(255,255,255,.02)}
-.ai-input{flex:1;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:10px;padding:8px 12px;font-size:12px;font-family:var(--font-b);outline:none;transition:border-color .15s}
-.ai-input:focus{border-color:var(--blue)}
-.ai-input::placeholder{color:var(--text-2)}
-.ai-send{width:34px;height:34px;border-radius:9px;background:var(--blue);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .14s}
+.ai-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);background:var(--navy)}
+.ai-input{flex:1;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:9px 12px;font-size:13px;font-family:var(--font-b);outline:none;transition:outline .1s ease-out}
+.ai-input:focus{outline:2px solid var(--rust);outline-offset:2px}
+.ai-input::placeholder{color:var(--text-3)}
+.ai-send{width:36px;height:36px;border-radius:0;background:var(--blue);color:var(--navy);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .14s}
 .ai-send:disabled{opacity:.5;pointer-events:none}
 .ai-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px}
-.ai-quick-btn{font-size:10px;font-weight:500;padding:5px 10px;border-radius:20px;border:.5px solid var(--border-blue);background:rgba(10,135,84,.08);color:#7aadff;cursor:pointer;transition:background .14s;font-family:var(--font-b)}
-.ai-quick-btn:hover{background:rgba(10,135,84,.15)}
+.ai-quick-btn{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.08em;padding:6px 11px;border-radius:0;border:1px solid var(--border-blue);background:transparent;color:var(--text-1);cursor:pointer;transition:background .14s}
+.ai-quick-btn:hover{background:var(--navy-mid)}
 
 /* ── ANALYTICS ── */
 .anal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.toggle{display:flex;background:#0b1829;border-radius:9px;border:.5px solid var(--border);padding:3px;gap:2px}
-.toggle-btn{font-family:var(--font-d);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:5px 13px;border-radius:7px;border:none;cursor:pointer;color:var(--text-2);background:transparent;transition:background .18s,color .18s}
-.toggle-btn.active{background:var(--blue);color:#fff;box-shadow:0 2px 9px var(--blue-glow)}
+.toggle{display:flex;background:transparent;border-radius:0;border:1.5px solid var(--border-blue);padding:0;gap:0}
+.toggle-btn{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:0;border:none;cursor:pointer;color:var(--text-2);background:transparent;transition:background .15s ease-out,color .15s ease-out}
+.toggle-btn.active{background:var(--blue);color:var(--navy);box-shadow:none}
 
 /* table */
-.tbl{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.tbl-hrow{display:grid;padding:10px 16px;border-bottom:.5px solid var(--border);background:rgba(255,255,255,.02)}
-.tbl-clbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)}
-.tbl-row{display:grid;padding:13px 16px;border-bottom:.5px solid var(--border);align-items:center;transition:background .14s}
+.tbl{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.tbl-hrow{display:grid;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--navy)}
+.tbl-clbl{font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2)}
+.tbl-row{display:grid;padding:13px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background .14s}
 .tbl-row:last-child{border-bottom:none}
-.tbl-row:hover{background:rgba(255,255,255,.02)}
-.row-lbl{font-size:12px;font-weight:500;color:var(--text-1)}
-.row-sub{font-size:10px;color:var(--text-2);margin-top:1px}
+.tbl-row:hover{background:var(--navy)}
+.row-lbl{font-size:13px;font-weight:500;color:var(--text-1)}
+.row-sub{font-family:var(--font-m);font-size:9.5px;color:var(--text-2);margin-top:2px}
 
 /* score */
-.score-val{font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:-.01em}
-.score-bar{height:3px;border-radius:2px;margin-top:4px;background:rgba(255,255,255,.08);overflow:hidden}
-.score-fill{height:100%;border-radius:2px}
-.acc-pill{display:inline-flex;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
-.acc-pill.h{background:rgba(0,184,107,.12);color:var(--emerald)}
-.acc-pill.m{background:rgba(240,180,41,.12);color:var(--gold)}
-.acc-pill.l{background:rgba(255,80,80,.12);color:var(--red)}
+.score-val{font-family:var(--font-m);font-size:13px;font-weight:600;letter-spacing:0}
+.score-bar{height:4px;border-radius:0;margin-top:4px;background:var(--navy-mid);overflow:hidden}
+.score-fill{height:100%;border-radius:0}
+.acc-pill{display:inline-flex;font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.08em;padding:3px 8px;border-radius:0;border:1px solid}
+.acc-pill.h{background:rgba(92,114,104,.14);border-color:var(--emerald);color:var(--emerald-mid)}
+.acc-pill.m{background:rgba(201,118,46,.16);border-color:var(--gold);color:#8A4E1D}
+.acc-pill.l{background:rgba(176,58,46,.14);border-color:var(--red);color:#8A2E22}
 
 /* fine risk gauge */
-.frs-card{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);display:flex;align-items:flex-start;gap:4px;padding:16px 14px 16px 10px;position:relative;overflow:hidden}
-.frs-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--emerald) 0%,rgba(0,184,107,0) 100%)}
+.frs-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);display:flex;align-items:flex-start;gap:4px;padding:16px 14px 16px 10px;position:relative;overflow:hidden}
+.frs-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:6px;background:var(--emerald)}
 .frs-factors{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-.frs-frow{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.025);border-radius:7px;padding:5px 9px;border:.5px solid var(--border)}
-.frs-fdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.frs-verdict{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--emerald);font-weight:500;background:rgba(0,184,107,.07);border:.5px solid rgba(0,184,107,.16);border-radius:7px;padding:6px 9px}
+.frs-frow{display:flex;align-items:center;gap:7px;background:var(--navy);border-radius:0;padding:6px 9px;border:1px solid var(--border)}
+.frs-fdot{width:6px;height:6px;border-radius:0;flex-shrink:0}
+.frs-verdict{display:flex;align-items:center;gap:5px;font-family:var(--font-m);font-size:9.5px;letter-spacing:.06em;color:var(--emerald-mid);font-weight:500;background:rgba(92,114,104,.12);border:1px solid var(--emerald);border-radius:0;padding:6px 9px}
 
 /* waste root cause */
-.wrc{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.wrc-top{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 16px 11px;border-bottom:.5px solid var(--border)}
+.wrc{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.wrc-top{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 16px 11px;border-bottom:1px solid var(--border)}
 .wrc-body{display:flex;align-items:center;gap:6px;padding:16px 14px 12px}
 .wrc-legend{flex:1;display:flex;flex-direction:column;gap:7px}
-.wrc-li{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.025);border-radius:8px;padding:7px 9px;border:.5px solid var(--border);transition:border-color .14s}
-.wrc-li:hover{border-color:rgba(255,255,255,.1)}
-.wrc-swatch{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.wrc-insight{display:flex;align-items:flex-start;gap:7px;margin:0 12px 14px;background:rgba(10,135,84,.06);border:.5px solid rgba(10,135,84,.16);border-radius:9px;padding:9px 11px;font-size:11px;color:var(--text-2);line-height:1.5}
+.wrc-li{display:flex;align-items:center;justify-content:space-between;background:var(--navy);border-radius:0;padding:7px 9px;border:1px solid var(--border);transition:border-color .14s}
+.wrc-li:hover{border-color:var(--border-blue)}
+.wrc-swatch{width:9px;height:9px;border-radius:0;flex-shrink:0}
+.wrc-insight{display:flex;align-items:flex-start;gap:7px;margin:0 12px 14px;background:var(--navy);border-left:3px solid var(--rust);border-radius:0;padding:9px 11px;font-size:12px;color:var(--text-2);line-height:1.55}
 .wrc-insight strong{color:var(--text-1);font-weight:500}
 
 /* document status */
-.doc-chip{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+.doc-chip{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:0;border:1px solid currentColor}
 
 /* monthly summary */
-.msumm{background:linear-gradient(135deg,#0b2040 0%,#071428 100%);border-radius:var(--r-md);border:.5px solid rgba(10,135,84,.18);padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.msumm-val{font-family:var(--font-d);font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1}
-.msumm-val.em{color:var(--emerald)}.msumm-val.bl{color:#5599ff}.msumm-val.go{color:var(--gold)}
-.audit-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:rgba(10,135,84,.12);border:.5px solid rgba(10,135,84,.28);color:#7aadff}
+.msumm{background:var(--blue);border-radius:0;border:none;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative}
+.msumm::after{content:'';position:absolute;right:0;top:0;width:12px;height:12px;background:var(--gold)}
+.msumm-val{font-family:var(--font-serif);font-size:22px;font-weight:400;letter-spacing:-.01em;line-height:1}
+.msumm-val.em{color:#C7D3CC}.msumm-val.bl{color:#F0EBE1}.msumm-val.go{color:#E8B27A}
+.audit-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:0;background:transparent;border:1px solid rgba(240,235,225,.35);color:#A3998B}
 
 /* ── INVOICE TABLE ── */
-.inv{background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.25)}
-.inv-hd{background:#09182e;padding:16px 20px 14px;border-bottom:1px solid rgba(10,135,84,.15);display:flex;align-items:flex-start;justify-content:space-between}
-.inv-col{display:grid;grid-template-columns:2fr 1fr 1fr 1.1fr;padding:8px 20px;background:#f7f9fc;border-bottom:1px solid #e8ecf4}
-.inv-clbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8899bb}
+.inv{background:var(--navy-card);border-radius:0;overflow:hidden;border:1.5px solid var(--border-blue)}
+.inv-hd{background:var(--blue);padding:16px 20px 14px;border-bottom:none;display:flex;align-items:flex-start;justify-content:space-between}
+.inv-col{display:grid;grid-template-columns:2fr 1fr 1fr 1.1fr;padding:8px 20px;background:var(--navy);border-bottom:1px solid var(--border)}
+.inv-clbl{font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2)}
 .inv-clbl.r{text-align:right}
-.inv-line{display:grid;grid-template-columns:2fr 1fr 1fr 1.1fr;padding:13px 20px;align-items:center;border-bottom:1px solid #f0f3fa;transition:background .14s}
-.inv-line:hover{background:#fafbff}
+.inv-line{display:grid;grid-template-columns:2fr 1fr 1fr 1.1fr;padding:13px 20px;align-items:center;border-bottom:1px solid var(--border);transition:background .14s}
+.inv-line:hover{background:var(--navy)}
 .inv-line:last-child{border-bottom:none}
-.inv-totals{background:#f7f9fc;border-top:1px solid #e0e6f0;padding:12px 20px}
-.inv-grand{display:flex;align-items:center;justify-content:space-between;margin-top:9px;padding-top:9px;border-top:1.5px solid #09182e}
-.inv-stamp{margin-top:10px;padding-top:9px;border-top:.5px dashed #c8d4e8;display:flex;align-items:center;gap:5px;font-size:9px;color:#aab4cc;font-style:italic}
+.inv-totals{background:var(--navy);border-top:1px dashed var(--border-blue);padding:12px 20px}
+.inv-grand{display:flex;align-items:center;justify-content:space-between;margin-top:9px;padding-top:9px;border-top:2px solid var(--border-blue)}
+.inv-stamp{margin-top:10px;padding-top:9px;border-top:1px dashed var(--border);display:flex;align-items:center;gap:5px;font-family:var(--font-m);font-size:8.5px;letter-spacing:.08em;color:var(--text-3)}
 
 /* ── DAILY HISTORY ── */
-.dh-sect{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:10px;display:flex;align-items:center;gap:7px}
-.dh-sect::after{content:'';flex:1;height:.5px;background:var(--border)}
-.dh-day{background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);overflow:hidden;transition:border-color .18s}
-.dh-day:hover{border-color:rgba(10,135,84,.18)}
+.dh-sect{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-2);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.dh-sect::after{content:'';flex:1;height:1px;background:var(--border-blue)}
+.dh-day{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden;transition:background .15s ease-out}
+.dh-day:hover{background:var(--navy)}
 .dh-dhdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none}
-.dh-ddot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.dh-dname{font-family:var(--font-d);font-size:12px;font-weight:700;color:var(--text-1);letter-spacing:-.01em}
-.dh-ddate{font-size:10px;color:var(--text-2);margin-top:1px}
-.dh-dtotal{font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--emerald);letter-spacing:-.02em}
-.dh-chev{color:var(--text-2);transition:transform .22s;display:flex;align-items:center}
+.dh-ddot{width:8px;height:8px;border-radius:0;flex-shrink:0}
+.dh-dname{font-family:var(--font-b);font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
+.dh-ddate{font-family:var(--font-m);font-size:9.5px;color:var(--text-2);margin-top:2px}
+.dh-dtotal{font-family:var(--font-m);font-size:12.5px;font-weight:600;color:var(--rust)}
+.dh-chev{color:var(--text-2);transition:transform .18s ease-out;display:flex;align-items:center}
 .dh-chev.open{transform:rotate(180deg)}
-.dh-bar{height:3px;background:var(--border);margin:0 14px 11px;border-radius:2px;overflow:hidden}
-.dh-barfill{height:100%;border-radius:2px}
-.dh-items{overflow:hidden;max-height:0;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
+.dh-bar{height:4px;background:var(--navy-mid);margin:0 14px 11px;border-radius:0;overflow:hidden}
+.dh-barfill{height:100%;border-radius:0}
+.dh-items{overflow:hidden;max-height:0;transition:max-height .28s ease-out}
 .dh-items.open{max-height:300px}
-.dh-inner{border-top:.5px solid var(--border);padding:11px 14px 13px;display:flex;flex-direction:column;gap:7px}
+.dh-inner{border-top:1px solid var(--border);padding:11px 14px 13px;display:flex;flex-direction:column;gap:7px}
 .dh-crow{display:grid;grid-template-columns:1fr 1fr 1fr;padding:0 9px 5px}
-.dh-clbl{font-size:9px;color:var(--text-2);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.dh-clbl{font-family:var(--font-m);font-size:8.5px;color:var(--text-2);font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .dh-clbl.c{text-align:center}.dh-clbl.r{text-align:right}
-.dh-irow{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:7px 9px;background:rgba(255,255,255,.02);border-radius:7px;border:.5px solid var(--border)}
-.dh-iname{font-size:11px;color:var(--text-1)}
-.dh-iqty{font-size:11px;color:var(--text-2);text-align:center}
-.dh-iaed{font-family:var(--font-d);font-size:11px;font-weight:600;color:var(--emerald);text-align:right}
+.dh-irow{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:7px 9px;background:var(--navy);border-radius:0;border:1px solid var(--border)}
+.dh-iname{font-size:12px;color:var(--text-1)}
+.dh-iqty{font-family:var(--font-m);font-size:11px;color:var(--text-2);text-align:center}
+.dh-iaed{font-family:var(--font-m);font-size:11px;font-weight:600;color:var(--rust);text-align:right}
 
 /* ── SAFE VAULT ── */
 .sv-body{width:100%;padding:0 0 80px}
-.sv-hdr{background:linear-gradient(160deg,#07142a 0%,var(--navy) 100%);padding:24px 18px 20px;border-bottom:.5px solid var(--border-blue);position:relative;overflow:hidden}
-.sv-hdr::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(10,135,84,.35),transparent)}
-.sv-kpi{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:16px 18px}
-.sv-kpi-card{background:var(--navy-card);border-radius:var(--r-sm);border:.5px solid var(--border);padding:11px 8px;text-align:center}
-.sv-kpi-val{font-family:var(--font-d);font-size:17px;font-weight:700;margin-bottom:2px}
-.sv-kpi-lbl{font-size:9px;color:var(--text-2);line-height:1.2}
+.sv-hdr{background:var(--blue);color:#F0EBE1;padding:24px 18px 20px;border-bottom:none;position:relative;overflow:hidden}
+.sv-hdr::before{content:'';position:absolute;top:0;right:0;width:14px;height:14px;background:var(--red)}
+.sv-kpi{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;padding:16px 18px}
+.sv-kpi-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);margin-left:-1.5px;padding:11px 8px;text-align:center}
+.sv-kpi-card:first-child{margin-left:0}
+.sv-kpi-val{font-family:var(--font-serif);font-size:20px;font-weight:500;margin-bottom:2px}
+.sv-kpi-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);line-height:1.4}
 
 /* neighbor banner */
-.nb-banner{margin:0 18px;background:linear-gradient(135deg,#0c1f38 0%,#091828 100%);border-radius:var(--r-md);border:.5px solid rgba(240,180,41,.2);padding:11px 14px;display:flex;align-items:flex-start;gap:10px}
-.nb-pulse{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 7px rgba(255,79,79,.7);flex-shrink:0;margin-top:3px;animation:pulse 1.2s ease-in-out infinite}
+.nb-banner{margin:0 18px;background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);border-left:4px solid var(--gold);padding:11px 14px;display:flex;align-items:flex-start;gap:10px}
+.nb-pulse{width:8px;height:8px;border-radius:0;background:var(--red);flex-shrink:0;margin-top:3px;animation:pulse 1.2s ease-in-out infinite}
 .nb-dots{display:flex;gap:5px;margin-top:5px}
-.nb-dot{width:5px;height:5px;border-radius:50%;background:var(--border);transition:background .3s}
+.nb-dot{width:5px;height:5px;border-radius:0;background:var(--navy-mid);transition:background .3s}
 .nb-dot.active{background:var(--gold)}
 
 /* doc card */
-.doc-card{background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);padding:13px 15px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.doc-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:7px;overflow:hidden}
-.doc-bar-fill{height:100%;border-radius:2px}
-.renew-btn{display:flex;align-items:center;gap:5px;background:rgba(10,135,84,.1);border:.5px solid rgba(10,135,84,.28);border-radius:8px;padding:6px 11px;font-size:10px;font-weight:600;color:#7aadff;cursor:pointer;white-space:nowrap;transition:background .14s;font-family:var(--font-b)}
-.renew-btn:hover{background:rgba(10,135,84,.17)}
+.doc-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);padding:13px 15px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.doc-bar{height:4px;background:var(--navy-mid);border-radius:0;margin-top:7px;overflow:hidden}
+.doc-bar-fill{height:100%;border-radius:0}
+.renew-btn{display:flex;align-items:center;gap:5px;background:transparent;border:1.5px solid var(--border-blue);border-radius:999px;padding:7px 13px;font-size:11px;font-weight:600;color:var(--text-1);cursor:pointer;white-space:nowrap;transition:background .14s;font-family:var(--font-b)}
+.renew-btn:hover{background:var(--navy-mid)}
 
 /* fine history */
-.fh-tabs{display:flex;gap:6px;padding:14px 18px 0}
-.fh-tab{font-size:11px;font-weight:600;padding:6px 14px;border-radius:8px 8px 0 0;border:none;cursor:pointer;font-family:var(--font-d);letter-spacing:.04em;text-transform:uppercase;transition:background .15s,color .15s}
-.fh-tab.active{background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-bottom:none}
-.fh-tab:not(.active){background:transparent;color:var(--text-2)}
-.fh-list{margin:0 18px;background:var(--navy-card);border-radius:0 var(--r-md) var(--r-md) var(--r-md);border:.5px solid var(--border);overflow:hidden}
-.fh-item{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border-bottom:.5px solid var(--border);transition:background .14s}
+.fh-tabs{display:flex;gap:0;padding:14px 18px 0}
+.fh-tab{font-family:var(--font-m);font-size:9.5px;font-weight:500;padding:9px 14px;border-radius:0;border:1.5px solid var(--border-blue);margin-left:-1.5px;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:background .15s,color .15s}
+.fh-tab:first-child{margin-left:0}
+.fh-tab.active{background:var(--blue);color:var(--navy)}
+.fh-tab:not(.active){background:var(--navy-card);color:var(--text-2)}
+.fh-list{margin:0 18px;background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.fh-item{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border-bottom:1px solid var(--border);transition:background .14s}
 .fh-item:last-child{border-bottom:none}
-.fh-item:hover{background:rgba(255,255,255,.02)}
-.fh-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fh-item:hover{background:var(--navy)}
+.fh-icon{width:32px;height:32px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 /* ── TOOLS TAB ── */
 .tools-body{width:100%;padding:22px 18px 90px;display:flex;flex-direction:column;gap:20px}
-.tools-title{font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--text-1);letter-spacing:-.01em}
-.tools-sub{font-size:10px;color:var(--text-2);margin-top:2px}
+.tools-title{font-family:var(--font-b);font-size:15px;font-weight:700;color:var(--text-1);letter-spacing:-.02em}
+.tools-sub{font-family:var(--font-m);font-size:9.5px;color:var(--text-2);margin-top:2px}
 
 /* lang toggle */
-.lang-strip{background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);padding:13px 15px;display:flex;align-items:center;gap:11px}
-.lang-icon{width:34px;height:34px;border-radius:9px;background:rgba(10,135,84,.1);border:.5px solid rgba(10,135,84,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lang-strip{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);padding:13px 15px;display:flex;align-items:center;gap:11px}
+.lang-icon{width:34px;height:34px;border-radius:0;background:var(--navy);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sw{position:relative;width:42px;height:23px;flex-shrink:0}
 .sw input{opacity:0;width:0;height:0}
 .sw-track{position:absolute;inset:0;background:rgba(255,255,255,.08);border-radius:12px;cursor:pointer;transition:background .18s;border:.5px solid var(--border)}
@@ -526,153 +533,153 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .lang-flag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:3px 8px;border-radius:20px;border:.5px solid;cursor:pointer;transition:background .14s;font-family:var(--font-b)}
 
 /* halal tracker */
-.ht-card{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.ht-hd{background:linear-gradient(135deg,#071d0f 0%,#0a2218 100%);padding:14px 16px;border-bottom:.5px solid rgba(0,184,107,.13);display:flex;align-items:center;gap:10px}
-.ht-hicon{width:36px;height:36px;border-radius:9px;background:rgba(0,184,107,.12);border:.5px solid rgba(0,184,107,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ht-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.ht-hd{background:var(--blue);color:#F0EBE1;padding:14px 16px;border-bottom:none;display:flex;align-items:center;gap:10px}
+.ht-hicon{width:36px;height:36px;border-radius:0;background:rgba(240,235,225,.08);border:1px solid rgba(240,235,225,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ht-grid{display:grid;grid-template-columns:1.5fr .8fr .8fr .7fr}
-.ht-hrow{display:grid;padding:8px 16px;background:rgba(255,255,255,.02);border-bottom:.5px solid var(--border)}
-.ht-row{display:grid;padding:11px 16px;border-bottom:.5px solid var(--border);align-items:center;transition:background .14s}
-.ht-row:hover{background:rgba(255,255,255,.02)}
+.ht-hrow{display:grid;padding:8px 16px;background:var(--navy);border-bottom:1px solid var(--border)}
+.ht-row{display:grid;padding:11px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background .14s}
+.ht-row:hover{background:var(--navy)}
 .ht-row:last-child{border-bottom:none}
-.ht-iicon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ht-iname{font-size:11px;font-weight:500;color:var(--text-1)}
-.ht-ibatch{font-size:9px;color:var(--text-2);margin-top:1px}
-.ht-expval{font-family:var(--font-d);font-size:11px;font-weight:600;letter-spacing:-.01em}
-.ht-days{font-size:9px;color:var(--text-2);margin-top:1px}
-.ht-cert{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px}
-.ht-cdot{width:4px;height:4px;border-radius:50%}
-.ht-status{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px}
-.ht-add{padding:10px 16px;border-top:.5px solid var(--border);background:rgba(255,255,255,.01)}
-.ht-add-btn{width:100%;background:rgba(0,184,107,.07);border:.5px dashed rgba(0,184,107,.28);border-radius:9px;padding:9px;font-size:11px;font-weight:500;color:var(--emerald);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .14s;font-family:var(--font-b)}
-.ht-add-btn:hover{background:rgba(0,184,107,.12)}
+.ht-iicon{width:24px;height:24px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ht-iname{font-size:12px;font-weight:500;color:var(--text-1)}
+.ht-ibatch{font-family:var(--font-m);font-size:8.5px;color:var(--text-2);margin-top:2px}
+.ht-expval{font-family:var(--font-m);font-size:11px;font-weight:600}
+.ht-days{font-family:var(--font-m);font-size:8.5px;color:var(--text-2);margin-top:1px}
+.ht-cert{display:inline-flex;align-items:center;gap:3px;font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.06em;padding:3px 6px;border-radius:0;border:1px solid currentColor}
+.ht-cdot{width:4px;height:4px;border-radius:0}
+.ht-status{display:inline-flex;align-items:center;gap:3px;font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.06em;padding:3px 6px;border-radius:0;border:1px solid currentColor}
+.ht-add{padding:10px 16px;border-top:1px solid var(--border);background:var(--navy)}
+.ht-add-btn{width:100%;background:transparent;border:1.5px dashed var(--border-blue);border-radius:0;padding:10px;font-size:12px;font-weight:600;color:var(--text-1);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .14s;font-family:var(--font-b)}
+.ht-add-btn:hover{background:var(--navy-mid)}
 
 /* supplier book */
-.sup-card{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.sup-hd{padding:14px 16px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#07111e 0%,#0b1829 100%)}
-.sup-entry{padding:13px 16px;border-bottom:.5px solid var(--border)}
+.sup-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.sup-hd{padding:14px 16px;border-bottom:1.5px solid var(--border-blue);display:flex;align-items:center;gap:10px;background:var(--navy)}
+.sup-entry{padding:13px 16px;border-bottom:1px solid var(--border)}
 .sup-entry:last-child{border-bottom:none}
 .sup-top{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;margin-bottom:9px}
-.sup-av{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
-.sup-name{font-size:12px;font-weight:600;color:var(--text-1)}
-.sup-cat{font-size:10px;color:var(--text-2);margin-top:1px}
-.sup-btn{display:flex;align-items:center;gap:4px;padding:6px 11px;border-radius:8px;font-size:10px;font-weight:600;border:none;cursor:pointer;text-decoration:none;transition:opacity .14s;font-family:var(--font-b)}
-.sup-btn.call{background:rgba(0,184,107,.12);border:.5px solid rgba(0,184,107,.22);color:var(--emerald)}
-.sup-btn.wa{background:rgba(37,211,102,.12);border:.5px solid rgba(37,211,102,.22);color:#25d366}
-.sup-aird{background:rgba(10,135,84,.06);border:.5px solid rgba(10,135,84,.14);border-radius:7px;padding:8px 10px;display:flex;align-items:flex-start;gap:6px;font-size:10px;color:var(--text-2);line-height:1.5}
+.sup-av{width:32px;height:32px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;border:1px solid var(--border)}
+.sup-name{font-size:13px;font-weight:600;color:var(--text-1)}
+.sup-cat{font-family:var(--font-m);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);margin-top:2px}
+.sup-btn{display:flex;align-items:center;gap:4px;padding:7px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .14s;font-family:var(--font-b)}
+.sup-btn.call{background:transparent;border:1.5px solid var(--border-blue);color:var(--text-1)}
+.sup-btn.wa{background:transparent;border:1.5px solid var(--emerald);color:var(--emerald-mid)}
+.sup-aird{background:var(--navy);border-left:3px solid var(--rust);border-radius:0;padding:8px 10px;display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--text-2);line-height:1.55}
 .sup-aird strong{color:var(--text-1);font-weight:500}
 
 /* whatsapp report */
-.wa-card{background:linear-gradient(135deg,#071710 0%,#051209 100%);border-radius:var(--r-xl);border:.5px solid rgba(37,211,102,.18);overflow:hidden;position:relative}
-.wa-card::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(37,211,102,.07) 0%,transparent 70%);pointer-events:none}
-.wa-hd{padding:16px 18px 13px;border-bottom:.5px solid rgba(37,211,102,.1);display:flex;align-items:flex-start;gap:11px}
-.wa-icon{width:38px;height:38px;border-radius:11px;background:rgba(37,211,102,.1);border:.5px solid rgba(37,211,102,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.wa-preview{margin:13px 18px;background:#0f1f12;border-radius:13px;border:.5px solid rgba(37,211,102,.09);overflow:hidden}
-.wa-bar{background:#128c7e;padding:8px 13px;display:flex;align-items:center;gap:7px}
-.wa-bav{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;flex-shrink:0}
-.wa-bubble{margin:11px;background:#1d2e1e;border-radius:11px 11px 11px 0;padding:11px 13px;border:.5px solid rgba(37,211,102,.09)}
-.wa-bline{font-size:11px;color:rgba(255,255,255,.7);line-height:1.7;display:flex;align-items:baseline;gap:5px}
-.wa-bline .em{color:#25d366;font-weight:600}
-.wa-bline .warn{color:var(--gold);font-weight:600}
-.wa-bline .ok{color:var(--emerald)}
-.wa-bfoot{margin-top:7px;padding-top:7px;border-top:.5px solid rgba(255,255,255,.05);font-size:9px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between}
+.wa-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden;position:relative}
+.wa-card::before{content:'';position:absolute;top:0;right:0;width:12px;height:12px;background:var(--emerald);z-index:1}
+.wa-hd{padding:16px 18px 13px;border-bottom:1.5px solid var(--border-blue);display:flex;align-items:flex-start;gap:11px}
+.wa-icon{width:38px;height:38px;border-radius:0;background:var(--navy);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wa-preview{margin:13px 18px;background:var(--blue);border-radius:0;overflow:hidden}
+.wa-bar{background:#26221E;padding:8px 13px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(240,235,225,.12)}
+.wa-bav{width:22px;height:22px;border-radius:0;background:rgba(240,235,225,.15);display:flex;align-items:center;justify-content:center;font-size:10px;color:#F0EBE1;font-weight:700;flex-shrink:0}
+.wa-bubble{margin:11px;background:rgba(240,235,225,.06);border-radius:0;padding:11px 13px;border:1px solid rgba(240,235,225,.12)}
+.wa-bline{font-family:var(--font-m);font-size:10.5px;color:#C4BBAE;line-height:1.8;display:flex;align-items:baseline;gap:5px}
+.wa-bline .em{color:#C7D3CC;font-weight:600}
+.wa-bline .warn{color:#E8B27A;font-weight:600}
+.wa-bline .ok{color:#C7D3CC}
+.wa-bfoot{margin-top:7px;padding-top:7px;border-top:1px dashed rgba(240,235,225,.15);font-family:var(--font-m);font-size:8.5px;color:#6E675E;display:flex;justify-content:space-between}
 .wa-ctrl{padding:13px 18px 17px;display:flex;flex-direction:column;gap:9px}
 .wa-trow{display:flex;align-items:center;gap:9px}
-.wa-tlbl{font-size:11px;color:var(--text-2);flex:1}
-.wa-sel{background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:7px;padding:6px 9px;font-size:11px;font-family:var(--font-b);cursor:pointer;outline:none}
-.wa-inp{flex:1;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:7px;padding:7px 11px;font-size:12px;font-family:var(--font-b);outline:none;transition:border-color .14s}
-.wa-inp:focus{border-color:#25d366}
-.wa-inp::placeholder{color:var(--text-2)}
-.wa-copybtn{background:rgba(37,211,102,.08);border:.5px solid rgba(37,211,102,.18);border-radius:7px;padding:7px 9px;color:#25d366;cursor:pointer;display:flex;align-items:center;transition:background .14s;flex-shrink:0}
-.wa-copybtn:hover{background:rgba(37,211,102,.14)}
-.wa-send{width:100%;background:#25d366;color:#fff;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:11px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .14s,transform .14s;box-shadow:0 4px 18px rgba(37,211,102,.22)}
-.wa-send:active{transform:scale(.98);opacity:.9}
-.wa-send.sent{background:#1aab53;pointer-events:none}
+.wa-tlbl{font-size:12px;color:var(--text-2);flex:1}
+.wa-sel{background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:7px 9px;font-size:12px;font-family:var(--font-b);cursor:pointer;outline:none}
+.wa-inp{flex:1;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:8px 11px;font-size:13px;font-family:var(--font-b);outline:none}
+.wa-inp:focus{outline:2px solid var(--rust);outline-offset:2px}
+.wa-inp::placeholder{color:var(--text-3)}
+.wa-copybtn{background:transparent;border:1.5px solid var(--border-blue);border-radius:0;padding:7px 9px;color:var(--text-1);cursor:pointer;display:flex;align-items:center;transition:background .14s;flex-shrink:0}
+.wa-copybtn:hover{background:var(--navy-mid)}
+.wa-send{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .14s}
+.wa-send:active{opacity:.9}
+.wa-send.sent{background:var(--emerald);color:#F0EBE1;pointer-events:none}
 
 /* ── MUNICIPALITY LOG ── */
-.ml-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s}
+.ml-backdrop{position:fixed;inset:0;background:rgba(30,27,24,.5);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s ease-out}
 .ml-backdrop.open{opacity:1;pointer-events:all}
-.ml-sheet{background:#0b1829;border-radius:22px 22px 0 0;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;border:.5px solid rgba(10,135,84,.22);transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.2,.64,1)}
+.ml-sheet{background:var(--navy-card);border-radius:14px 14px 0 0;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;border:2px solid var(--border-blue);border-bottom:none;transform:translateY(100%);transition:transform .28s ease-out}
 .ml-backdrop.open .ml-sheet{transform:translateY(0)}
-.ml-handle{width:38px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);margin:12px auto 0}
-.ml-eyebrow{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5599ff;margin-bottom:4px;display:flex;align-items:center;gap:5px}
-.ml-title{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--text-1);letter-spacing:-.02em;margin-bottom:3px}
-.ml-subtitle{font-size:11px;color:var(--text-2)}
-.ml-close{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.07);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-2);flex-shrink:0}
-.ml-ts{display:flex;align-items:center;gap:7px;background:rgba(10,135,84,.07);border:.5px solid var(--border-blue);border-radius:8px;padding:8px 12px;margin:12px 18px 0;font-size:11px;color:var(--text-2)}
-.ml-flbl{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.ml-fnum{width:18px;height:18px;border-radius:50%;background:var(--navy-card);border:.5px solid var(--border-blue);font-size:9px;font-weight:700;color:#5599ff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.stepper{display:flex;align-items:center;gap:0;border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border)}
-.step-btn{width:46px;height:52px;background:rgba(255,255,255,.04);border:none;color:var(--text-1);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .14s}
-.step-btn:hover{background:rgba(255,255,255,.08)}
-.step-val{flex:1;text-align:center;font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--text-1);background:transparent}
-.temp-status{display:flex;align-items:center;gap:6px;margin-top:10px;padding:7px 11px;border-radius:8px;font-size:11px;font-weight:500}
-.ml-check-row{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:.5px solid var(--border);cursor:pointer;transition:opacity .14s}
+.ml-handle{width:44px;height:4px;border-radius:99px;background:var(--navy-mid);margin:12px auto 0}
+.ml-eyebrow{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);margin-bottom:4px;display:flex;align-items:center;gap:5px}
+.ml-title{font-family:var(--font-b);font-size:20px;font-weight:700;color:var(--text-1);letter-spacing:-.02em;margin-bottom:3px}
+.ml-subtitle{font-size:12px;color:var(--text-2)}
+.ml-close{width:32px;height:32px;border-radius:0;background:transparent;border:1.5px solid var(--border-blue);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-2);flex-shrink:0}
+.ml-ts{display:flex;align-items:center;gap:7px;background:var(--navy);border:1px solid var(--border);border-radius:0;padding:8px 12px;margin:12px 18px 0;font-family:var(--font-m);font-size:10px;letter-spacing:.06em;color:var(--text-2)}
+.ml-flbl{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ml-fnum{width:18px;height:18px;border-radius:0;background:var(--blue);font-family:var(--font-m);font-size:9px;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stepper{display:flex;align-items:center;gap:0;border-radius:0;overflow:hidden;border:1.5px solid var(--border-blue)}
+.step-btn{width:48px;height:52px;background:var(--navy);border:none;color:var(--text-1);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .14s}
+.step-btn:hover{background:var(--navy-mid)}
+.step-val{flex:1;text-align:center;font-family:var(--font-serif);font-size:30px;font-weight:500;color:var(--text-1);background:transparent}
+.temp-status{display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 11px;border-radius:0;font-size:12px;font-weight:500;border-left-width:3px;border-left-style:solid}
+.ml-check-row{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .14s}
 .ml-check-row:last-child{border-bottom:none}
 .ml-check-row:hover{opacity:.85}
-.ml-cb{width:22px;height:22px;border-radius:6px;border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .18s,border-color .18s}
+.ml-cb{width:24px;height:24px;border-radius:0;border:1.5px solid var(--border-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s ease-out,border-color .15s ease-out}
 .ml-cb.checked{background:var(--emerald);border-color:var(--emerald)}
-.ml-select{width:100%;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:13px;font-family:var(--font-b);outline:none;transition:border-color .14s;-webkit-appearance:none}
-.ml-select:focus{border-color:var(--blue)}
-.ml-risk{background:rgba(255,79,79,.07);border:.5px solid rgba(255,79,79,.2);border-radius:10px;padding:11px 13px;margin-top:10px}
+.ml-select{width:100%;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:13px 14px;font-size:14px;font-family:var(--font-b);outline:none;-webkit-appearance:none}
+.ml-select:focus{outline:2px solid var(--rust);outline-offset:2px}
+.ml-risk{background:rgba(176,58,46,.08);border:none;border-left:4px solid var(--red);border-radius:0;padding:11px 13px;margin-top:10px}
 .ml-risk-hdr{display:flex;align-items:center;gap:6px;margin-bottom:5px}
-.ml-submit{width:100%;background:var(--blue);color:#fff;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .14s;box-shadow:0 4px 20px var(--blue-glow)}
+.ml-submit{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:15px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .14s}
 .ml-submit:disabled{opacity:.4;pointer-events:none}
 .ml-success{display:flex;flex-direction:column;align-items:center;padding:36px 24px 48px;text-align:center}
-.ml-ring{width:80px;height:80px;border-radius:50%;background:rgba(0,184,107,.1);border:2px solid var(--emerald);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 0 24px rgba(0,184,107,.3)}
-.ml-receipt{width:100%;background:rgba(255,255,255,.03);border:.5px solid var(--border);border-radius:var(--r-md);padding:16px;text-align:left;margin-top:20px}
-.ml-receipt-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:.5px solid var(--border)}
+.ml-ring{width:72px;height:72px;border-radius:0;background:var(--emerald);display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:#F0EBE1}
+.ml-receipt{width:100%;background:var(--navy);border:1px dashed var(--border-blue);border-radius:0;padding:16px;text-align:left;margin-top:20px;font-family:var(--font-m)}
+.ml-receipt-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border)}
 .ml-receipt-row:last-child{border-bottom:none}
 
 /* ── RECIPE SETTINGS ── */
 .rs-body{width:100%;padding:22px 18px 90px;display:flex;flex-direction:column;gap:18px}
-.rs-buffer{background:var(--navy-card);border-radius:var(--r-lg);border:.5px solid var(--border);overflow:hidden}
-.rs-buf-hd{background:var(--navy-card);padding:16px 18px;border-bottom:.5px solid var(--border-blue);display:flex;align-items:center;gap:10px}
-.rs-buf-icon{width:36px;height:36px;border-radius:9px;background:rgba(10,135,84,.1);border:.5px solid rgba(10,135,84,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rs-buffer{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
+.rs-buf-hd{background:var(--navy-card);padding:16px 18px;border-bottom:1.5px solid var(--border-blue);display:flex;align-items:center;gap:10px}
+.rs-buf-icon{width:36px;height:36px;border-radius:0;background:var(--navy);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .range-wrap{padding:18px 20px 20px}
 .range-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.range-val{font-family:var(--font-d);font-size:26px;font-weight:800;color:var(--emerald);letter-spacing:-.03em}
-.range-unit{font-size:12px;color:var(--text-2);margin-left:3px;font-weight:400}
-.range-input{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer}
-.range-input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--emerald,#00b86b);box-shadow:0 0 8px rgba(0,184,107,.5);cursor:pointer;border:2px solid #fff}
+.range-val{font-family:var(--font-serif);font-size:28px;font-weight:500;color:var(--rust);letter-spacing:-.01em}
+.range-unit{font-family:var(--font-m);font-size:12px;color:var(--text-2);margin-left:3px;font-weight:400}
+.range-input{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:0;outline:none;cursor:pointer}
+.range-input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:0;background:var(--blue);cursor:pointer;border:2px solid var(--navy-card)}
 .range-ticks{display:flex;justify-content:space-between;margin-top:8px}
-.range-tick{font-size:9px;color:var(--text-3)}
-.rs-drink{background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);overflow:hidden}
+.range-tick{font-family:var(--font-m);font-size:8.5px;color:var(--text-3)}
+.rs-drink{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
 .rs-drink-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;transition:background .14s}
-.rs-drink-hdr:hover{background:rgba(255,255,255,.02)}
-.rs-drink-body{overflow:hidden;max-height:0;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
+.rs-drink-hdr:hover{background:var(--navy)}
+.rs-drink-body{overflow:hidden;max-height:0;transition:max-height .28s ease-out}
 .rs-drink-body.open{max-height:400px}
-.rs-inner{padding:14px 18px 16px;border-top:.5px solid var(--border)}
-.rs-slider-lbl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);margin-bottom:7px}
+.rs-inner{padding:14px 18px 16px;border-top:1px solid var(--border)}
+.rs-slider-lbl{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);margin-bottom:7px}
 .rs-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:13px}
-.rs-summ-item{background:rgba(255,255,255,.03);border-radius:8px;padding:8px;border:.5px solid var(--border);text-align:center}
-.rs-summ-val{font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:2px}
-.rs-summ-lbl{font-size:9px;color:var(--text-2)}
-.rs-impact{background:linear-gradient(135deg,#040d1e 0%,#070f20 100%);border-radius:var(--r-md);border:.5px solid var(--border-blue);padding:18px 20px;position:relative;overflow:hidden}
-.rs-impact::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--emerald) 0%,var(--blue) 100%)}
-.rs-save-btn{width:100%;background:var(--emerald);color:#fff;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s;box-shadow:0 4px 18px rgba(0,184,107,.22)}
-.rs-save-btn.saved{background:var(--emerald-mid);pointer-events:none}
+.rs-summ-item{background:var(--navy);border-radius:0;padding:8px;border:1px solid var(--border);text-align:center}
+.rs-summ-val{font-family:var(--font-m);font-size:13px;font-weight:600;color:var(--text-1);margin-bottom:2px}
+.rs-summ-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.rs-impact{background:var(--blue);border-radius:0;border:none;padding:18px 20px;position:relative;overflow:hidden}
+.rs-impact::before{content:'';position:absolute;left:0;top:0;width:12px;height:12px;background:var(--emerald)}
+.rs-save-btn{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s}
+.rs-save-btn.saved{background:var(--emerald);color:#F0EBE1;pointer-events:none}
 
 /* ── PRO MODAL ── */
-.pro-fab{position:fixed;bottom:24px;right:16px;z-index:150;background:var(--blue);color:#fff;border:none;border-radius:50px;padding:12px 18px;display:flex;align-items:center;gap:7px;font-family:var(--font-d);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 28px var(--blue-glow);transition:transform .18s,box-shadow .18s}
-.pro-fab:hover{transform:translateY(-2px);box-shadow:0 8px 34px rgba(10,135,84,.5)}
-.pro-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.pro-fab{position:fixed;bottom:24px;right:16px;z-index:150;background:var(--blue);color:var(--navy);border:none;border-radius:999px;padding:13px 20px;display:flex;align-items:center;gap:7px;font-family:var(--font-b);font-size:13px;font-weight:700;letter-spacing:.01em;text-transform:none;cursor:pointer;box-shadow:0 8px 20px rgba(30,27,24,.25);transition:background .15s ease-out}
+.pro-fab:hover{background:#332E28}
+.pro-backdrop{position:fixed;inset:0;background:rgba(30,27,24,.5);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s ease-out}
 .pro-backdrop.open{opacity:1;pointer-events:all}
-.pro-sheet{background:#0b1829;border-radius:22px 22px 0 0;width:100%;max-width:480px;max-height:88vh;overflow-y:auto;border:.5px solid var(--border-blue);transform:translateY(100%);transition:transform .32s cubic-bezier(.34,1.2,.64,1)}
+.pro-sheet{background:var(--navy-card);border-radius:14px 14px 0 0;width:100%;max-width:480px;max-height:88vh;overflow-y:auto;border:2px solid var(--border-blue);border-bottom:none;transform:translateY(100%);transition:transform .28s ease-out}
 .pro-backdrop.open .pro-sheet{transform:translateY(0)}
 .pro-trust{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}
-.pro-trust-item{background:rgba(255,255,255,.03);border-radius:8px;padding:9px;border:.5px solid var(--border);display:flex;align-items:center;gap:7px;font-size:10px;color:var(--text-2)}
+.pro-trust-item{background:var(--navy);border-radius:0;padding:9px;border:1px solid var(--border);display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-2)}
 .pro-service-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
-.pro-service{padding:11px;border-radius:9px;border:.5px solid var(--border);cursor:pointer;transition:background .14s,border-color .14s;font-size:11px;color:var(--text-2);text-align:center}
-.pro-service.selected{background:rgba(10,135,84,.1);border-color:rgba(10,135,84,.35);color:#7aadff}
-.pro-input{width:100%;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:var(--r-sm);padding:10px 13px;font-size:12px;font-family:var(--font-b);outline:none;transition:border-color .14s;margin-bottom:9px}
-.pro-input:focus{border-color:var(--blue)}
-.pro-input::placeholder{color:var(--text-2)}
-.pro-submit{width:100%;background:var(--blue);color:#fff;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 20px var(--blue-glow);transition:opacity .14s}
+.pro-service{padding:12px;border-radius:0;border:1.5px solid var(--border-blue);cursor:pointer;transition:background .14s,color .14s;font-size:12px;font-weight:600;color:var(--text-2);text-align:center;background:var(--navy-card)}
+.pro-service.selected{background:var(--blue);border-color:var(--blue);color:var(--navy)}
+.pro-input{width:100%;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:11px 13px;font-size:13px;font-family:var(--font-b);outline:none;margin-bottom:9px}
+.pro-input:focus{outline:2px solid var(--rust);outline-offset:2px}
+.pro-input::placeholder{color:var(--text-3)}
+.pro-submit{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .14s}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(70px);background:#0d2240;border:.5px solid rgba(10,135,84,.38);border-radius:var(--r-md);padding:11px 18px;display:flex;align-items:center;gap:9px;font-size:12px;color:var(--text-1);font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .38s;opacity:0;z-index:300;white-space:nowrap}
+.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(70px);background:#1E1B18;border:none;border-radius:0;padding:12px 16px;display:flex;align-items:center;gap:9px;font-size:13px;color:#F0EBE1;font-weight:500;box-shadow:0 12px 28px rgba(30,27,24,.3);transition:transform .18s ease-out,opacity .18s ease-out;opacity:0;z-index:300;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast-icon{width:19px;height:19px;border-radius:50%;background:var(--emerald);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.toast-icon{width:8px;height:8px;border-radius:0;background:var(--emerald);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:transparent;overflow:hidden}
 
 /* ── ANIMATIONS ── */
 .fade-in{opacity:0;transform:translateY(12px);animation:fadeUp .45s ease forwards}
@@ -683,61 +690,61 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 /* ── AUTH SCREENS ── */
 .auth-shell{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;max-width:480px;margin:0 auto;width:100%}
 .auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.auth-logo-mark{width:38px;height:38px;background:var(--blue);border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px var(--blue-glow);flex-shrink:0}
-.auth-brand{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
-.auth-tagline{font-size:12px;color:var(--text-2);margin-bottom:28px;text-align:center}
-.auth-card{width:100%;background:var(--navy-card);border-radius:var(--r-lg);border:1px solid var(--border);padding:28px 24px;box-shadow:0 4px 24px rgba(26,26,24,.05)}
-[data-theme="dark"] .auth-card{box-shadow:0 4px 24px rgba(0,0,0,.4)}
-.auth-title{font-family:var(--font-d);font-size:22px;font-weight:500;color:var(--text-1);letter-spacing:-.5px;margin-bottom:4px}
-.auth-sub{font-size:12px;color:var(--text-2);margin-bottom:22px}
-.auth-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:6px;display:block}
+.auth-logo-mark{width:40px;height:40px;background:var(--blue);border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.auth-logo-mark::after{content:'';position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;background:var(--gold)}
+.auth-brand{font-family:var(--font-b);font-size:21px;font-weight:700;color:var(--text-1);letter-spacing:-.02em}
+.auth-tagline{font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-bottom:28px;text-align:center}
+.auth-card{width:100%;background:var(--navy-card);border-radius:0;border:2px solid var(--border-blue);padding:28px 24px}
+.auth-title{font-family:var(--font-b);font-size:26px;font-weight:700;color:var(--text-1);letter-spacing:-.03em;margin-bottom:4px}
+.auth-sub{font-size:13.5px;color:var(--text-2);margin-bottom:22px}
+.auth-label{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-bottom:6px;display:block}
 .auth-input-wrap{position:relative;margin-bottom:14px}
-.auth-input{width:100%;background:var(--navy-mid);color:var(--text-1);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:14px;font-family:var(--font-b);outline:none;transition:border-color .15s,background .15s}
-.auth-input:focus{border-color:var(--blue);background:var(--navy)}
+.auth-input{width:100%;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:13px 14px;font-size:15px;font-family:var(--font-b);outline:none}
+.auth-input:focus{outline:2px solid var(--rust);outline-offset:2px}
 .auth-input::placeholder{color:var(--text-3)}
 .auth-input.pr{padding-right:44px}
 .auth-eye{position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-2);display:flex;align-items:center;padding:2px}
-.auth-btn{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(26,26,24,.18);transition:transform .12s,box-shadow .15s;margin-top:8px}
-[data-theme="dark"] .auth-btn{box-shadow:0 6px 20px rgba(245,243,238,.12)}
-.auth-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,26,24,.24)}
-[data-theme="dark"] .auth-btn:hover:not(:disabled){box-shadow:0 8px 24px rgba(245,243,238,.18)}
-.auth-btn:active:not(:disabled){transform:translateY(0)}
+.auth-btn{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:15.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s ease-out;margin-top:8px}
+.auth-btn:hover:not(:disabled){background:#332E28}
 .auth-btn:disabled{opacity:.4;pointer-events:none}
-.auth-error{background:rgba(255,79,79,.08);border:.5px solid rgba(255,79,79,.25);border-radius:var(--r-sm);padding:8px 12px;font-size:12px;color:#ff7070;margin-bottom:13px}
-.auth-switch{text-align:center;margin-top:18px;font-size:12px;color:var(--text-2)}
-.auth-switch-btn{background:none;border:none;color:var(--text-1);font-weight:600;cursor:pointer;font-size:12px;font-family:var(--font-b);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;padding:0}
+.auth-error{background:rgba(176,58,46,.08);border:none;border-left:4px solid var(--red);border-radius:0;padding:10px 12px;font-size:13px;color:#8A2E22;margin-bottom:13px}
+.auth-success{background:rgba(92,114,104,.12);border:none;border-left:4px solid var(--emerald);border-radius:0;padding:10px 12px;font-size:13px;color:var(--emerald-mid);margin-bottom:13px}
+.auth-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--text-2)}
+.auth-switch-btn{background:none;border:none;color:var(--rust);font-weight:600;cursor:pointer;font-size:13px;font-family:var(--font-b);text-decoration:none;padding:0}
 .auth-trust{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:18px}
-.auth-trust-item{background:rgba(255,255,255,.03);border-radius:8px;padding:8px 10px;border:.5px solid var(--border);display:flex;align-items:center;gap:7px;font-size:10px;color:var(--text-2)}
+.auth-trust-item{background:transparent;border-radius:0;padding:8px 10px;border:1px solid var(--border);display:flex;align-items:center;gap:7px;font-family:var(--font-m);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
 .spin-sm{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .65s linear infinite}
 
 /* ── ONBOARDING ── */
 .ob-shell{min-height:100vh;background:var(--navy);display:flex;flex-direction:column;max-width:480px;margin:0 auto;width:100%}
-.ob-bar{height:3px;background:var(--border)}
-.ob-bar-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .4s cubic-bezier(.34,1.2,.64,1)}
+.ob-bar{height:4px;background:var(--navy-mid)}
+.ob-bar-fill{height:100%;background:var(--rust);border-radius:0;transition:width .3s ease-out}
 .ob-hdr{padding:18px 20px 0;display:flex;align-items:center;justify-content:space-between}
-.ob-step-lbl{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)}
-.ob-skip{background:none;border:none;font-size:12px;color:var(--text-2);cursor:pointer;font-family:var(--font-b)}
+.ob-step-lbl{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
+.ob-skip{background:none;border:none;font-size:13px;color:var(--text-2);cursor:pointer;font-family:var(--font-b)}
 .ob-body{padding:22px 20px 110px;flex:1}
-.ob-title{font-family:var(--font-d);font-size:21px;font-weight:800;color:var(--text-1);letter-spacing:-.02em;line-height:1.2;margin-bottom:5px}
-.ob-sub{font-size:13px;color:var(--text-2);line-height:1.5;margin-bottom:22px}
-.ob-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);margin-bottom:5px;display:block;margin-top:13px}
-.ob-input{width:100%;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:14px;font-family:var(--font-b);outline:none;transition:border-color .15s}
-.ob-input:focus{border-color:var(--blue)}
+.ob-title{font-family:var(--font-b);font-size:25px;font-weight:700;color:var(--text-1);letter-spacing:-.03em;line-height:1.15;margin-bottom:5px}
+.ob-sub{font-size:14px;color:var(--text-2);line-height:1.55;margin-bottom:22px}
+.ob-label{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-bottom:6px;display:block;margin-top:13px}
+.ob-input{width:100%;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:13px 14px;font-size:15px;font-family:var(--font-b);outline:none}
+.ob-input:focus{outline:2px solid var(--rust);outline-offset:2px}
 .ob-input::placeholder{color:var(--text-3)}
-.ob-select{width:100%;background:var(--navy-card);color:var(--text-1);border:.5px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:14px;font-family:var(--font-b);outline:none;-webkit-appearance:none;cursor:pointer;transition:border-color .15s}
-.ob-select:focus{border-color:var(--blue)}
+.ob-select{width:100%;background:var(--navy-card);color:var(--text-1);border:1.5px solid var(--border-blue);border-radius:0;padding:13px 14px;font-size:15px;font-family:var(--font-b);outline:none;-webkit-appearance:none;cursor:pointer}
+.ob-select:focus{outline:2px solid var(--rust);outline-offset:2px}
 .ob-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}
-.ob-opt{padding:13px 12px;background:var(--navy-card);border-radius:var(--r-md);border:.5px solid var(--border);cursor:pointer;transition:border-color .18s,background .18s}
-.ob-opt.sel{border-color:var(--blue);background:rgba(10,135,84,.09)}
+.ob-opt{padding:13px 12px;background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);cursor:pointer;transition:background .15s ease-out,color .15s ease-out}
+.ob-opt.sel{border-color:var(--blue);background:var(--blue)}
+.ob-opt.sel .ob-opt-name{color:var(--navy)}
+.ob-opt.sel .ob-opt-sub{color:var(--text-3)}
 .ob-opt-icon{font-size:18px;margin-bottom:4px}
-.ob-opt-name{font-size:12px;font-weight:500;color:var(--text-1);margin-bottom:1px}
-.ob-opt-sub{font-size:10px;color:var(--text-2)}
+.ob-opt-name{font-size:13px;font-weight:600;color:var(--text-1);margin-bottom:1px}
+.ob-opt-sub{font-family:var(--font-m);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
 .ob-footer{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;padding:14px 20px 28px;background:linear-gradient(transparent,var(--navy) 35%)}
-.ob-next{width:100%;background:var(--blue);color:#fff;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:var(--r-md);padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px var(--blue-glow);transition:opacity .14s}
+.ob-next{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:15.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .14s}
 .ob-next:disabled{opacity:.35;pointer-events:none}
-.ob-back{background:none;border:none;font-size:12px;color:var(--text-2);cursor:pointer;margin-top:9px;font-family:var(--font-b);width:100%;text-align:center}
+.ob-back{background:none;border:none;font-size:13px;color:var(--text-2);cursor:pointer;margin-top:9px;font-family:var(--font-b);width:100%;text-align:center}
 .ob-success{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px 24px;text-align:center}
-.ob-success-ring{width:80px;height:80px;border-radius:50%;background:rgba(0,184,107,.1);border:2px solid var(--emerald);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 24px rgba(0,184,107,.25)}`;
+.ob-success-ring{width:72px;height:72px;border-radius:0;background:var(--emerald);border:none;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#F0EBE1}`;
 
 // ─── STATIC DATA ─────────────────────────────────────────────
 
@@ -757,9 +764,9 @@ const MONTHLY_DATA = [
 
 const WASTE_CAUSES = [
   { label:"Over-Prep",  pct:54, color:"#0a8754" },
-  { label:"Expiry",     pct:31, color:"#00b86b"  },
-  { label:"Spill/Loss", pct:10, color:"#f0b429"  },
-  { label:"Other",      pct:5,  color:"#8899bb"  },
+  { label:"Expiry",     pct:31, color:"#5C7268"  },
+  { label:"Spill/Loss", pct:10, color:"#C9762E"  },
+  { label:"Other",      pct:5,  color:"#9C9184"  },
 ];
 
 const DOCS = [
@@ -771,21 +778,21 @@ const DOCS = [
 ];
 
 const DOC_CFG = {
-  valid:    { label:"Valid",    bg:"rgba(0,184,107,.1)",  border:"rgba(0,184,107,.25)",  text:"#00b86b" },
-  expiring: { label:"Expiring", bg:"rgba(240,180,41,.1)", border:"rgba(240,180,41,.25)", text:"#f0b429" },
-  urgent:   { label:"Urgent",   bg:"rgba(255,80,80,.1)",  border:"rgba(255,80,80,.25)",  text:"#ff5050" },
+  valid:    { label:"Valid",    bg:"rgba(92,114,104,.1)",  border:"rgba(92,114,104,.25)",  text:"#5C7268" },
+  expiring: { label:"Expiring", bg:"rgba(201,118,46,.1)", border:"rgba(201,118,46,.25)", text:"#C9762E" },
+  urgent:   { label:"Urgent",   bg:"rgba(176,58,46,.1)",  border:"rgba(176,58,46,.25)",  text:"#B03A2E" },
 };
 
 const VIOLATIONS = [
-  { type:"Fridge Temp Log Missing",   date:"12 Mar 2026", inspector:"DM-F-0441", amount:3500, icon:<AlertTriangle size={14} color="#ff5050"/> },
-  { type:"Health Card Expired (2 staff)", date:"19 Jan 2026", inspector:"DHA-H-0229", amount:5000, icon:<XCircle size={14} color="#ff5050"/> },
-  { type:"Pest Control Record Gap",   date:"08 Nov 2025", inspector:"DM-P-0187", amount:2000, icon:<ShieldAlert size={14} color="#ff5050"/> },
+  { type:"Fridge Temp Log Missing",   date:"12 Mar 2026", inspector:"DM-F-0441", amount:3500, icon:<AlertTriangle size={14} color="#B03A2E"/> },
+  { type:"Health Card Expired (2 staff)", date:"19 Jan 2026", inspector:"DHA-H-0229", amount:5000, icon:<XCircle size={14} color="#B03A2E"/> },
+  { type:"Pest Control Record Gap",   date:"08 Nov 2025", inspector:"DM-P-0187", amount:2000, icon:<ShieldAlert size={14} color="#B03A2E"/> },
 ];
 
 const AVOIDED = [
-  { type:"Checklist 100% · Inspection Passed", date:"28 Apr 2026", inspector:"DM-F-0492", amount:5000, icon:<CheckCircle2 size={14} color="#00b86b"/> },
-  { type:"All Health Cards Renewed On Time",    date:"14 Feb 2026", inspector:"DHA",        amount:3500, icon:<Award size={14} color="#00b86b"/> },
-  { type:"HACCP Logs Auto-Generated",           date:"02 Jan 2026", inspector:"DM",         amount:2000, icon:<ShieldCheck size={14} color="#00b86b"/> },
+  { type:"Checklist 100% · Inspection Passed", date:"28 Apr 2026", inspector:"DM-F-0492", amount:5000, icon:<CheckCircle2 size={14} color="#5C7268"/> },
+  { type:"All Health Cards Renewed On Time",    date:"14 Feb 2026", inspector:"DHA",        amount:3500, icon:<Award size={14} color="#5C7268"/> },
+  { type:"HACCP Logs Auto-Generated",           date:"02 Jan 2026", inspector:"DM",         amount:2000, icon:<ShieldCheck size={14} color="#5C7268"/> },
 ];
 
 const NB_ALERTS = [
@@ -1063,8 +1070,8 @@ function matchToMenu(importedRows, menuItems) {
 }
 
 const INGREDIENTS = [
-  { id:1, name:"Full-Cream Milk",  nameAr:"حليب كامل الدسم", batch:"BC-2026-441", icon:<Milk size={12} color="#00b86b"/>,     iconBg:"#e8f7f0", expiry:"04 Jun 2026", daysLeft:18, halal:true,  status:"expiring" },
-  { id:2, name:"Oat Milk",         nameAr:"حليب الشوفان",     batch:"BC-2026-389", icon:<Milk size={12} color="#f0b429"/>,     iconBg:"#fff8e6", expiry:"12 Jun 2026", daysLeft:26, halal:true,  status:"expiring" },
+  { id:1, name:"Full-Cream Milk",  nameAr:"حليب كامل الدسم", batch:"BC-2026-441", icon:<Milk size={12} color="#5C7268"/>,     iconBg:"#e8f7f0", expiry:"04 Jun 2026", daysLeft:18, halal:true,  status:"expiring" },
+  { id:2, name:"Oat Milk",         nameAr:"حليب الشوفان",     batch:"BC-2026-389", icon:<Milk size={12} color="#C9762E"/>,     iconBg:"#fff8e6", expiry:"12 Jun 2026", daysLeft:26, halal:true,  status:"expiring" },
   { id:3, name:"Croissants",       nameAr:"كرواسان",           batch:"BK-0501-22",  icon:<Wheat size={12} color="#8b5e3c"/>,   iconBg:"#f5ede5", expiry:"18 May 2026", daysLeft:1,  halal:true,  status:"urgent"   },
   { id:4, name:"Coffee Beans",     nameAr:"حبوب القهوة",       batch:"CB-2026-119", icon:<Coffee size={12} color="#5a3e28"/>,  iconBg:"#f0ebe5", expiry:"31 Aug 2026", daysLeft:106, halal:true, status:"valid"    },
   { id:5, name:"Fresh Cream",      nameAr:"كريمة طازجة",      batch:"FC-0429-07",  icon:<Apple size={12} color="#ff6b6b"/>,   iconBg:"#fff0f0", expiry:"20 May 2026", daysLeft:3,  halal:false, status:"urgent"   },
@@ -1072,20 +1079,20 @@ const INGREDIENTS = [
 ];
 
 const EXPIRY_CFG = {
-  valid:    { text:"#00b86b", bg:"rgba(0,184,107,.1)",  label:"Fresh"    },
-  expiring: { text:"#f0b429", bg:"rgba(240,180,41,.1)", label:"Expiring" },
-  urgent:   { text:"#ff5050", bg:"rgba(255,80,80,.1)",  label:"Urgent"   },
+  valid:    { text:"#5C7268", bg:"rgba(92,114,104,.1)",  label:"Fresh"    },
+  expiring: { text:"#C9762E", bg:"rgba(201,118,46,.1)", label:"Expiring" },
+  urgent:   { text:"#B03A2E", bg:"rgba(176,58,46,.1)",  label:"Urgent"   },
 };
 
 const SUPPLIERS = [
   {
     emoji:"🥛", name:"Al Marai UAE",      category:"Dairy Supplier",
-    phone:"+97142997000", wa:"97142997000", color:"rgba(0,184,107,.1)", border:"rgba(0,184,107,.2)",
+    phone:"+97142997000", wa:"97142997000", color:"rgba(92,114,104,.1)", border:"rgba(92,114,104,.2)",
     rec:{ action:"Reduce", detail:"Order 29L tomorrow — 11L carryover covers gap.", saving:"AED 67.65" },
   },
   {
     emoji:"🥐", name:"French Bakery DXB", category:"Pastry Supplier",
-    phone:"+971501234567", wa:"971501234567", color:"rgba(240,180,41,.1)", border:"rgba(240,180,41,.2)",
+    phone:"+971501234567", wa:"971501234567", color:"rgba(201,118,46,.1)", border:"rgba(201,118,46,.2)",
     rec:{ action:"Hold", detail:"Sunday pastry order correct. No changes needed.", saving:null },
   },
   {
@@ -1121,19 +1128,19 @@ const WA_REPORT = `🟢 *Kaffelog — Daily Report*
 _Kaffelog · kaffelog.com_`;
 
 const INGREDIENT_RECOVERY = [
-  { name:"Milk",         sub:"Full-cream & oat blend",   icon:"🥛", iconBg:"#e8f7f0", color:"#00b86b", qty:"120 L",     unit:"litres saved",    pct:78, recovered:738.00,  note:"+12% vs last month" },
-  { name:"Pastries",     sub:"Croissants, danish, muffins", icon:"🥐", iconBg:"#fff8e6", color:"#f0b429", qty:"84 units", unit:"items recovered", pct:55, recovered:294.00,  note:"+6% vs last month"  },
+  { name:"Milk",         sub:"Full-cream & oat blend",   icon:"🥛", iconBg:"#e8f7f0", color:"#5C7268", qty:"120 L",     unit:"litres saved",    pct:78, recovered:738.00,  note:"+12% vs last month" },
+  { name:"Pastries",     sub:"Croissants, danish, muffins", icon:"🥐", iconBg:"#fff8e6", color:"#C9762E", qty:"84 units", unit:"items recovered", pct:55, recovered:294.00,  note:"+6% vs last month"  },
   { name:"Coffee Beans", sub:"Single-origin & house blend",  icon:"☕", iconBg:"#f0ebe5", color:"#8b5e3c", qty:"3.2 kg",   unit:"kilograms saved", pct:38, recovered:192.00,  note:"Stable"             },
 ];
 
 const DAILY_HISTORY = [
-  { day:"Today",     date:"Sat, 17 May",  total:184.50, dotColor:"#00b86b", items:[{n:"Milk",qty:"30 L",aed:184.50}] },
-  { day:"Friday",    date:"16 May 2026",  total:227.80, dotColor:"#00b86b", items:[{n:"Milk",qty:"22 L",aed:135.30},{n:"Pastries",qty:"13 units",aed:45.50},{n:"Coffee",qty:"0.8 kg",aed:47.00}] },
-  { day:"Thursday",  date:"15 May 2026",  total:196.20, dotColor:"#00b86b", items:[{n:"Milk",qty:"18 L",aed:110.70},{n:"Pastries",qty:"10 units",aed:35.00},{n:"Coffee",qty:"0.9 kg",aed:50.50}] },
-  { day:"Wednesday", date:"14 May 2026",  total:312.00, dotColor:"#5599ff", items:[{n:"Milk",qty:"28 L",aed:172.20},{n:"Pastries",qty:"20 units",aed:70.00},{n:"Coffee",qty:"1.2 kg",aed:69.80}] },
-  { day:"Tuesday",   date:"13 May 2026",  total:144.50, dotColor:"#f0b429", items:[{n:"Milk",qty:"16 L",aed:98.40},{n:"Pastries",qty:"10 units",aed:35.00},{n:"Coffee",qty:"0.2 kg",aed:11.10}] },
-  { day:"Monday",    date:"12 May 2026",  total:89.00,  dotColor:"#f0b429", items:[{n:"Milk",qty:"10 L",aed:61.50},{n:"Pastries",qty:"8 units",aed:27.50}] },
-  { day:"Sunday",    date:"11 May 2026",  total:106.00, dotColor:"#8899bb", items:[{n:"Milk",qty:"12 L",aed:73.80},{n:"Coffee",qty:"0.55 kg",aed:32.20}] },
+  { day:"Today",     date:"Sat, 17 May",  total:184.50, dotColor:"#5C7268", items:[{n:"Milk",qty:"30 L",aed:184.50}] },
+  { day:"Friday",    date:"16 May 2026",  total:227.80, dotColor:"#5C7268", items:[{n:"Milk",qty:"22 L",aed:135.30},{n:"Pastries",qty:"13 units",aed:45.50},{n:"Coffee",qty:"0.8 kg",aed:47.00}] },
+  { day:"Thursday",  date:"15 May 2026",  total:196.20, dotColor:"#5C7268", items:[{n:"Milk",qty:"18 L",aed:110.70},{n:"Pastries",qty:"10 units",aed:35.00},{n:"Coffee",qty:"0.9 kg",aed:50.50}] },
+  { day:"Wednesday", date:"14 May 2026",  total:312.00, dotColor:"#C9762E", items:[{n:"Milk",qty:"28 L",aed:172.20},{n:"Pastries",qty:"20 units",aed:70.00},{n:"Coffee",qty:"1.2 kg",aed:69.80}] },
+  { day:"Tuesday",   date:"13 May 2026",  total:144.50, dotColor:"#C9762E", items:[{n:"Milk",qty:"16 L",aed:98.40},{n:"Pastries",qty:"10 units",aed:35.00},{n:"Coffee",qty:"0.2 kg",aed:11.10}] },
+  { day:"Monday",    date:"12 May 2026",  total:89.00,  dotColor:"#C9762E", items:[{n:"Milk",qty:"10 L",aed:61.50},{n:"Pastries",qty:"8 units",aed:27.50}] },
+  { day:"Sunday",    date:"11 May 2026",  total:106.00, dotColor:"#9C9184", items:[{n:"Milk",qty:"12 L",aed:73.80},{n:"Coffee",qty:"0.55 kg",aed:32.20}] },
 ];
 
 const MAX_DAY = Math.max(...DAILY_HISTORY.map(d=>d.total));
@@ -1141,13 +1148,13 @@ const MAX_DAY = Math.max(...DAILY_HISTORY.map(d=>d.total));
 // ─── HELPERS ─────────────────────────────────────────────────
 
 const fmt = n => n.toLocaleString("en-AE",{minimumFractionDigits:2,maximumFractionDigits:2});
-const scoreColor = v => v>=92?"#00b86b":v>=85?"#f0b429":"#ff5050";
+const scoreColor = v => v>=92?"#5C7268":v>=85?"#C9762E":"#B03A2E";
 const accClass   = v => v>=93?"h":v>=87?"m":"l";
 const getTempStatus = t => t<=4
-  ? {label:"Compliant ≤4°C",color:"#00b86b",bg:"rgba(0,184,107,.1)",border:"rgba(0,184,107,.22)"}
+  ? {label:"Compliant ≤4°C",color:"#5C7268",bg:"rgba(92,114,104,.1)",border:"rgba(92,114,104,.22)"}
   : t<=6
-  ? {label:"Monitor — amber zone",color:"#f0b429",bg:"rgba(240,180,41,.1)",border:"rgba(240,180,41,.22)"}
-  : {label:"Warning — exceeds limit",color:"#ff5050",bg:"rgba(255,80,80,.1)",border:"rgba(255,80,80,.22)"};
+  ? {label:"Monitor — amber zone",color:"#C9762E",bg:"rgba(201,118,46,.1)",border:"rgba(201,118,46,.22)"}
+  : {label:"Warning — exceeds limit",color:"#B03A2E",bg:"rgba(176,58,46,.1)",border:"rgba(176,58,46,.22)"};
 
 // ─── SVG DONUT CHART ─────────────────────────────────────────
 
@@ -1167,8 +1174,8 @@ function DonutChart({ slices }) {
     <svg viewBox="0 0 160 160" width="150" height="150" style={{flexShrink:0}}>
       {paths.map((p,i)=><path key={i} d={p.d} fill={p.color} opacity=".9"/>)}
       <circle cx={cx} cy={cy} r={ir-2} fill="#0f2038"/>
-      <text x={cx} y={cy-5} textAnchor="middle" fill="#f0f4ff" fontSize="17" fontWeight="700" fontFamily="Syne,sans-serif">54%</text>
-      <text x={cx} y={cy+11} textAnchor="middle" fill="#8899bb" fontSize="9" fontFamily="DM Sans,sans-serif">Over-Prep</text>
+      <text x={cx} y={cy-5} textAnchor="middle" fill="#E8E4DB" fontSize="17" fontWeight="700" fontFamily="Syne,sans-serif">54%</text>
+      <text x={cx} y={cy+11} textAnchor="middle" fill="#9C9184" fontSize="9" fontFamily="DM Sans,sans-serif">Over-Prep</text>
     </svg>
   );
 }
@@ -1184,15 +1191,15 @@ function FineRiskGauge({score}){
   const fs=(score/100)*sweep;
   const[fx,fy]=pt(start+fs);
   const fillD=`M${sx} ${sy}A${r} ${r} 0 ${fs>180?1:0} 1 ${fx} ${fy}`;
-  const gc=score<=35?"#00b86b":score<=65?"#f0b429":"#ff5050";
+  const gc=score<=35?"#5C7268":score<=65?"#C9762E":"#B03A2E";
   const rl=score<=35?"Low Risk":score<=65?"Moderate":"High Risk";
   return(
     <svg viewBox="0 0 180 148" width="174" height="148">
       <path d={trackD} fill="none" stroke="rgba(255,255,255,.07)" strokeWidth="10" strokeLinecap="round"/>
       <path d={fillD} fill="none" stroke={gc} strokeWidth="10" strokeLinecap="round" style={{filter:`drop-shadow(0 0 5px ${gc}88)`}}/>
       <circle cx={cx} cy={cy} r={r-14} fill="#0f2038"/>
-      <text x={cx} y={cy+8} textAnchor="middle" fill="#f0f4ff" fontSize="26" fontWeight="800" fontFamily="Syne,sans-serif">{score}</text>
-      <text x={cx} y={cy+23} textAnchor="middle" fill="#8899bb" fontSize="9" fontFamily="DM Sans,sans-serif">/ 100</text>
+      <text x={cx} y={cy+8} textAnchor="middle" fill="#E8E4DB" fontSize="26" fontWeight="800" fontFamily="Syne,sans-serif">{score}</text>
+      <text x={cx} y={cy+23} textAnchor="middle" fill="#9C9184" fontSize="9" fontFamily="DM Sans,sans-serif">/ 100</text>
       <text x={cx} y={136} textAnchor="middle" fill={gc} fontSize="10" fontWeight="600" fontFamily="DM Sans,sans-serif">{rl}</text>
     </svg>
   );
@@ -1200,7 +1207,7 @@ function FineRiskGauge({score}){
 
 // ─── RANGE SLIDER ────────────────────────────────────────────
 
-function RangeSlider({value,min,max,onChange,color="#00b86b"}){
+function RangeSlider({value,min,max,onChange,color="#5C7268"}){
   const pct=((value-min)/(max-min))*100;
   const bg=`linear-gradient(to right, ${color} ${pct}%, rgba(255,255,255,.1) ${pct}%)`;
   return(
@@ -1292,7 +1299,7 @@ Be concise, practical, and specific with numbers. Use AED for currency. Mention 
           <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"2px"}}>Powered by Claude · UAE cafe intelligence</div>
         </div>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:"5px"}}>
-          <div style={{width:"6px",height:"6px",borderRadius:"50%",background:"var(--emerald)",boxShadow:"0 0 5px rgba(0,184,107,.7)",animation:"pulse 2s infinite"}}/>
+          <div style={{width:"6px",height:"6px",borderRadius:"50%",background:"var(--emerald)",boxShadow:"0 0 5px rgba(92,114,104,.7)",animation:"pulse 2s infinite"}}/>
           <span style={{fontSize:"10px",color:"var(--emerald)"}}>Live</span>
         </div>
       </div>
@@ -1439,8 +1446,8 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
 
             {/* timestamp */}
             <div className="ml-ts">
-              <Clock size={12} color="#5599ff"/>
-              <span style={{fontSize:"10px",color:"#5599ff",fontWeight:"600"}}>{L.ts}</span>
+              <Clock size={12} color="#C9762E"/>
+              <span style={{fontSize:"10px",color:"#C9762E",fontWeight:"600"}}>{L.ts}</span>
               <span style={{marginLeft:"auto",fontSize:"10px",color:"var(--text-2)"}}>{timeStr} · {dateStr}</span>
             </div>
 
@@ -1476,7 +1483,7 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
                     <div style={{flex:1}}>
                       <div style={{fontSize:"12px",fontWeight:"500",color:"var(--text-1)",display:"flex",alignItems:"center",gap:"5px"}}>
                         {arabic?item.labelAr:item.label}
-                        {item.critical&&<span style={{fontSize:"8px",background:"rgba(255,80,80,.12)",color:"var(--red)",padding:"1px 5px",borderRadius:"3px",fontWeight:"700",letterSpacing:".04em"}}>CRITICAL</span>}
+                        {item.critical&&<span style={{fontSize:"8px",background:"rgba(176,58,46,.12)",color:"var(--red)",padding:"1px 5px",borderRadius:"3px",fontWeight:"700",letterSpacing:".04em"}}>CRITICAL</span>}
                       </div>
                       <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"2px"}}>{item.sub}</div>
                     </div>
@@ -1490,7 +1497,7 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
                         {arabic?"تنبيه المخاطر":"Risk Alert"}
                       </span>
                     </div>
-                    <div style={{fontSize:"11px",color:"#ff7070",lineHeight:"1.5"}}>
+                    <div style={{fontSize:"11px",color:"#C75448",lineHeight:"1.5"}}>
                       {arabic
                         ?`${uncheckedCritical.length} بند حرج غير مكتمل — قد يؤدي إلى غرامة بلدية.`
                         :`${uncheckedCritical.length} critical item${uncheckedCritical.length>1?"s":""} unchecked. This may result in a municipality fine. Notifying Owner.`
@@ -1567,7 +1574,7 @@ function NeighborhoodBanner(){
           {NB_ALERTS.map((_,i)=><div key={i} className={`nb-dot ${i===idx?"active":""}`}/>)}
         </div>
       </div>
-      <div style={{background:"rgba(0,184,107,.1)",border:".5px solid rgba(0,184,107,.22)",borderRadius:"6px",padding:"3px 8px",fontSize:"9px",fontWeight:"700",color:"var(--emerald)",flexShrink:0,letterSpacing:".04em",textTransform:"uppercase"}}>Checklist Updated</div>
+      <div style={{background:"rgba(92,114,104,.1)",border:".5px solid rgba(92,114,104,.22)",borderRadius:"6px",padding:"3px 8px",fontSize:"9px",fontWeight:"700",color:"var(--emerald)",flexShrink:0,letterSpacing:".04em",textTransform:"uppercase"}}>Checklist Updated</div>
     </div>
   );
 }
@@ -1602,7 +1609,7 @@ function FineHistoryLog(){
       <div className="fh-list">
         {items.map((item,i)=>(
           <div key={i} className="fh-item">
-            <div className="fh-icon" style={{background:tab==="violations"?"rgba(255,80,80,.1)":"rgba(0,184,107,.1)"}}>
+            <div className="fh-icon" style={{background:tab==="violations"?"rgba(176,58,46,.1)":"rgba(92,114,104,.1)"}}>
               {item.icon}
             </div>
             <div style={{flex:1}}>
@@ -1615,7 +1622,7 @@ function FineHistoryLog(){
           </div>
         ))}
       </div>
-      <div style={{display:"flex",alignItems:"center",gap:"7px",marginTop:"10px",padding:"9px 12px",background:"rgba(0,184,107,.06)",border:".5px solid rgba(0,184,107,.15)",borderRadius:"9px"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"7px",marginTop:"10px",padding:"9px 12px",background:"rgba(92,114,104,.06)",border:".5px solid rgba(92,114,104,.15)",borderRadius:"9px"}}>
         <Award size={13} color="var(--emerald)"/>
         <span style={{fontSize:"11px",color:"var(--text-2)"}}>Current fine-free streak: <strong style={{color:"var(--emerald)"}}>29 days</strong></span>
       </div>
@@ -1684,8 +1691,8 @@ function SafeVault(){
       {/* header */}
       <div className="sv-hdr">
         <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
-          <div style={{width:"40px",height:"40px",borderRadius:"11px",background:"rgba(10,135,84,.12)",border:".5px solid rgba(10,135,84,.28)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 0 14px rgba(10,135,84,.2)"}}>
-            <Lock size={18} color="#7aadff"/>
+          <div style={{width:"40px",height:"40px",borderRadius:"11px",background:"rgba(30,27,24,.12)",border:".5px solid rgba(30,27,24,.28)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 0 14px rgba(30,27,24,.2)"}}>
+            <Lock size={18} color="#C9762E"/>
           </div>
           <div>
             <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"700",color:"var(--text-1)"}}>SafeVault</div>
@@ -1717,8 +1724,8 @@ function SafeVault(){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div className="dh-sect">Documents &amp; Licences</div>
           <button onClick={() => setShowAddStaff(true)} style={{
-            background:"rgba(10,135,84,.12)",color:"#1a1a18",
-            border:".5px solid rgba(10,135,84,.3)",borderRadius:8,
+            background:"rgba(30,27,24,.12)",color:"#1E1B18",
+            border:".5px solid rgba(30,27,24,.3)",borderRadius:8,
             padding:"5px 11px",fontSize:10,fontWeight:700,
             letterSpacing:".06em",textTransform:"uppercase",cursor:"pointer",
             fontFamily:"var(--font-d)",display:"flex",alignItems:"center",gap:5
@@ -1727,10 +1734,10 @@ function SafeVault(){
 
         {showAddStaff && (
           <div style={{
-            background:"rgba(10,135,84,.08)",border:".5px solid rgba(10,135,84,.3)",
+            background:"rgba(30,27,24,.08)",border:".5px solid rgba(30,27,24,.3)",
             borderRadius:10,padding:"11px 12px",marginBottom:4
           }}>
-            <div style={{fontSize:11,fontWeight:600,color:"#1a1a18",marginBottom:8,letterSpacing:".06em",textTransform:"uppercase"}}>
+            <div style={{fontSize:11,fontWeight:600,color:"#1E1B18",marginBottom:8,letterSpacing:".06em",textTransform:"uppercase"}}>
               New staff health card
             </div>
             <input
@@ -1738,13 +1745,13 @@ function SafeVault(){
               placeholder="Staff name (e.g. Ahmed Hassan)"
               value={newStaff.name}
               onChange={e => setNewStaff({...newStaff, name: e.target.value})}
-              style={{width:"100%",padding:"8px 10px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",marginBottom:7}}
+              style={{width:"100%",padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",marginBottom:7}}
             />
             <input
               type="date"
               value={newStaff.expiry}
               onChange={e => setNewStaff({...newStaff, expiry: e.target.value})}
-              style={{width:"100%",padding:"8px 10px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark",marginBottom:9}}
+              style={{width:"100%",padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark",marginBottom:9}}
             />
             <div style={{display:"flex",gap:7}}>
               <button onClick={handleAddStaff} disabled={newStaff.name.trim().length<2 || !newStaff.expiry} style={{
@@ -1953,7 +1960,7 @@ function WeeklyAnalyticsContent(){
         {[
           {label:"Avg Safety Score",value:"89.75%",color:"var(--emerald)"},
           {label:"Total Saved",value:"AED 4,259",color:"var(--emerald)"},
-          {label:"Avg Match Rate",value:"92.75%",color:"#5599ff"},
+          {label:"Avg Match Rate",value:"92.75%",color:"#C9762E"},
         ].map(({label,value,color})=>(
           <div key={label} style={{background:"var(--navy-card)",borderRadius:"var(--r-md)",padding:"13px 10px",border:".5px solid var(--border)",textAlign:"center"}}>
             <div style={{fontFamily:"var(--font-d)",fontSize:"14px",fontWeight:"700",color,letterSpacing:"-.02em",marginBottom:"3px"}}>{value}</div>
@@ -1976,7 +1983,7 @@ function MonthlyAnalyticsContent(){
     <>
       <div className="msumm slide-in">
         <div><div style={{fontSize:"9px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"5px"}}>Total Saved (Apr)</div><div className="msumm-val em">AED 4,259</div><div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"3px"}}>↑ 6.8% vs March</div></div>
-        <div><div style={{fontSize:"9px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"5px"}}>Audit Status</div><div style={{marginTop:"5px"}}><span className="audit-badge"><div style={{width:"4px",height:"4px",borderRadius:"50%",background:"#7aadff"}}/>Municipality Ready</span></div><div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"5px"}}>DM 2025 compliant</div></div>
+        <div><div style={{fontSize:"9px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"5px"}}>Audit Status</div><div style={{marginTop:"5px"}}><span className="audit-badge"><div style={{width:"4px",height:"4px",borderRadius:"50%",background:"#C9762E"}}/>Municipality Ready</span></div><div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"5px"}}>DM 2025 compliant</div></div>
         <div><div style={{fontSize:"9px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"5px"}}>Waste Prevented</div><div className="msumm-val bl">52.3 kg</div><div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"3px"}}>UAE 2025 target</div></div>
         <div><div style={{fontSize:"9px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"5px"}}>Compliance Score</div><div className="msumm-val go">96%</div><div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"3px"}}>Staff & fridge logs</div></div>
       </div>
@@ -1987,12 +1994,12 @@ function MonthlyAnalyticsContent(){
         <div className="inv">
           <div className="inv-hd">
             <div>
-              <div style={{fontSize:"9px",fontWeight:"700",letterSpacing:".12em",textTransform:"uppercase",color:"#5599ff",marginBottom:"4px",display:"flex",alignItems:"center",gap:"5px"}}><div style={{width:"4px",height:"4px",borderRadius:"50%",background:"#5599ff"}}/>Recovery Statement</div>
-              <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"800",color:"#f0f4ff",letterSpacing:"-.02em"}}>Ingredient Recovery Report</div>
-              <div style={{fontSize:"10px",color:"#8899bb",marginTop:"2px"}}>April 2026 · Dubai Municipality Compliant</div>
+              <div style={{fontSize:"9px",fontWeight:"700",letterSpacing:".12em",textTransform:"uppercase",color:"#C9762E",marginBottom:"4px",display:"flex",alignItems:"center",gap:"5px"}}><div style={{width:"4px",height:"4px",borderRadius:"50%",background:"#C9762E"}}/>Recovery Statement</div>
+              <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"800",color:"#E8E4DB",letterSpacing:"-.02em"}}>Ingredient Recovery Report</div>
+              <div style={{fontSize:"10px",color:"#9C9184",marginTop:"2px"}}>April 2026 · Dubai Municipality Compliant</div>
             </div>
             <div style={{textAlign:"right"}}>
-              <div style={{fontFamily:"var(--font-d)",fontSize:"10px",fontWeight:"700",color:"#1a1a18",letterSpacing:".06em"}}>{refNum}</div>
+              <div style={{fontFamily:"var(--font-d)",fontSize:"10px",fontWeight:"700",color:"#1E1B18",letterSpacing:".06em"}}>{refNum}</div>
               <div style={{fontSize:"9px",color:"#5566aa",marginTop:"2px"}}>Generated {new Date().toLocaleDateString("en-AE",{day:"numeric",month:"long",year:"numeric"})}</div>
               <div style={{marginTop:"6px"}}><span className="audit-badge" style={{fontSize:"8px"}}>Audit Ready</span></div>
             </div>
@@ -2004,23 +2011,23 @@ function MonthlyAnalyticsContent(){
             <div key={item.name} className="inv-line" style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1.1fr"}}>
               <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
                 <div style={{width:"26px",height:"26px",borderRadius:"7px",background:item.iconBg,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:"14px"}}>{item.icon}</div>
-                <div><div style={{fontSize:"13px",fontWeight:"500",color:"#0a1628"}}>{item.name}</div><div style={{fontSize:"10px",color:"#8899bb",marginTop:"1px"}}>{item.sub}</div></div>
+                <div><div style={{fontSize:"13px",fontWeight:"500",color:"#0a1628"}}>{item.name}</div><div style={{fontSize:"10px",color:"#9C9184",marginTop:"1px"}}>{item.sub}</div></div>
               </div>
-              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:"#1a2840"}}>{item.qty}</div><div style={{fontSize:"9px",color:"#8899bb",marginTop:"1px"}}>{item.unit}</div></div>
+              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:"#1a2840"}}>{item.qty}</div><div style={{fontSize:"9px",color:"#9C9184",marginTop:"1px"}}>{item.unit}</div></div>
               <div>
                 <div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:item.color}}>{item.pct}%</div>
                 <div style={{height:"3px",background:"#edf1f9",borderRadius:"2px",marginTop:"4px",overflow:"hidden"}}><div style={{height:"100%",borderRadius:"2px",width:`${item.pct}%`,background:item.color}}/></div>
               </div>
               <div style={{textAlign:"right"}}>
                 <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#007a46"}}>{fmt(item.recovered)}</div>
-                <div style={{fontSize:"9px",color:"#00b86b",marginTop:"1px"}}>{item.note}</div>
+                <div style={{fontSize:"9px",color:"#5C7268",marginTop:"1px"}}>{item.note}</div>
               </div>
             </div>
           ))}
           <div className="inv-totals">
             {INGREDIENT_RECOVERY.map(item=>(
               <div key={item.name} style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
-                <span style={{fontSize:"10px",color:"#8899bb"}}>Subtotal ({item.name})</span>
+                <span style={{fontSize:"10px",color:"#9C9184"}}>Subtotal ({item.name})</span>
                 <span style={{fontSize:"11px",color:"#1a2840",fontWeight:"600",fontFamily:"var(--font-d)"}}>AED {fmt(item.recovered)}</span>
               </div>
             ))}
@@ -2108,7 +2115,7 @@ function RecipeSettings(){
       {/* APPEARANCE — theme switcher */}
       <div className="rs-buffer" style={{marginBottom:14}}>
         <div className="rs-buf-hd">
-          <div className="rs-buf-icon" style={{background:"rgba(26,26,24,.06)",border:".5px solid var(--border)"}}>
+          <div className="rs-buf-icon" style={{background:"rgba(30,27,24,.06)",border:".5px solid var(--border)"}}>
             <span style={{fontSize:16}}>☾</span>
           </div>
           <div style={{flex:1}}>
@@ -2126,7 +2133,7 @@ function RecipeSettings(){
       {/* buffer */}
       <div className="rs-buffer">
         <div className="rs-buf-hd">
-          <div className="rs-buf-icon"><Sparkles size={16} color="#7aadff"/></div>
+          <div className="rs-buf-icon"><Sparkles size={16} color="#C9762E"/></div>
           <div>
             <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"var(--text-1)"}}>Milk Steaming Waste Buffer</div>
             <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"2px"}}>Accounts for milk left in pitcher after steaming. Standard is 10%.</div>
@@ -2140,7 +2147,7 @@ function RecipeSettings(){
           <RangeSlider value={buffer} min={0} max={20} onChange={setBuffer}/>
           <div style={{display:"flex",justifyContent:"space-between",marginTop:"7px"}}>
             {[0,5,10,15,20].map(v=>(
-              <button key={v} onClick={()=>setBuffer(v)} style={{fontSize:"9px",padding:"3px 7px",borderRadius:"5px",border:".5px solid",background:buffer===v?"rgba(0,184,107,.12)":"transparent",borderColor:buffer===v?"rgba(0,184,107,.35)":"var(--border)",color:buffer===v?"var(--emerald)":"var(--text-2)",cursor:"pointer",fontFamily:"var(--font-b)"}}>
+              <button key={v} onClick={()=>setBuffer(v)} style={{fontSize:"9px",padding:"3px 7px",borderRadius:"5px",border:".5px solid",background:buffer===v?"rgba(92,114,104,.12)":"transparent",borderColor:buffer===v?"rgba(92,114,104,.35)":"var(--border)",color:buffer===v?"var(--emerald)":"var(--text-2)",cursor:"pointer",fontFamily:"var(--font-b)"}}>
                 {v}%
               </button>
             ))}
@@ -2201,10 +2208,10 @@ function RecipeSettings(){
           Based on these settings, your recommendation engine is now calibrated for <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>your cafe's specialty standards</strong> — using a <strong style={{color:"var(--emerald)",fontStyle:"normal"}}>{buffer}% steaming buffer</strong>, Latte at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.latte.milk}ml</strong>, Flat White at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.fw.milk}ml</strong>, Cappuccino at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.capp.milk}ml</strong>.
         </div>
 
-        <div style={{background:"rgba(10,135,84,.06)",border:".5px solid rgba(10,135,84,.2)",borderRadius:10,padding:"11px 13px",marginBottom:14,display:"flex",gap:9,alignItems:"flex-start"}}>
-          <Info size={13} color="#7aadff" style={{flexShrink:0,marginTop:1}}/>
+        <div style={{background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.2)",borderRadius:10,padding:"11px 13px",marginBottom:14,display:"flex",gap:9,alignItems:"flex-start"}}>
+          <Info size={13} color="#C9762E" style={{flexShrink:0,marginTop:1}}/>
           <div style={{fontSize:11,color:"var(--text-2)",lineHeight:1.55}}>
-            <strong style={{color:"var(--text-1)"}}>Adding new drinks?</strong> Go to <strong style={{color:"#1a1a18"}}>Sales Entry → + Add Your Own Item</strong> to create mochas, matchas, signature drinks. The engine learns them automatically.
+            <strong style={{color:"var(--text-1)"}}>Adding new drinks?</strong> Go to <strong style={{color:"#1E1B18"}}>Sales Entry → + Add Your Own Item</strong> to create mochas, matchas, signature drinks. The engine learns them automatically.
           </div>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px",marginBottom:"16px"}}>
@@ -2239,7 +2246,7 @@ function HalalExpiryTracker({arabic}){
   });
   const [showAddForm, setShowAddForm] = useState(false);
   const [newIng, setNewIng] = useState({
-    name: "", icon: "📦", iconBg: "rgba(10,135,84,.12)",
+    name: "", icon: "📦", iconBg: "rgba(30,27,24,.12)",
     batch: "", expiry: "", halal: true
   });
 
@@ -2316,7 +2323,7 @@ function HalalExpiryTracker({arabic}){
       );
     }
 
-    setNewIng({ name: "", icon: "📦", iconBg: "rgba(10,135,84,.12)", batch: "", expiry: "", halal: true });
+    setNewIng({ name: "", icon: "📦", iconBg: "rgba(30,27,24,.12)", batch: "", expiry: "", halal: true });
     setShowAddForm(false);
   };
 
@@ -2332,11 +2339,11 @@ function HalalExpiryTracker({arabic}){
           <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"var(--text-1)"}}>{T.title}</div>
           <div style={{fontSize:"10px",color:"#5a9e7a",marginTop:"2px"}}>{T.sub}</div>
         </div>
-        <span style={{background:"rgba(0,184,107,.12)",border:".5px solid rgba(0,184,107,.28)",borderRadius:"5px",padding:"3px 8px",fontSize:"9px",fontWeight:"700",color:"var(--emerald)",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>{T.badge}</span>
+        <span style={{background:"rgba(92,114,104,.12)",border:".5px solid rgba(92,114,104,.28)",borderRadius:"5px",padding:"3px 8px",fontSize:"9px",fontWeight:"700",color:"var(--emerald)",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>{T.badge}</span>
       </div>
       {expiringSoon>0&&(
-        <div style={{display:"flex",alignItems:"center",gap:"7px",padding:"8px 16px",background:"rgba(255,80,80,.06)",borderBottom:".5px solid rgba(255,80,80,.13)"}}>
-          <AlertTriangle size={11} color="var(--red)"/><span style={{fontSize:"10px",color:"#ff7070"}}>{T.warn}</span>
+        <div style={{display:"flex",alignItems:"center",gap:"7px",padding:"8px 16px",background:"rgba(176,58,46,.06)",borderBottom:".5px solid rgba(176,58,46,.13)"}}>
+          <AlertTriangle size={11} color="var(--red)"/><span style={{fontSize:"10px",color:"#C75448"}}>{T.warn}</span>
         </div>
       )}
       <div className="ht-hrow ht-grid">
@@ -2365,8 +2372,8 @@ function HalalExpiryTracker({arabic}){
             <div><div className="ht-expval" style={{color:cfg.text}}>{ing.expiry}</div><div className="ht-days">{ing.daysLeft}d</div></div>
             <div>
               {ing.halal
-                ?<span className="ht-cert" style={{background:"rgba(0,184,107,.1)",color:"var(--emerald)",border:".5px solid rgba(0,184,107,.2)"}}><div className="ht-cdot" style={{background:"var(--emerald)"}}/>{arabic?"حلال":"Halal"}</span>
-                :<span className="ht-cert" style={{background:"rgba(255,80,80,.1)",color:"var(--red)",border:".5px solid rgba(255,80,80,.2)"}}><div className="ht-cdot" style={{background:"var(--red)"}}/>{arabic?"غير مؤكد":"Unverified"}</span>
+                ?<span className="ht-cert" style={{background:"rgba(92,114,104,.1)",color:"var(--emerald)",border:".5px solid rgba(92,114,104,.2)"}}><div className="ht-cdot" style={{background:"var(--emerald)"}}/>{arabic?"حلال":"Halal"}</span>
+                :<span className="ht-cert" style={{background:"rgba(176,58,46,.1)",color:"var(--red)",border:".5px solid rgba(176,58,46,.2)"}}><div className="ht-cdot" style={{background:"var(--red)"}}/>{arabic?"غير مؤكد":"Unverified"}</span>
               }
             </div>
             <div><span className="ht-status" style={{background:cfg.bg,color:cfg.text,border:`.5px solid ${cfg.text}44`}}>{arabic?(ing.status==="valid"?"جيد":ing.status==="expiring"?"قريب":"عاجل"):cfg.label}</span></div>
@@ -2377,12 +2384,12 @@ function HalalExpiryTracker({arabic}){
       {/* Add ingredient form OR button */}
       {showAddForm ? (
         <div style={{
-          background:"rgba(10,135,84,.06)",
-          borderTop:".5px solid rgba(10,135,84,.2)",
+          background:"rgba(30,27,24,.06)",
+          borderTop:".5px solid rgba(30,27,24,.2)",
           padding:"14px 16px"
         }}>
           <div style={{
-            fontSize:11,fontWeight:600,color:"#1a1a18",marginBottom:10,
+            fontSize:11,fontWeight:600,color:"#1E1B18",marginBottom:10,
             letterSpacing:".06em",textTransform:"uppercase",
             display:"flex",alignItems:"center",gap:6
           }}>
@@ -2396,14 +2403,14 @@ function HalalExpiryTracker({arabic}){
               placeholder="Icon"
               value={newIng.icon}
               onChange={e => setNewIng({...newIng, icon: e.target.value.slice(0,2)})}
-              style={{width:50,padding:"8px 6px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:16,textAlign:"center",outline:"none"}}
+              style={{width:50,padding:"8px 6px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:16,textAlign:"center",outline:"none"}}
             />
             <input
               type="text"
               placeholder="Ingredient name (e.g. Condensed milk)"
               value={newIng.name}
               onChange={e => setNewIng({...newIng, name: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
+              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
             />
           </div>
 
@@ -2414,13 +2421,13 @@ function HalalExpiryTracker({arabic}){
               placeholder="Batch # (optional)"
               value={newIng.batch}
               onChange={e => setNewIng({...newIng, batch: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
+              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
             />
             <input
               type="date"
               value={newIng.expiry}
               onChange={e => setNewIng({...newIng, expiry: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#07111e",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark"}}
+              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark"}}
             />
           </div>
 
@@ -2430,9 +2437,9 @@ function HalalExpiryTracker({arabic}){
               onClick={() => setNewIng({...newIng, halal: true})}
               style={{
                 flex:1,padding:"8px 0",fontSize:11,
-                background: newIng.halal ? "rgba(0,184,107,.15)" : "rgba(255,255,255,.03)",
+                background: newIng.halal ? "rgba(92,114,104,.15)" : "rgba(255,255,255,.03)",
                 color: newIng.halal ? "var(--emerald)" : "var(--text-3)",
-                border:".5px solid " + (newIng.halal ? "rgba(0,184,107,.4)" : "var(--border)"),
+                border:".5px solid " + (newIng.halal ? "rgba(92,114,104,.4)" : "var(--border)"),
                 borderRadius:7,cursor:"pointer",fontFamily:"var(--font-d)",
                 fontWeight:newIng.halal?600:400,letterSpacing:".06em",textTransform:"uppercase"
               }}
@@ -2441,9 +2448,9 @@ function HalalExpiryTracker({arabic}){
               onClick={() => setNewIng({...newIng, halal: false})}
               style={{
                 flex:1,padding:"8px 0",fontSize:11,
-                background: !newIng.halal ? "rgba(255,80,80,.12)" : "rgba(255,255,255,.03)",
+                background: !newIng.halal ? "rgba(176,58,46,.12)" : "rgba(255,255,255,.03)",
                 color: !newIng.halal ? "var(--red)" : "var(--text-3)",
-                border:".5px solid " + (!newIng.halal ? "rgba(255,80,80,.3)" : "var(--border)"),
+                border:".5px solid " + (!newIng.halal ? "rgba(176,58,46,.3)" : "var(--border)"),
                 borderRadius:7,cursor:"pointer",fontFamily:"var(--font-d)",
                 fontWeight:!newIng.halal?600:400,letterSpacing:".06em",textTransform:"uppercase"
               }}
@@ -2468,7 +2475,7 @@ function HalalExpiryTracker({arabic}){
             <button
               onClick={() => {
                 setShowAddForm(false);
-                setNewIng({ name:"", icon:"📦", iconBg:"rgba(10,135,84,.12)", batch:"", expiry:"", halal:true });
+                setNewIng({ name:"", icon:"📦", iconBg:"rgba(30,27,24,.12)", batch:"", expiry:"", halal:true });
               }}
               style={{padding:"10px 16px",background:"transparent",color:"var(--text-3)",border:".5px solid var(--border)",borderRadius:8,fontSize:11,cursor:"pointer",fontFamily:"var(--font-b)"}}
             >Cancel</button>
@@ -2490,12 +2497,12 @@ function SupplierBook({arabic}){
   return(
     <div className="sup-card">
       <div className="sup-hd">
-        <div style={{width:"36px",height:"36px",borderRadius:"9px",background:"rgba(10,135,84,.1)",border:".5px solid rgba(10,135,84,.22)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><BookUser size={16} color="#7aadff"/></div>
+        <div style={{width:"36px",height:"36px",borderRadius:"9px",background:"rgba(30,27,24,.1)",border:".5px solid rgba(30,27,24,.22)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><BookUser size={16} color="#C9762E"/></div>
         <div style={{flex:1}}>
           <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"var(--text-1)"}}>{arabic?"دفتر الموردين":"Supplier Book"}</div>
           <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"2px"}}>{arabic?"موصول بتوصيات الذكاء الاصطناعي":"Linked to AI order recommendations"}</div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(10,135,84,.1)",border:".5px solid rgba(10,135,84,.22)",borderRadius:"20px",padding:"4px 9px",fontSize:"9px",fontWeight:"700",color:"#1a1a18",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>
+        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(30,27,24,.1)",border:".5px solid rgba(30,27,24,.22)",borderRadius:"20px",padding:"4px 9px",fontSize:"9px",fontWeight:"700",color:"#1E1B18",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>
           <Zap size={9}/>{arabic?"ذكاء":"AI"}
         </div>
       </div>
@@ -2513,7 +2520,7 @@ function SupplierBook({arabic}){
           </div>
           <div className="sup-aird">
             <div style={{marginTop:"1px",flexShrink:0}}>
-              {sup.rec.action==="Reduce"?<TrendingUp size={12} color="var(--emerald)"/>:sup.rec.action==="Restock"?<AlertTriangle size={12} color="var(--gold)"/>:<CheckCircle2 size={12} color="#5599ff)"/>}
+              {sup.rec.action==="Reduce"?<TrendingUp size={12} color="var(--emerald)"/>:sup.rec.action==="Restock"?<AlertTriangle size={12} color="var(--gold)"/>:<CheckCircle2 size={12} color="#C9762E)"/>}
             </div>
             <div className="sup-aird"><strong>AI · {sup.rec.action}:</strong> {sup.rec.detail}{sup.rec.saving&&<span style={{color:"var(--emerald)",fontWeight:"600"}}> Save {sup.rec.saving}</span>}</div>
           </div>
@@ -2533,11 +2540,11 @@ function WhatsAppReport({arabic}){
   return(
     <div className="wa-card" style={{opacity:0.85}}>
       <div className="wa-hd">
-        <div className="wa-icon" style={{background:"rgba(240,180,41,.1)",border:".5px solid rgba(240,180,41,.25)"}}><MessageSquare size={17} color="#f0b429"/></div>
+        <div className="wa-icon" style={{background:"rgba(201,118,46,.1)",border:".5px solid rgba(201,118,46,.25)"}}><MessageSquare size={17} color="#C9762E"/></div>
         <div style={{flex:1}}>
-          <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#f0f4ff",marginBottom:"2px",display:"flex",alignItems:"center",gap:"8px"}}>
+          <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#E8E4DB",marginBottom:"2px",display:"flex",alignItems:"center",gap:"8px"}}>
             {T.title}
-            <span style={{fontSize:"8px",fontWeight:"700",letterSpacing:".08em",textTransform:"uppercase",color:"#f0b429",background:"rgba(240,180,41,.12)",border:".5px solid rgba(240,180,41,.3)",padding:"2px 6px",borderRadius:"4px"}}>{T.label}</span>
+            <span style={{fontSize:"8px",fontWeight:"700",letterSpacing:".08em",textTransform:"uppercase",color:"#C9762E",background:"rgba(201,118,46,.12)",border:".5px solid rgba(201,118,46,.3)",padding:"2px 6px",borderRadius:"4px"}}>{T.label}</span>
           </div>
           <div style={{fontSize:"10px",color:"#a08648"}}>{T.sub}</div>
         </div>
@@ -2557,7 +2564,7 @@ function WhatsAppReport({arabic}){
           <div className="wa-bfoot"><span>Kaffelog</span><span>7:00 AM</span></div>
         </div>
       </div>
-      <div style={{padding:"14px 16px",background:"rgba(240,180,41,.04)",borderTop:".5px solid rgba(240,180,41,.18)",fontSize:"11px",color:"var(--text-2)",lineHeight:"1.55",textAlign:"center"}}>
+      <div style={{padding:"14px 16px",background:"rgba(201,118,46,.04)",borderTop:".5px solid rgba(201,118,46,.18)",fontSize:"11px",color:"var(--text-2)",lineHeight:"1.55",textAlign:"center"}}>
         Automatic 7AM WhatsApp delivery launches once Meta Business API approval is complete.<br/>
         For now, use the in-app notifications.
       </div>
@@ -2587,7 +2594,7 @@ function WhatsAppReport_OLD({arabic}){
     <div className="wa-card">
       <div className="wa-hd">
         <div className="wa-icon"><MessageSquare size={17} color="#25d366"/></div>
-        <div style={{flex:1}}><div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#f0f4ff",marginBottom:"2px"}}>{T.title}</div><div style={{fontSize:"10px",color:"#5a7a62"}}>{T.sub}</div></div>
+        <div style={{flex:1}}><div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#E8E4DB",marginBottom:"2px"}}>{T.title}</div><div style={{fontSize:"10px",color:"#5a7a62"}}>{T.sub}</div></div>
         <button className="wa-copybtn" onClick={handleCopy} title="Copy">{copied?<Check size={12} color="#25d366"/>:<Copy size={12}/>}</button>
       </div>
       <div className="wa-preview">
@@ -2630,7 +2637,7 @@ function ToolsTab({arabic,setArabic}){
       {/* Language toggle */}
       <div className="fade-in">
         <div className="lang-strip">
-          <div className="lang-icon"><Languages size={15} color="#7aadff"/></div>
+          <div className="lang-icon"><Languages size={15} color="#C9762E"/></div>
           <div style={{flex:1}}>
             <div style={{fontSize:"12px",fontWeight:"500",color:"var(--text-1)"}}>{arabic?"العربية مفعّلة":"Arabic Language Mode"}</div>
             <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"1px"}}>{arabic?"واجهة الباريستا تعمل بالعربية":"Barista + Halal tracker switch to Arabic · RTL"}</div>
@@ -2638,9 +2645,9 @@ function ToolsTab({arabic,setArabic}){
           <label className="sw"><input type="checkbox" checked={arabic} onChange={()=>setArabic(a=>!a)}/><span className="sw-track"/></label>
         </div>
         {arabic&&(
-          <div style={{marginTop:"7px",background:"rgba(10,135,84,.06)",border:".5px solid rgba(10,135,84,.14)",borderRadius:"9px",padding:"8px 13px",display:"flex",alignItems:"center",gap:"6px"}}>
-            <Globe size={10} color="#7aadff"/>
-            <span style={{fontSize:"10px",color:"#1a1a18"}}>الوضع العربي مفعّل — الباريستا وتتبع المكونات يعملان بالعربية</span>
+          <div style={{marginTop:"7px",background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.14)",borderRadius:"9px",padding:"8px 13px",display:"flex",alignItems:"center",gap:"6px"}}>
+            <Globe size={10} color="#C9762E"/>
+            <span style={{fontSize:"10px",color:"#1E1B18"}}>الوضع العربي مفعّل — الباريستا وتتبع المكونات يعملان بالعربية</span>
           </div>
         )}
       </div>
@@ -2682,7 +2689,7 @@ function ProModal({onClose}){
         <div style={{width:"36px",height:"4px",borderRadius:"2px",background:"rgba(255,255,255,.15)",margin:"12px auto 0"}}/>
         {submitted?(
           <div style={{display:"flex",flexDirection:"column",alignItems:"center",padding:"36px 24px 48px",textAlign:"center"}}>
-            <div style={{width:"72px",height:"72px",borderRadius:"50%",background:"rgba(0,184,107,.1)",border:"2px solid var(--emerald)",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:"16px",boxShadow:"0 0 22px rgba(0,184,107,.3)"}}><CheckCircle2 size={32} color="var(--emerald)"/></div>
+            <div style={{width:"72px",height:"72px",borderRadius:"50%",background:"rgba(92,114,104,.1)",border:"2px solid var(--emerald)",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:"16px",boxShadow:"0 0 22px rgba(92,114,104,.3)"}}><CheckCircle2 size={32} color="var(--emerald)"/></div>
             <div style={{fontFamily:"var(--font-d)",fontSize:"18px",fontWeight:"800",color:"var(--text-1)",marginBottom:"6px"}}>Renewal Requested!</div>
             <div style={{fontSize:"12px",color:"var(--text-2)",lineHeight:"1.6",marginBottom:"20px"}}>A PRO partner will contact you on WhatsApp within 24 hours. Reference: <strong style={{color:"var(--text-1)"}}>PRO-{Date.now().toString(36).toUpperCase().slice(-5)}</strong></div>
             <button style={{background:"var(--navy-card)",border:".5px solid var(--border)",borderRadius:"var(--r-md)",padding:"11px 26px",color:"var(--text-1)",fontFamily:"var(--font-d)",fontSize:"11px",fontWeight:"600",cursor:"pointer",letterSpacing:".06em",textTransform:"uppercase"}} onClick={onClose}>Done</button>
@@ -2738,7 +2745,7 @@ function useTheme() {
       document.documentElement.setAttribute("data-theme", actual);
       // Update PWA theme-color meta tag so iOS status bar updates
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", actual === "dark" ? "#1a1612" : "#f5f3ee");
+      if (meta) meta.setAttribute("content", actual === "dark" ? "#1a1612" : "#F6F3EC");
     };
 
     applyTheme();
@@ -2767,7 +2774,11 @@ function useTheme() {
 }
 
 // Inline theme toggle component — 3 buttons: Light / Dark / System
+// HIDDEN during the Operations Desk reskin: the app ships light-first per the
+// design brief; the toggle returns once dark mode gets its own design pass.
 function ThemeToggle({ inline = false }) {
+  return null;
+  /* eslint-disable no-unreachable */
   const [preference, setPreference] = useTheme();
 
   const wrapStyle = inline ? {
@@ -2897,32 +2908,32 @@ function InstallPrompt() {
     return (
       <div style={{
         position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999,
-        background: "#1a1a18", borderTop: "1px solid #2d2d2a",
+        background: "#1E1B18", borderTop: "1px solid #2d2d2a",
         padding: "18px 20px 24px", boxShadow: "0 -8px 24px rgba(0,0,0,.18)",
         maxWidth: 480, margin: "0 auto"
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
           <div style={{
             fontFamily: "'Fraunces',Georgia,serif",
-            fontSize: 18, fontWeight: 500, color: "#f5f3ee",
+            fontSize: 18, fontWeight: 500, color: "#F6F3EC",
             letterSpacing: "-0.3px"
           }}>
             Install Kaffelog on iPhone
           </div>
           <button onClick={handleDismiss} style={{
-            background: "transparent", border: "none", color: "#9a958c",
+            background: "transparent", border: "none", color: "#9C9184",
             cursor: "pointer", padding: 0, fontSize: 20, lineHeight: 1
           }}>×</button>
         </div>
-        <ol style={{ paddingLeft: 22, fontSize: 13, color: "#b5b1a8", lineHeight: 1.7, margin: "8px 0 0" }}>
-          <li>Tap the <strong style={{ color: "#f5f3ee", fontWeight: 600 }}>Share</strong> icon at the bottom (square with up-arrow)</li>
-          <li>Scroll down, tap <strong style={{ color: "#f5f3ee", fontWeight: 600 }}>"Add to Home Screen"</strong></li>
-          <li>Tap <strong style={{ color: "#f5f3ee", fontWeight: 600 }}>"Add"</strong> in the top right</li>
+        <ol style={{ paddingLeft: 22, fontSize: 13, color: "#A3998B", lineHeight: 1.7, margin: "8px 0 0" }}>
+          <li>Tap the <strong style={{ color: "#F6F3EC", fontWeight: 600 }}>Share</strong> icon at the bottom (square with up-arrow)</li>
+          <li>Scroll down, tap <strong style={{ color: "#F6F3EC", fontWeight: 600 }}>"Add to Home Screen"</strong></li>
+          <li>Tap <strong style={{ color: "#F6F3EC", fontWeight: 600 }}>"Add"</strong> in the top right</li>
           <li>Open Kaffelog from your home screen like any app</li>
         </ol>
         <button onClick={handleDismiss} style={{
           marginTop: 16, width: "100%", padding: "12px 0",
-          background: "#f5f3ee", color: "#1a1a18",
+          background: "#F6F3EC", color: "#1E1B18",
           border: "none", borderRadius: 4,
           fontSize: 11, fontWeight: 500, cursor: "pointer",
           fontFamily: "'Inter',sans-serif", letterSpacing: ".1em", textTransform: "uppercase"
@@ -2935,20 +2946,20 @@ function InstallPrompt() {
   return (
     <div style={{
       position: "fixed", bottom: 16, left: 16, right: 16, zIndex: 9999,
-      background: "#1a1a18",
-      border: "1px solid #1a1a18",
+      background: "#1E1B18",
+      border: "1px solid #1E1B18",
       borderRadius: 4, padding: "14px 16px",
-      boxShadow: "0 8px 28px rgba(26,26,24,.18)",
+      boxShadow: "0 8px 28px rgba(30,27,24,.18)",
       display: "flex", alignItems: "center", gap: 12,
       maxWidth: 480, margin: "0 auto"
     }}>
       <div style={{
         width: 38, height: 38, borderRadius: 4,
-        background: "rgba(245,243,238,.1)",
+        background: "rgba(240,235,225,.1)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-        border: "1px solid rgba(245,243,238,.18)"
+        border: "1px solid rgba(240,235,225,.18)"
       }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5f3ee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F6F3EC" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
           <line x1="12" y1="18" x2="12.01" y2="18"/>
         </svg>
@@ -2956,17 +2967,17 @@ function InstallPrompt() {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
           fontFamily: "'Fraunces',Georgia,serif",
-          fontSize: 15, fontWeight: 500, color: "#f5f3ee",
+          fontSize: 15, fontWeight: 500, color: "#F6F3EC",
           marginBottom: 2, letterSpacing: "-0.2px"
         }}>
           Install Kaffelog
         </div>
-        <div style={{ fontSize: 11, color: "#b5b1a8", lineHeight: 1.4 }}>
+        <div style={{ fontSize: 11, color: "#A3998B", lineHeight: 1.4 }}>
           Add to home screen for instant access &amp; 7am reminders
         </div>
       </div>
       <button onClick={handleInstall} style={{
-        background: "#f5f3ee", color: "#1a1a18",
+        background: "#F6F3EC", color: "#1E1B18",
         border: "none", borderRadius: 4,
         padding: "9px 14px", fontSize: 11, fontWeight: 500,
         letterSpacing: ".1em", textTransform: "uppercase",
@@ -2974,7 +2985,7 @@ function InstallPrompt() {
       }}>Install</button>
       <button onClick={handleDismiss} style={{
         background: "transparent", border: "none",
-        color: "rgba(245,243,238,.55)", cursor: "pointer",
+        color: "rgba(240,235,225,.55)", cursor: "pointer",
         padding: 0, fontSize: 18, lineHeight: 1, flexShrink: 0
       }}>×</button>
     </div>
@@ -3101,7 +3112,7 @@ function StockTracker({ stock, setStock, compact = false }) {
         </div>
         {stock.some(s => stockStatus(s) === "critical") && (
           <div style={{
-            background: "rgba(255,80,80,.12)", color: "#ff7070",
+            background: "rgba(176,58,46,.12)", color: "#C75448",
             padding: "4px 9px", borderRadius: 6, fontSize: 10,
             fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase",
             display: "flex", alignItems: "center", gap: 5
@@ -3114,15 +3125,15 @@ function StockTracker({ stock, setStock, compact = false }) {
       {stock.map((item) => {
         const status = stockStatus(item);
         const statusColor =
-          status === "critical" ? "#ff5050" :
-          status === "low"      ? "#f0b429" : "#00b86b";
+          status === "critical" ? "#B03A2E" :
+          status === "low"      ? "#C9762E" : "#5C7268";
         const pctFull = Math.min(100, (item.current / (item.threshold * 3)) * 100);
 
         return (
           <div key={item.id} style={{
             background: "rgba(255,255,255,.025)", borderRadius: 10,
             padding: "10px 12px", marginBottom: 6,
-            border: `.5px solid ${status === "critical" ? "rgba(255,80,80,.3)" : "var(--border)"}`,
+            border: `.5px solid ${status === "critical" ? "rgba(176,58,46,.3)" : "var(--border)"}`,
             transition: "all .2s"
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -3169,9 +3180,9 @@ function StockTracker({ stock, setStock, compact = false }) {
                 }}>
                   <div style={{ fontSize: 10, color: "var(--text-3)" }}>
                     {status === "critical"
-                      ? <span style={{ color: "#ff7070", fontWeight: 600 }}>⚠ Below safe stock — restock now</span>
+                      ? <span style={{ color: "#C75448", fontWeight: 600 }}>⚠ Below safe stock — restock now</span>
                       : status === "low"
-                      ? <span style={{ color: "#f0b429", fontWeight: 600 }}>↓ Below {item.threshold}{item.unit} threshold</span>
+                      ? <span style={{ color: "#C9762E", fontWeight: 600 }}>↓ Below {item.threshold}{item.unit} threshold</span>
                       : `Threshold: ${item.threshold}${item.unit}`}
                   </div>
                   {addingTo === item.id ? (
@@ -3184,7 +3195,7 @@ function StockTracker({ stock, setStock, compact = false }) {
                         onChange={e => setAddAmount(e.target.value)}
                         onKeyDown={e => e.key === "Enter" && handleAddStock(item.id)}
                         style={{
-                          width: 60, padding: "4px 8px", background: "#07111e",
+                          width: 60, padding: "4px 8px", background: "#1E1B18",
                           color: "var(--text-1)", border: ".5px solid var(--blue)",
                           borderRadius: 6, fontSize: 12, outline: "none",
                           fontFamily: "var(--font-b)", textAlign: "center"
@@ -3214,8 +3225,8 @@ function StockTracker({ stock, setStock, compact = false }) {
                     <button
                       onClick={() => { setAddingTo(item.id); setAddAmount(""); }}
                       style={{
-                        background: "rgba(10,135,84,.12)", color: "#1a1a18",
-                        border: ".5px solid rgba(10,135,84,.3)", borderRadius: 6,
+                        background: "rgba(30,27,24,.12)", color: "#1E1B18",
+                        border: ".5px solid rgba(30,27,24,.3)", borderRadius: 6,
                         padding: "4px 10px", fontSize: 10, fontWeight: 700,
                         letterSpacing: ".06em", textTransform: "uppercase",
                         cursor: "pointer", fontFamily: "var(--font-d)",
@@ -3235,10 +3246,10 @@ function StockTracker({ stock, setStock, compact = false }) {
       {!compact && (
         <div style={{
           marginTop: 10, padding: "8px 11px",
-          background: "rgba(10,135,84,.06)", border: ".5px solid rgba(10,135,84,.18)",
+          background: "rgba(30,27,24,.06)", border: ".5px solid rgba(30,27,24,.18)",
           borderRadius: 8, display: "flex", gap: 7, alignItems: "flex-start"
         }}>
-          <Info size={11} color="#7aadff" style={{ flexShrink: 0, marginTop: 1 }}/>
+          <Info size={11} color="#C9762E" style={{ flexShrink: 0, marginTop: 1 }}/>
           <div style={{ fontSize: 10, color: "var(--text-2)", lineHeight: 1.5 }}>
             Stock auto-decreases when you log yesterday's sales. The threshold line shows where we'll alert you.
           </div>
@@ -3531,8 +3542,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
         {/* CSV UPLOAD ROW */}
         <div style={{
           marginBottom: 12, padding: "10px 12px",
-          background: csvImport ? "rgba(0,184,107,.06)" : "rgba(10,135,84,.04)",
-          border: ".5px dashed " + (csvImport ? "rgba(0,184,107,.35)" : "rgba(10,135,84,.3)"),
+          background: csvImport ? "rgba(92,114,104,.06)" : "rgba(30,27,24,.04)",
+          border: ".5px dashed " + (csvImport ? "rgba(92,114,104,.35)" : "rgba(30,27,24,.3)"),
           borderRadius: 10
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -3542,7 +3553,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
               display: "flex", alignItems: "center", justifyContent: "center",
               flexShrink: 0
             }}>
-              <Package size={16} color={csvImport ? "var(--emerald)" : "#7aadff"}/>
+              <Package size={16} color={csvImport ? "var(--emerald)" : "#C9762E"}/>
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               {csvImport ? (
@@ -3588,7 +3599,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
           {csvError && (
             <div style={{
               marginTop: 9, padding: "7px 10px",
-              background: "rgba(255,80,80,.08)", border: ".5px solid rgba(255,80,80,.25)",
+              background: "rgba(176,58,46,.08)", border: ".5px solid rgba(176,58,46,.25)",
               borderRadius: 7, fontSize: 10, color: "#ff7a7a", lineHeight: 1.45
             }}>
               {csvError}
@@ -3598,10 +3609,10 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
           {csvImport && csvImport.unmatched.length > 0 && (
             <div style={{
               marginTop: 9, padding: "7px 10px",
-              background: "rgba(240,180,41,.06)", border: ".5px solid rgba(240,180,41,.2)",
+              background: "rgba(201,118,46,.06)", border: ".5px solid rgba(201,118,46,.2)",
               borderRadius: 7, fontSize: 10, color: "var(--text-2)", lineHeight: 1.5
             }}>
-              <strong style={{ color: "#f0b429" }}>{csvImport.unmatched.length} item{csvImport.unmatched.length === 1 ? "" : "s"} didn't match your menu:</strong> {csvImport.unmatched.slice(0, 3).map(u => u.item).join(", ")}{csvImport.unmatched.length > 3 ? "…" : ""}
+              <strong style={{ color: "#C9762E" }}>{csvImport.unmatched.length} item{csvImport.unmatched.length === 1 ? "" : "s"} didn't match your menu:</strong> {csvImport.unmatched.slice(0, 3).map(u => u.item).join(", ")}{csvImport.unmatched.length > 3 ? "…" : ""}
               <div style={{ marginTop: 4, color: "var(--text-3)" }}>
                 Add them via "+ Add Your Own Item" below, then re-upload.
               </div>
@@ -3620,7 +3631,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             <div key={item.id} style={{
               background: "rgba(255,255,255,.025)",
               borderRadius: 10,
-              border: ".5px solid " + (isExpanded ? "rgba(10,135,84,.35)" : "var(--border)"),
+              border: ".5px solid " + (isExpanded ? "rgba(30,27,24,.35)" : "var(--border)"),
               marginBottom: 7,
               overflow: "hidden",
               transition: "border-color .2s"
@@ -3633,8 +3644,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                     <span style={{ fontSize: 13, color: "var(--text-1)", fontWeight: 500 }}>{item.name}</span>
                     {recipe.cup_size && recipe.cup_size !== "-" && (
                       <span style={{
-                        fontSize: 9, color: "#1a1a18",
-                        background: "rgba(10,135,84,.12)", padding: "2px 6px",
+                        fontSize: 9, color: "#1E1B18",
+                        background: "rgba(30,27,24,.12)", padding: "2px 6px",
                         borderRadius: 4, fontWeight: 600
                       }}>{recipe.cup_size}</span>
                     )}
@@ -3674,7 +3685,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   value={sales[item.id] || ""}
                   onChange={(e) => updateSale(item.id, e.target.value)}
                   style={{
-                    width: 64, padding: "8px 10px", background: "#07111e",
+                    width: 64, padding: "8px 10px", background: "#1E1B18",
                     color: "var(--text-1)", border: ".5px solid var(--border)",
                     borderRadius: 8, fontSize: 15, fontWeight: 600,
                     textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
@@ -3685,13 +3696,13 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
               {/* Expandable ingredient editor */}
               {isExpanded && (
                 <div style={{
-                  background: "rgba(10,135,84,.04)",
-                  borderTop: ".5px solid rgba(10,135,84,.2)",
+                  background: "rgba(30,27,24,.04)",
+                  borderTop: ".5px solid rgba(30,27,24,.2)",
                   padding: "12px 12px 10px"
                 }}>
                   <div style={{
                     fontSize: 10, fontWeight: 600, letterSpacing: ".06em",
-                    textTransform: "uppercase", color: "#1a1a18", marginBottom: 8,
+                    textTransform: "uppercase", color: "#1E1B18", marginBottom: 8,
                     display: "flex", alignItems: "center", gap: 6
                   }}>
                     <Sparkles size={10}/>Recipe — what goes in each {item.name.toLowerCase()}
@@ -3731,7 +3742,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         placeholder="Ingredient"
                         style={{
                           flex: 1, padding: "6px 9px", fontSize: 12,
-                          background: "#07111e", color: "var(--text-1)",
+                          background: "#1E1B18", color: "var(--text-1)",
                           border: ".5px solid var(--border)", borderRadius: 6,
                           outline: "none", fontFamily: "var(--font-b)", minWidth: 0
                         }}
@@ -3743,7 +3754,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         placeholder="0"
                         style={{
                           width: 60, padding: "6px 8px", fontSize: 12,
-                          background: "#07111e", color: "var(--text-1)",
+                          background: "#1E1B18", color: "var(--text-1)",
                           border: ".5px solid var(--border)", borderRadius: 6,
                           textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
                         }}
@@ -3753,7 +3764,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         onChange={(e) => updateIngredient(item.id, idx, "unit", e.target.value)}
                         style={{
                           width: 56, padding: "6px 6px", fontSize: 11,
-                          background: "#07111e", color: "var(--text-1)",
+                          background: "#1E1B18", color: "var(--text-1)",
                           border: ".5px solid var(--border)", borderRadius: 6,
                           outline: "none", fontFamily: "var(--font-b)",
                           appearance: "none", cursor: "pointer"
@@ -3785,8 +3796,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                     onClick={() => addIngredientToItem(item.id)}
                     style={{
                       width: "100%", marginTop: 8, padding: "7px 0",
-                      background: "transparent", color: "#1a1a18",
-                      border: ".5px dashed rgba(10,135,84,.4)",
+                      background: "transparent", color: "#1E1B18",
+                      border: ".5px dashed rgba(30,27,24,.4)",
                       borderRadius: 6, fontSize: 11, fontWeight: 600,
                       cursor: "pointer", fontFamily: "var(--font-d)",
                       letterSpacing: ".06em", textTransform: "uppercase"
@@ -3811,8 +3822,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             onClick={() => setShowAddItem(true)}
             style={{
               width: "100%", padding: "10px 12px",
-              background: "rgba(10,135,84,.06)", color: "#1a1a18",
-              border: ".5px dashed rgba(10,135,84,.4)", borderRadius: 10,
+              background: "rgba(30,27,24,.06)", color: "#1E1B18",
+              border: ".5px dashed rgba(30,27,24,.4)", borderRadius: 10,
               fontSize: 12, fontWeight: 600, cursor: "pointer",
               fontFamily: "var(--font-d)", letterSpacing: ".06em",
               textTransform: "uppercase", marginTop: 4
@@ -3820,10 +3831,10 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
           >+ Add Your Own Item (mocha, matcha, sandwich…)</button>
         ) : (
           <div style={{
-            background: "rgba(10,135,84,.08)", border: ".5px solid rgba(10,135,84,.3)",
+            background: "rgba(30,27,24,.08)", border: ".5px solid rgba(30,27,24,.3)",
             borderRadius: 10, padding: "11px 12px", marginTop: 4
           }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#1a1a18", marginBottom: 8, letterSpacing: ".06em", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#1E1B18", marginBottom: 8, letterSpacing: ".06em", textTransform: "uppercase" }}>
               New menu item
             </div>
             <div style={{ display: "flex", gap: 7, marginBottom: 7 }}>
@@ -3832,14 +3843,14 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                 placeholder="Icon (emoji)"
                 value={newItem.icon}
                 onChange={e => setNewItem({ ...newItem, icon: e.target.value.slice(0, 2) })}
-                style={{ width: 60, padding: "8px 10px", background: "#07111e", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 14, textAlign: "center", outline: "none" }}
+                style={{ width: 60, padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 14, textAlign: "center", outline: "none" }}
               />
               <input
                 type="text"
                 placeholder="Item name (e.g. Mocha)"
                 value={newItem.name}
                 onChange={e => setNewItem({ ...newItem, name: e.target.value })}
-                style={{ flex: 1, padding: "8px 10px", background: "#07111e", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, outline: "none", fontFamily: "var(--font-b)" }}
+                style={{ flex: 1, padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, outline: "none", fontFamily: "var(--font-b)" }}
               />
             </div>
             <div style={{ display: "flex", gap: 7, marginBottom: 9 }}>
@@ -3850,7 +3861,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   placeholder="0"
                   value={newItem.milk_ml || ""}
                   onChange={e => setNewItem({ ...newItem, milk_ml: parseInt(e.target.value) || 0 })}
-                  style={{ width: "100%", padding: "8px 10px", background: "#07111e", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
+                  style={{ width: "100%", padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -3860,7 +3871,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   placeholder="15"
                   value={newItem.cost_aed || ""}
                   onChange={e => setNewItem({ ...newItem, cost_aed: parseInt(e.target.value) || 0 })}
-                  style={{ width: "100%", padding: "8px 10px", background: "#07111e", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
+                  style={{ width: "100%", padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
                 />
               </div>
             </div>
@@ -3894,7 +3905,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
         {/* Standard order input */}
         <div style={{
           marginTop: 12, padding: "10px 12px",
-          background: "rgba(10,135,84,.06)", border: ".5px solid rgba(10,135,84,.2)",
+          background: "rgba(30,27,24,.06)", border: ".5px solid rgba(30,27,24,.2)",
           borderRadius: 10, display: "flex", alignItems: "center", gap: 10
         }}>
           <span style={{ fontSize: 18 }}>📦</span>
@@ -3911,7 +3922,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             value={standardOrder}
             onChange={(e) => setStandardOrder(Math.max(0, parseInt(e.target.value) || 0))}
             style={{
-              width: 64, padding: "8px 10px", background: "#07111e",
+              width: 64, padding: "8px 10px", background: "#1E1B18",
               color: "var(--text-1)", border: ".5px solid var(--border)",
               borderRadius: 8, fontSize: 15, fontWeight: 600,
               textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
@@ -3933,7 +3944,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             cursor: canCalculate ? "pointer" : "not-allowed",
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             transition: "all .2s",
-            boxShadow: canCalculate ? "0 4px 16px rgba(0,184,107,.3)" : "none"
+            boxShadow: canCalculate ? "0 4px 16px rgba(92,114,104,.3)" : "none"
           }}
         >
           <Sparkles size={14} />
@@ -3944,8 +3955,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
       {/* CALCULATION RESULT */}
       {calc && (
         <div className="fade-in" style={{
-          background: "linear-gradient(135deg, rgba(0,184,107,.12), rgba(0,184,107,.04))",
-          border: ".5px solid rgba(0,184,107,.3)", borderRadius: 16,
+          background: "linear-gradient(135deg, rgba(92,114,104,.12), rgba(92,114,104,.04))",
+          border: ".5px solid rgba(92,114,104,.3)", borderRadius: 16,
           padding: "18px 16px", marginBottom: 14
         }}>
           <div style={{
@@ -4019,7 +4030,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             onClick={handleSendWhatsApp}
             style={{
               width: "100%", padding: 14,
-              background: whatsappOpened ? "rgba(0,184,107,.2)" : "#25D366",
+              background: whatsappOpened ? "rgba(92,114,104,.2)" : "#25D366",
               color: whatsappOpened ? "var(--emerald)" : "white",
               border: "none", borderRadius: 12,
               fontFamily: "var(--font-d)", fontSize: 12, fontWeight: 700,
@@ -4049,10 +4060,10 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
       {/* HELPER TIP */}
       {!calc && (
         <div style={{
-          background: "rgba(10,135,84,.06)", border: ".5px solid rgba(10,135,84,.18)",
+          background: "rgba(30,27,24,.06)", border: ".5px solid rgba(30,27,24,.18)",
           borderRadius: 12, padding: "11px 13px", display: "flex", gap: 8
         }}>
-          <Info size={13} color="#7aadff" style={{ flexShrink: 0, marginTop: 1 }} />
+          <Info size={13} color="#C9762E" style={{ flexShrink: 0, marginTop: 1 }} />
           <div style={{ fontSize: 11, color: "var(--text-2)", lineHeight: 1.5 }}>
             <strong style={{ color: "var(--text-1)" }}>Why this works:</strong> Yesterday's sales × your recipes = exact milk used. Add 10% steam loss + 5L safety = today's order. No guessing.
           </div>
@@ -4089,7 +4100,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
     const timeStr = ts.toLocaleTimeString("en-AE", { hour:"2-digit", minute:"2-digit", second:"2-digit" });
 
     const checklistRows = Object.entries(log.checklist || {})
-      .map(([k, v]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;">${k.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:${v?"#00b86b":"#cc0000"};font-weight:600;">${v ? "✓ COMPLETED" : "✗ NOT DONE"}</td></tr>`)
+      .map(([k, v]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;">${k.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd;text-align:right;color:${v?"#5C7268":"#cc0000"};font-weight:600;">${v ? "✓ COMPLETED" : "✗ NOT DONE"}</td></tr>`)
       .join("");
 
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Municipality Log — ${log.ref_number}</title></head>
@@ -4104,8 +4115,8 @@ function LogsTab({ cafeName = "Your Cafe" }) {
     <tr><td style="padding:6px 0;color:#666;">Date</td><td style="padding:6px 0;">${dateStr}</td></tr>
     <tr><td style="padding:6px 0;color:#666;">Time</td><td style="padding:6px 0;">${timeStr}</td></tr>
     <tr><td style="padding:6px 0;color:#666;">Logged By</td><td style="padding:6px 0;font-weight:600;">${log.staff_name}</td></tr>
-    <tr><td style="padding:6px 0;color:#666;">Fridge Temperature</td><td style="padding:6px 0;color:${log.temp_compliant?"#00b86b":"#cc0000"};font-weight:600;">${log.fridge_temp_c}°C ${log.temp_compliant?"✓ Compliant":"✗ Above 4°C limit"}</td></tr>
-    <tr><td style="padding:6px 0;color:#666;">Status</td><td style="padding:6px 0;color:${log.all_clear?"#00b86b":"#f0b429"};font-weight:600;">${log.all_clear ? "ALL CLEAR — Inspector Ready" : "PARTIAL COMPLIANCE"}</td></tr>
+    <tr><td style="padding:6px 0;color:#666;">Fridge Temperature</td><td style="padding:6px 0;color:${log.temp_compliant?"#5C7268":"#cc0000"};font-weight:600;">${log.fridge_temp_c}°C ${log.temp_compliant?"✓ Compliant":"✗ Above 4°C limit"}</td></tr>
+    <tr><td style="padding:6px 0;color:#666;">Status</td><td style="padding:6px 0;color:${log.all_clear?"#5C7268":"#C9762E"};font-weight:600;">${log.all_clear ? "ALL CLEAR — Inspector Ready" : "PARTIAL COMPLIANCE"}</td></tr>
   </table>
 
   <h2 style="font-size:16px;margin:24px 0 12px;border-bottom:1px solid #ddd;padding-bottom:6px;">Inspection Checklist</h2>
@@ -4144,9 +4155,9 @@ function LogsTab({ cafeName = "Your Cafe" }) {
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;">${ts.toLocaleDateString("en-AE")}</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;">${ts.toLocaleTimeString("en-AE",{hour:"2-digit",minute:"2-digit"})}</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;font-weight:600;">${log.staff_name}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.temp_compliant?"#00b86b":"#cc0000"};">${log.fridge_temp_c}°C</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.temp_compliant?"#5C7268":"#cc0000"};">${log.fridge_temp_c}°C</td>
         <td style="padding:8px 10px;border-bottom:1px solid #ddd;text-align:center;">${log.tasks_completed}/${log.tasks_total}</td>
-        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.all_clear?"#00b86b":"#f0b429"};font-weight:600;">${log.all_clear ? "Clear" : "Partial"}</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #ddd;color:${log.all_clear?"#5C7268":"#C9762E"};font-weight:600;">${log.all_clear ? "Clear" : "Partial"}</td>
       </tr>`;
     }).join("");
 
@@ -4222,7 +4233,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
               letterSpacing:".06em",textTransform:"uppercase",
               cursor: filteredLogs.length > 0 ? "pointer" : "not-allowed",
               fontFamily:"var(--font-d)",display:"flex",alignItems:"center",gap:6,
-              boxShadow: filteredLogs.length > 0 ? "0 3px 12px rgba(0,184,107,.25)" : "none"
+              boxShadow: filteredLogs.length > 0 ? "0 3px 12px rgba(92,114,104,.25)" : "none"
             }}
           >
             <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4M2 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -4281,7 +4292,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
           return (
             <div key={log.id} style={{
               background:"var(--navy-card)",borderRadius:12,padding:"12px 14px",
-              border:".5px solid " + (log.all_clear ? "rgba(0,184,107,.2)" : "var(--border)"),
+              border:".5px solid " + (log.all_clear ? "rgba(92,114,104,.2)" : "var(--border)"),
               marginBottom:8
             }}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
@@ -4302,8 +4313,8 @@ function LogsTab({ cafeName = "Your Cafe" }) {
                   onClick={() => downloadLog(log)}
                   title="Download this log"
                   style={{
-                    background:"rgba(10,135,84,.1)",color:"#1a1a18",
-                    border:".5px solid rgba(10,135,84,.3)",borderRadius:7,
+                    background:"rgba(30,27,24,.1)",color:"#1E1B18",
+                    border:".5px solid rgba(30,27,24,.3)",borderRadius:7,
                     padding:"6px 10px",fontSize:10,cursor:"pointer",
                     fontFamily:"var(--font-d)",fontWeight:600,letterSpacing:".06em",
                     textTransform:"uppercase",display:"flex",alignItems:"center",gap:5,flexShrink:0
@@ -4340,11 +4351,11 @@ function LogsTab({ cafeName = "Your Cafe" }) {
       {/* Info footer */}
       <div style={{
         marginTop:14,padding:"10px 12px",
-        background:"rgba(10,135,84,.06)",border:".5px solid rgba(10,135,84,.18)",
+        background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.18)",
         borderRadius:10,fontSize:10,color:"var(--text-2)",lineHeight:1.5,
         display:"flex",gap:8,alignItems:"flex-start"
       }}>
-        <Info size={11} color="#7aadff" style={{flexShrink:0,marginTop:1}}/>
+        <Info size={11} color="#C9762E" style={{flexShrink:0,marginTop:1}}/>
         <div>
           Logs are timestamped, stored on AWS Bahrain, and downloadable as inspector-ready reports.
           When Dubai Municipality visits — tap Download All, hand them the file.
@@ -4362,8 +4373,8 @@ function LandingPage({ onGoLogin, onGoSignup }) {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#f5f3ee",
-      color: "#1a1a18",
+      background: "#F6F3EC",
+      color: "#1E1B18",
       fontFamily: "'Inter', 'DM Sans', -apple-system, sans-serif",
       WebkitFontSmoothing: "antialiased"
     }}>
@@ -4372,31 +4383,31 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "20px 24px",
         maxWidth: "1100px", margin: "0 auto",
-        borderBottom: "1px solid #d8d3c8"
+        borderBottom: "1px solid #DAD5C8"
       }}>
         <div>
           <div style={{
             fontFamily: "'Fraunces','Playfair Display',Georgia,serif",
-            fontSize: "22px", fontWeight: 500, color: "#1a1a18",
+            fontSize: "22px", fontWeight: 500, color: "#1E1B18",
             letterSpacing: "-0.3px", lineHeight: 1
           }}>Kaffelog</div>
           <div style={{
-            fontSize: "9.5px", color: "#6b6863",
+            fontSize: "9.5px", color: "#6E675E",
             textTransform: "uppercase", letterSpacing: "0.12em",
             marginTop: "4px", fontWeight: 500
           }}>Operations Software · UAE</div>
         </div>
         <div style={{ display: "flex", gap: "10px" }}>
           <button onClick={onGoLogin} style={{
-            background: "transparent", color: "#1a1a18",
-            border: "1px solid #1a1a18", borderRadius: "4px",
+            background: "transparent", color: "#1E1B18",
+            border: "1px solid #1E1B18", borderRadius: "4px",
             padding: "9px 16px", fontSize: "11px", fontWeight: 500,
             cursor: "pointer", letterSpacing: "0.08em",
             textTransform: "uppercase", fontFamily: "inherit"
           }}>Sign in</button>
           <button onClick={onGoSignup} style={{
-            background: "#1a1a18", color: "#f5f3ee",
-            border: "1px solid #1a1a18", borderRadius: "4px",
+            background: "#1E1B18", color: "#F6F3EC",
+            border: "1px solid #1E1B18", borderRadius: "4px",
             padding: "9px 16px", fontSize: "11px", fontWeight: 500,
             cursor: "pointer", letterSpacing: "0.08em",
             textTransform: "uppercase", fontFamily: "inherit"
@@ -4412,7 +4423,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         <div style={{ maxWidth: "780px" }}>
           <div style={{
             fontSize: "10px", fontWeight: 500,
-            color: "#6b6863", textTransform: "uppercase",
+            color: "#6E675E", textTransform: "uppercase",
             letterSpacing: "0.15em", marginBottom: "24px"
           }}>
             Built for UAE Cafés · 14-Day Free Trial
@@ -4425,7 +4436,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             letterSpacing: "-1.5px",
             lineHeight: 1.02,
             marginBottom: "28px",
-            color: "#1a1a18"
+            color: "#1E1B18"
           }}>
             Daily operations<br/>
             for cafés that<br/>
@@ -4433,7 +4444,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           </h1>
 
           <p style={{
-            fontSize: "17px", color: "#3a3a36",
+            fontSize: "17px", color: "#332E28",
             lineHeight: "1.55", maxWidth: "560px",
             marginBottom: "40px"
           }}>
@@ -4442,21 +4453,21 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
             <button onClick={onGoSignup} style={{
-              background: "#1a1a18", color: "#f5f3ee",
-              border: "1px solid #1a1a18", borderRadius: "4px",
+              background: "#1E1B18", color: "#F6F3EC",
+              border: "1px solid #1E1B18", borderRadius: "4px",
               padding: "14px 28px", fontSize: "12px", fontWeight: 500,
               cursor: "pointer", letterSpacing: "0.1em",
               textTransform: "uppercase", fontFamily: "inherit"
             }}>Start free trial</button>
             <button onClick={onGoLogin} style={{
-              background: "transparent", color: "#1a1a18",
-              border: "1px solid #d8d3c8", borderRadius: "4px",
+              background: "transparent", color: "#1E1B18",
+              border: "1px solid #DAD5C8", borderRadius: "4px",
               padding: "14px 24px", fontSize: "12px", fontWeight: 500,
               cursor: "pointer", letterSpacing: "0.1em",
               textTransform: "uppercase", fontFamily: "inherit"
             }}>Sign in →</button>
             <div style={{
-              fontSize: "11px", color: "#6b6863",
+              fontSize: "11px", color: "#6E675E",
               marginLeft: "8px", lineHeight: 1.4
             }}>No card · Cancel anytime</div>
           </div>
@@ -4465,8 +4476,8 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
       {/* DIVIDER WITH STATS */}
       <section style={{
-        borderTop: "1px solid #d8d3c8",
-        borderBottom: "1px solid #d8d3c8",
+        borderTop: "1px solid #DAD5C8",
+        borderBottom: "1px solid #DAD5C8",
         background: "#ebe7df"
       }}>
         <div style={{
@@ -4474,48 +4485,48 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))"
         }}>
-          <div style={{ padding: "28px 24px", borderRight: "1px solid #d8d3c8" }}>
+          <div style={{ padding: "28px 24px", borderRight: "1px solid #DAD5C8" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6b6863",
+              fontSize: "9.5px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Avg waste per day</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1a1a18"
+              letterSpacing: "-0.5px", color: "#1E1B18"
             }}>AED 60–90</div>
-            <div style={{ fontSize: "11px", color: "#6b6863", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
               On milk alone, median UAE café
             </div>
           </div>
-          <div style={{ padding: "28px 24px", borderRight: "1px solid #d8d3c8" }}>
+          <div style={{ padding: "28px 24px", borderRight: "1px solid #DAD5C8" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6b6863",
+              fontSize: "9.5px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Municipality fine range</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1a1a18"
+              letterSpacing: "-0.5px", color: "#1E1B18"
             }}>AED 5K–50K</div>
-            <div style={{ fontSize: "11px", color: "#6b6863", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
               Per missed/lost record
             </div>
           </div>
           <div style={{ padding: "28px 24px" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6b6863",
+              fontSize: "9.5px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Daily admin time</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1a1a18"
+              letterSpacing: "-0.5px", color: "#1E1B18"
             }}>20 sec</div>
-            <div style={{ fontSize: "11px", color: "#6b6863", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
               With Kaffelog. From the phone.
             </div>
           </div>
@@ -4528,7 +4539,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         padding: "80px 24px"
       }}>
         <div style={{
-          fontSize: "10px", color: "#6b6863",
+          fontSize: "10px", color: "#6E675E",
           textTransform: "uppercase", letterSpacing: "0.15em",
           fontWeight: 500, marginBottom: "16px"
         }}>What it actually does</div>
@@ -4538,7 +4549,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           fontSize: "clamp(28px, 4vw, 40px)",
           fontWeight: 500, letterSpacing: "-0.8px",
           lineHeight: 1.1, marginBottom: "56px",
-          color: "#1a1a18", maxWidth: "640px"
+          color: "#1E1B18", maxWidth: "640px"
         }}>
           Three things every UAE café fights every week. <em style={{color: "#2d7d4e"}}>Solved.</em>
         </h2>
@@ -4547,15 +4558,15 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
           gap: "0",
-          borderTop: "1px solid #d8d3c8",
-          borderBottom: "1px solid #d8d3c8"
+          borderTop: "1px solid #DAD5C8",
+          borderBottom: "1px solid #DAD5C8"
         }}>
           <div style={{
             padding: "32px 28px",
-            borderRight: "1px solid #d8d3c8"
+            borderRight: "1px solid #DAD5C8"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6b6863",
+              fontSize: "10px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>01 · Daily orders</div>
@@ -4563,10 +4574,10 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1a1a18"
+              marginBottom: "12px", color: "#1E1B18"
             }}>Stop guessing the milk order.</h3>
             <p style={{
-              fontSize: "14px", color: "#3a3a36",
+              fontSize: "14px", color: "#332E28",
               lineHeight: 1.55
             }}>
               Type yesterday's sales (or upload your Foodics CSV). App calculates today's exact order based on your actual pattern. Most cafés save 60-90 AED a day.
@@ -4574,10 +4585,10 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           </div>
           <div style={{
             padding: "32px 28px",
-            borderRight: "1px solid #d8d3c8"
+            borderRight: "1px solid #DAD5C8"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6b6863",
+              fontSize: "10px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>02 · Municipality</div>
@@ -4585,10 +4596,10 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1a1a18"
+              marginBottom: "12px", color: "#1E1B18"
             }}>Inspector walks in. You tap once.</h3>
             <p style={{
-              fontSize: "14px", color: "#3a3a36",
+              fontSize: "14px", color: "#332E28",
               lineHeight: 1.55
             }}>
               90-second daily checklist. Every required log timestamped and downloadable as a single PDF, ready in 30 days of history at any moment.
@@ -4598,7 +4609,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             padding: "32px 28px"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6b6863",
+              fontSize: "10px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>03 · SafeVault</div>
@@ -4606,10 +4617,10 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1a1a18"
+              marginBottom: "12px", color: "#1E1B18"
             }}>Never miss a renewal.</h3>
             <p style={{
-              fontSize: "14px", color: "#3a3a36",
+              fontSize: "14px", color: "#332E28",
               lineHeight: 1.55
             }}>
               Trade license, staff health cards, supplier contracts. Every expiry tracked with 30-day countdowns. The AED 5,000 fines that catch most cafés off-guard, prevented.
@@ -4620,12 +4631,12 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
       {/* PRICING */}
       <section style={{
-        background: "#1a1a18", color: "#f5f3ee",
+        background: "#1E1B18", color: "#F6F3EC",
         padding: "80px 24px"
       }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{
-            fontSize: "10px", color: "#9a958c",
+            fontSize: "10px", color: "#9C9184",
             textTransform: "uppercase", letterSpacing: "0.15em",
             fontWeight: 500, marginBottom: "16px"
           }}>Pricing</div>
@@ -4635,7 +4646,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             fontSize: "clamp(28px, 4vw, 42px)",
             fontWeight: 500, letterSpacing: "-0.8px",
             lineHeight: 1.1, marginBottom: "56px",
-            color: "#f5f3ee", maxWidth: "640px"
+            color: "#F6F3EC", maxWidth: "640px"
           }}>
             Less than one pastry bag that spoiled.
           </h2>
@@ -4644,32 +4655,32 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: "1px",
-            background: "#3a3a36",
-            border: "1px solid #3a3a36"
+            background: "#332E28",
+            border: "1px solid #332E28"
           }}>
             {/* Starter */}
             <div style={{
-              background: "#1a1a18", padding: "32px 28px"
+              background: "#1E1B18", padding: "32px 28px"
             }}>
               <div style={{
-                fontSize: "10px", color: "#9a958c",
+                fontSize: "10px", color: "#9C9184",
                 textTransform: "uppercase", letterSpacing: "0.12em",
                 fontWeight: 500, marginBottom: "16px"
               }}>Starter</div>
               <div style={{
                 fontFamily: "'Fraunces',Georgia,serif",
                 fontSize: "40px", fontWeight: 500,
-                letterSpacing: "-1px", color: "#f5f3ee",
+                letterSpacing: "-1px", color: "#F6F3EC",
                 marginBottom: "4px"
               }}>AED 99
-                <span style={{ fontSize: "14px", color: "#9a958c", fontWeight: 400 }}> /mo</span>
+                <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
               </div>
-              <div style={{ fontSize: "13px", color: "#b5b1a8", lineHeight: 1.5, marginBottom: "24px" }}>
+              <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                 Compliance only. Logs, SafeVault, audit downloads. Stops the AED 5,000+ fines.
               </div>
               <button onClick={onGoSignup} style={{
-                background: "transparent", color: "#f5f3ee",
-                border: "1px solid #6b6863", borderRadius: "4px",
+                background: "transparent", color: "#F6F3EC",
+                border: "1px solid #6E675E", borderRadius: "4px",
                 padding: "10px 18px", fontSize: "11px", fontWeight: 500,
                 cursor: "pointer", letterSpacing: "0.1em",
                 textTransform: "uppercase", fontFamily: "inherit",
@@ -4684,31 +4695,31 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             }}>
               <div style={{
                 position: "absolute", top: "0", left: "0", right: "0",
-                background: "#2d7d4e", color: "#f5f3ee",
+                background: "#2d7d4e", color: "#F6F3EC",
                 fontSize: "9px", fontWeight: 500, textAlign: "center",
                 padding: "4px 0", letterSpacing: "0.15em",
                 textTransform: "uppercase"
               }}>Most cafés pick this</div>
               <div style={{ marginTop: "12px" }}>
                 <div style={{
-                  fontSize: "10px", color: "#9a958c",
+                  fontSize: "10px", color: "#9C9184",
                   textTransform: "uppercase", letterSpacing: "0.12em",
                   fontWeight: 500, marginBottom: "16px"
                 }}>Pro</div>
                 <div style={{
                   fontFamily: "'Fraunces',Georgia,serif",
                   fontSize: "40px", fontWeight: 500,
-                  letterSpacing: "-1px", color: "#f5f3ee",
+                  letterSpacing: "-1px", color: "#F6F3EC",
                   marginBottom: "4px"
                 }}>AED 199
-                  <span style={{ fontSize: "14px", color: "#9a958c", fontWeight: 400 }}> /mo</span>
+                  <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
                 </div>
-                <div style={{ fontSize: "13px", color: "#b5b1a8", lineHeight: 1.5, marginBottom: "24px" }}>
+                <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                   Everything + smart milk recommendations. Pays for itself in 3 days.
                 </div>
                 <button onClick={onGoSignup} style={{
-                  background: "#f5f3ee", color: "#1a1a18",
-                  border: "1px solid #f5f3ee", borderRadius: "4px",
+                  background: "#F6F3EC", color: "#1E1B18",
+                  border: "1px solid #F6F3EC", borderRadius: "4px",
                   padding: "10px 18px", fontSize: "11px", fontWeight: 500,
                   cursor: "pointer", letterSpacing: "0.1em",
                   textTransform: "uppercase", fontFamily: "inherit",
@@ -4719,27 +4730,27 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
             {/* Chain */}
             <div style={{
-              background: "#1a1a18", padding: "32px 28px"
+              background: "#1E1B18", padding: "32px 28px"
             }}>
               <div style={{
-                fontSize: "10px", color: "#9a958c",
+                fontSize: "10px", color: "#9C9184",
                 textTransform: "uppercase", letterSpacing: "0.12em",
                 fontWeight: 500, marginBottom: "16px"
               }}>Chain</div>
               <div style={{
                 fontFamily: "'Fraunces',Georgia,serif",
                 fontSize: "40px", fontWeight: 500,
-                letterSpacing: "-1px", color: "#f5f3ee",
+                letterSpacing: "-1px", color: "#F6F3EC",
                 marginBottom: "4px"
               }}>AED 499
-                <span style={{ fontSize: "14px", color: "#9a958c", fontWeight: 400 }}> /mo</span>
+                <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
               </div>
-              <div style={{ fontSize: "13px", color: "#b5b1a8", lineHeight: 1.5, marginBottom: "24px" }}>
+              <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                 3+ locations. Centralized dashboard, per-location reports.
               </div>
               <button onClick={onGoSignup} style={{
-                background: "transparent", color: "#f5f3ee",
-                border: "1px solid #6b6863", borderRadius: "4px",
+                background: "transparent", color: "#F6F3EC",
+                border: "1px solid #6E675E", borderRadius: "4px",
                 padding: "10px 18px", fontSize: "11px", fontWeight: 500,
                 cursor: "pointer", letterSpacing: "0.1em",
                 textTransform: "uppercase", fontFamily: "inherit",
@@ -4752,7 +4763,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
       {/* FOOTER */}
       <footer style={{
-        background: "#f5f3ee",
+        background: "#F6F3EC",
         padding: "60px 24px 40px"
       }}>
         <div style={{
@@ -4765,11 +4776,11 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
-              color: "#1a1a18", marginBottom: "8px",
+              color: "#1E1B18", marginBottom: "8px",
               letterSpacing: "-0.3px"
             }}>Kaffelog</div>
             <div style={{
-              fontSize: "12px", color: "#6b6863",
+              fontSize: "12px", color: "#6E675E",
               lineHeight: 1.6
             }}>
               Daily operations software.<br/>
@@ -4779,37 +4790,37 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
           <div>
             <div style={{
-              fontSize: "9.5px", color: "#6b6863",
+              fontSize: "9.5px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.15em",
               fontWeight: 500, marginBottom: "14px"
             }}>Contact</div>
             <a href="mailto:info@kaffelog.com" style={{
-              display: "block", color: "#1a1a18",
+              display: "block", color: "#1E1B18",
               textDecoration: "none", fontSize: "13px",
               marginBottom: "8px"
             }}>info@kaffelog.com</a>
             <a href="https://www.instagram.com/logkaffe/" target="_blank" rel="noopener noreferrer" style={{
-              display: "block", color: "#1a1a18",
+              display: "block", color: "#1E1B18",
               textDecoration: "none", fontSize: "13px"
             }}>Instagram → @logkaffe</a>
           </div>
 
           <div>
             <div style={{
-              fontSize: "9.5px", color: "#6b6863",
+              fontSize: "9.5px", color: "#6E675E",
               textTransform: "uppercase", letterSpacing: "0.15em",
               fontWeight: 500, marginBottom: "14px"
             }}>Get started</div>
             <button onClick={onGoSignup} style={{
               background: "none", border: "none",
-              color: "#1a1a18", cursor: "pointer",
+              color: "#1E1B18", cursor: "pointer",
               textAlign: "left", padding: 0,
               fontSize: "13px", fontFamily: "inherit",
               display: "block", marginBottom: "8px"
             }}>Start 14-day trial →</button>
             <button onClick={onGoLogin} style={{
               background: "none", border: "none",
-              color: "#1a1a18", cursor: "pointer",
+              color: "#1E1B18", cursor: "pointer",
               textAlign: "left", padding: 0,
               fontSize: "13px", fontFamily: "inherit",
               display: "block"
@@ -4820,8 +4831,8 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         <div style={{
           maxWidth: "1100px", margin: "40px auto 0",
           paddingTop: "24px",
-          borderTop: "1px solid #d8d3c8",
-          fontSize: "11px", color: "#6b6863",
+          borderTop: "1px solid #DAD5C8",
+          fontSize: "11px", color: "#6E675E",
           display: "flex", justifyContent: "space-between",
           flexWrap: "wrap", gap: "12px"
         }}>
@@ -5055,8 +5066,8 @@ function OnboardingFlow({ session, onComplete }) {
     <input className="ob-input" type="date" style={{colorScheme:"dark"}} value={tradeExp} onChange={e=>setTradeExp(e.target.value)}/>
     <label className="ob-label">Owner WhatsApp <span style={{color:"var(--text-3)",fontWeight:400,textTransform:"none"}}>(receives 7am daily report)</span></label>
     <input className="ob-input" type="tel" placeholder="+971 50 XXX XXXX" value={phone} onChange={e=>setPhone(e.target.value)}/>
-    <div style={{marginTop:14,background:"rgba(10,135,84,.06)",border:".5px solid rgba(10,135,84,.18)",borderRadius:"var(--r-md)",padding:"11px 13px",fontSize:12,color:"var(--text-2)",lineHeight:1.5}}>
-      <span style={{color:"#1a1a18",fontWeight:600}}>📱 Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
+    <div style={{marginTop:14,background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.18)",borderRadius:"var(--r-md)",padding:"11px 13px",fontSize:12,color:"var(--text-2)",lineHeight:1.5}}>
+      <span style={{color:"#1E1B18",fontWeight:600}}>📱 Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
     </div></>,
 
     // Step 4
@@ -5251,7 +5262,7 @@ export default function Kaffelog(){
               <div className="card-white" style={{padding:"18px"}}>
                 <div style={{display:"flex",alignItems:"center",gap:"9px",marginBottom:"12px"}}>
                   <div className="ai-chip"><div className="ai-blink"/>Smart Insight</div>
-                  <div style={{marginLeft:"auto",fontSize:"10px",color:"#8899bb"}}>Confidence: <span style={{color:"var(--emerald)",fontWeight:"600"}}>97%</span></div>
+                  <div style={{marginLeft:"auto",fontSize:"10px",color:"#9C9184"}}>Confidence: <span style={{color:"var(--emerald)",fontWeight:"600"}}>97%</span></div>
                 </div>
                 <p className="ai-text">
                   <strong>Reduce tomorrow's milk order by 30 litres.</strong> Today's surplus fully covers Tuesday's projected demand — ordering your standard 60L would result in <strong>AED 184.50 in avoidable losses.</strong> This pattern holds across 11 of the last 13 weeks.

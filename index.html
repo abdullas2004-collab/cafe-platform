@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Theme + PWA -->
-    <meta name="theme-color" content="#f5f3ee" />
+    <meta name="theme-color" content="#F6F3EC" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Kaffelog" />
@@ -18,40 +18,28 @@
     <!-- Browser tab favicon -->
     <link rel="icon" type="image/png" href="/kaffelog_icon_192.png" />
 
-    <!-- Fonts: Fraunces (serif headings, editorial weight) + Inter (clean sans body) -->
+    <!-- Fonts: IBM Plex Sans (UI) + IBM Plex Mono (numbers, labels) + Newsreader (money figures) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 
     <title>Kaffelog — Daily operations software for UAE cafés</title>
     <meta name="description" content="Daily operations for cafés that actually run. Smart milk orders, Municipality-ready compliance, expiry tracking. Built in the UAE." />
 
-    <!-- Theme initialization — runs before React renders to prevent flash -->
+    <!-- Theme initialization — Operations Desk reskin ships light-first;
+         dark mode returns after its own design pass (stored preference is preserved) -->
     <script>
       (function() {
-        try {
-          var stored = localStorage.getItem('kaffelog_theme');
-          var theme;
-          if (stored === 'light' || stored === 'dark') {
-            theme = stored;
-          } else {
-            // Default to system preference
-            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          }
-          document.documentElement.setAttribute('data-theme', theme);
-          // Update theme-color meta dynamically
-          var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', theme === 'dark' ? '#1a1612' : '#f5f3ee');
-        } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
+        document.documentElement.setAttribute('data-theme', 'light');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', '#F6F3EC');
       })();
     </script>
   </head>
   <body>
     <style>
-      html[data-theme="light"], html[data-theme="light"] body { background: #f5f3ee; }
-      html[data-theme="dark"], html[data-theme="dark"] body { background: #1a1612; }
+      html[data-theme="light"], html[data-theme="light"] body { background: #F6F3EC; }
+      html[data-theme="dark"], html[data-theme="dark"] body { background: #1E1B18; }
       body { margin: 0; }
     </style>
     <div id="root"></div>
