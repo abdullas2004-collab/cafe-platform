@@ -26,13 +26,21 @@
     <title>Kaffelog — Daily operations software for UAE cafés</title>
     <meta name="description" content="Daily operations for cafés that actually run. Smart milk orders, Municipality-ready compliance, expiry tracking. Built in the UAE." />
 
-    <!-- Theme initialization — Operations Desk reskin ships light-first;
-         dark mode returns after its own design pass (stored preference is preserved) -->
+    <!-- Theme initialization — runs before React renders to prevent a flash -->
     <script>
       (function() {
-        document.documentElement.setAttribute('data-theme', 'light');
+        var theme = 'light';
+        try {
+          var stored = localStorage.getItem('kaffelog_theme_pref');
+          if (stored === 'light' || stored === 'dark') {
+            theme = stored;
+          } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark';
+          }
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', '#F6F3EC');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#1E1B18' : '#F6F3EC');
       })();
     </script>
   </head>

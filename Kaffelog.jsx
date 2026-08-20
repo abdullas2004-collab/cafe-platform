@@ -264,6 +264,16 @@ const STYLES = `
   --border-blue:#1E1B18;            /* Hard rule — cards, regions */
   --border-green:#5C7268;
   --white:#1E1B18;         /* Inverted use — text on bright backgrounds */
+  /* Deep surfaces (hero cards, dark headers) stay dark in BOTH themes.
+     They must not be built from --blue, which inverts to paper in night mode
+     and would leave their light text sitting on a light card. */
+  --surface-deep:#1E1B18;
+  --on-deep:#F0EBE1;
+  --on-deep-dim:#A3998B;
+  /* Status TEXT — tuned for paper in day, lifted for soot in night */
+  --ok-text:#3E5449;
+  --warn-text:#8A4E1D;
+  --bad-text:#8A2E22;
   --font-d:'IBM Plex Sans',system-ui,sans-serif;
   --font-b:'IBM Plex Sans',system-ui,sans-serif;
   --font-m:'IBM Plex Mono',ui-monospace,monospace;
@@ -278,19 +288,27 @@ const STYLES = `
   --navy-card:#26221E;
   --blue:#F6F3EC;
   --blue-glow:rgba(240,235,225,.12);
-  --emerald:#7A9A8C;
-  --emerald-mid:#5C7268;
-  --gold:#C9762E;
-  --rust:#C9762E;
-  --red:#C75448;
-  --purple:#9C9184;
+  /* Night-mode status and text colours are lifted well above their day
+     equivalents — the day values are tuned for paper and fail on soot. */
+  --emerald:#9DBBAB;
+  --emerald-mid:#C7D3CC;
+  --gold:#E8B27A;
+  --rust:#E8B27A;
+  --red:#E89184;
+  --purple:#C4BBAE;
   --text-1:#F0EBE1;
-  --text-2:#A3998B;
-  --text-3:#6E675E;
+  --text-2:#C4BBAE;
+  --text-3:#A3998B;
   --border:rgba(240,235,225,.16);
-  --border-blue:rgba(240,235,225,.4);
-  --border-green:#5C7268;
+  --border-blue:rgba(240,235,225,.45);
+  --border-green:#9DBBAB;
   --white:#F0EBE1;
+  --surface-deep:#26221E;
+  --on-deep:#F0EBE1;
+  --on-deep-dim:#A3998B;
+  --ok-text:#C7D3CC;
+  --warn-text:#E8B27A;
+  --bad-text:#E89184;
   --font-d:'IBM Plex Sans',system-ui,sans-serif;
   --font-b:'IBM Plex Sans',system-ui,sans-serif;
   --font-m:'IBM Plex Mono',ui-monospace,monospace;
@@ -311,8 +329,8 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 /* ── bottom tab bar (mobile) ── */
 .kf-tabbar{position:fixed;bottom:0;left:0;right:0;z-index:120;max-width:480px;margin:0 auto;background:var(--navy-card);border-top:2px solid var(--border-blue);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px calc(14px + env(safe-area-inset-bottom,6px))}
 .kf-tab{background:none;border:none;cursor:pointer;text-align:center;padding:0;color:var(--text-1)}
-.kf-tab-ic{width:22px;height:22px;margin:0 auto;border:1.5px solid var(--border-blue);background:transparent;display:flex;align-items:center;justify-content:center;transition:background .15s ease-out}
-.kf-tab.active .kf-tab-ic{background:var(--blue);color:var(--navy)}
+.kf-tab-ic{width:22px;height:22px;margin:0 auto;border:1.5px solid var(--border-blue);background-color:transparent;display:flex;align-items:center;justify-content:center;transition:background .15s ease-out}
+.kf-tab.active .kf-tab-ic{background-color:var(--blue);color:var(--navy)}
 .kf-tab-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;margin-top:5px;color:var(--text-1)}
 .kf-tab:not(.active){opacity:.45}
 
@@ -326,7 +344,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .kf-more-row{display:flex;justify-content:space-between;align-items:center;width:100%;padding:15px 22px;border:none;border-top:1px solid var(--border);background:none;cursor:pointer;text-align:left;font-family:var(--font-b)}
 .kf-more-row:hover{background:var(--navy)}
 .kf-more-name{font-weight:600;font-size:15.5px;color:var(--text-1)}
-.kf-more-name.danger{color:#8A2E22}
+.kf-more-name.danger{color:var(--bad-text)}
 .kf-more-meta{font-family:var(--font-m);font-size:10px;color:var(--text-2);letter-spacing:.06em}
 
 .kf-main{width:100%;display:flex;flex-direction:column;align-items:center}
@@ -397,7 +415,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .stat-l{font-family:var(--font-m);font-size:8.5px;color:var(--text-2);letter-spacing:.1em;text-transform:uppercase;line-height:1.4}
 
 /* savings card */
-.sav-card{background:var(--blue);border-radius:0;padding:22px;position:relative;overflow:hidden;border:1.5px solid var(--blue)}
+.sav-card{background:var(--surface-deep);border-radius:0;padding:22px;position:relative;overflow:hidden;border:1.5px solid var(--blue)}
 .sav-card::before{content:'';position:absolute;top:0;right:0;width:14px;height:14px;background:var(--emerald)}
 .sav-eyebrow{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A3998B;margin-bottom:7px;display:flex;align-items:center;gap:5px}
 .sav-amt{font-family:var(--font-serif);font-size:44px;font-weight:400;color:#F0EBE1;letter-spacing:-.01em;line-height:1;margin-bottom:3px}
@@ -416,12 +434,12 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .ai-text{font-family:var(--font-serif);font-style:italic;font-size:14.5px;font-weight:400;color:var(--text-1);line-height:1.65;margin-bottom:14px;padding-left:12px;border-left:3px solid var(--rust)}
 .ai-text strong{font-weight:500;font-style:normal;color:var(--text-1)}
 .tag{font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.08em;padding:3px 9px;border-radius:0;border:1px solid}
-.tag.a{background:rgba(201,118,46,.14);border-color:var(--gold);color:#8A4E1D}
+.tag.a{background:rgba(201,118,46,.14);border-color:var(--gold);color:var(--warn-text)}
 .tag.b{background:rgba(92,114,104,.12);border-color:var(--emerald);color:var(--emerald-mid)}
-.tag.c{background:rgba(176,58,46,.12);border-color:var(--red);color:#8A2E22}
+.tag.c{background:rgba(176,58,46,.12);border-color:var(--red);color:var(--bad-text)}
 
 /* projection */
-.proj{background:var(--blue);border-radius:0;border:none;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.proj{background:var(--surface-deep);border-radius:0;border:none;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
 .proj::before{content:'';position:absolute;left:0;top:0;width:12px;height:12px;background:var(--gold)}
 .proj-icon{width:38px;height:38px;border-radius:0;background:rgba(240,235,225,.08);border:1px solid rgba(240,235,225,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .proj-val{font-family:var(--font-serif);font-size:24px;font-weight:400;color:#E8B27A;letter-spacing:-.01em;line-height:1;margin-bottom:3px}
@@ -473,8 +491,8 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .score-fill{height:100%;border-radius:0}
 .acc-pill{display:inline-flex;font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.08em;padding:3px 8px;border-radius:0;border:1px solid}
 .acc-pill.h{background:rgba(92,114,104,.14);border-color:var(--emerald);color:var(--emerald-mid)}
-.acc-pill.m{background:rgba(201,118,46,.16);border-color:var(--gold);color:#8A4E1D}
-.acc-pill.l{background:rgba(176,58,46,.14);border-color:var(--red);color:#8A2E22}
+.acc-pill.m{background:rgba(201,118,46,.16);border-color:var(--gold);color:var(--warn-text)}
+.acc-pill.l{background:rgba(176,58,46,.14);border-color:var(--red);color:var(--bad-text)}
 
 /* fine risk gauge */
 .frs-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);display:flex;align-items:flex-start;gap:4px;padding:16px 14px 16px 10px;position:relative;overflow:hidden}
@@ -499,7 +517,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .doc-chip{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-m);font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:0;border:1px solid currentColor}
 
 /* monthly summary */
-.msumm{background:var(--blue);border-radius:0;border:none;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative}
+.msumm{background:var(--surface-deep);border-radius:0;border:none;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative}
 .msumm::after{content:'';position:absolute;right:0;top:0;width:12px;height:12px;background:var(--gold)}
 .msumm-val{font-family:var(--font-serif);font-size:22px;font-weight:400;letter-spacing:-.01em;line-height:1}
 .msumm-val.em{color:#C7D3CC}.msumm-val.bl{color:#F0EBE1}.msumm-val.go{color:#E8B27A}
@@ -507,7 +525,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 
 /* ── INVOICE TABLE ── */
 .inv{background:var(--navy-card);border-radius:0;overflow:hidden;border:1.5px solid var(--border-blue)}
-.inv-hd{background:var(--blue);padding:16px 20px 14px;border-bottom:none;display:flex;align-items:flex-start;justify-content:space-between}
+.inv-hd{background:var(--surface-deep);padding:16px 20px 14px;border-bottom:none;display:flex;align-items:flex-start;justify-content:space-between}
 .inv-col{display:grid;grid-template-columns:2fr 1fr 1fr 1.1fr;padding:8px 20px;background:var(--navy);border-bottom:1px solid var(--border)}
 .inv-clbl{font-family:var(--font-m);font-size:8.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2)}
 .inv-clbl.r{text-align:right}
@@ -545,7 +563,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 
 /* ── SAFE VAULT ── */
 .sv-body{width:100%;padding:0 0 80px}
-.sv-hdr{background:var(--blue);color:#F0EBE1;padding:24px 18px 20px;border-bottom:none;position:relative;overflow:hidden}
+.sv-hdr{background:var(--surface-deep);color:#F0EBE1;padding:24px 18px 20px;border-bottom:none;position:relative;overflow:hidden}
 .sv-hdr::before{content:'';position:absolute;top:0;right:0;width:14px;height:14px;background:var(--red)}
 .sv-kpi{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;padding:16px 18px}
 .sv-kpi-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);margin-left:-1.5px;padding:11px 8px;text-align:center}
@@ -597,7 +615,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 
 /* halal tracker */
 .ht-card{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
-.ht-hd{background:var(--blue);color:#F0EBE1;padding:14px 16px;border-bottom:none;display:flex;align-items:center;gap:10px}
+.ht-hd{background:var(--surface-deep);color:#F0EBE1;padding:14px 16px;border-bottom:none;display:flex;align-items:center;gap:10px}
 .ht-hicon{width:36px;height:36px;border-radius:0;background:rgba(240,235,225,.08);border:1px solid rgba(240,235,225,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ht-grid{display:grid;grid-template-columns:1.5fr .8fr .8fr .7fr}
 .ht-hrow{display:grid;padding:8px 16px;background:var(--navy);border-bottom:1px solid var(--border)}
@@ -636,7 +654,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .wa-card::before{content:'';position:absolute;top:0;right:0;width:12px;height:12px;background:var(--emerald);z-index:1}
 .wa-hd{padding:16px 18px 13px;border-bottom:1.5px solid var(--border-blue);display:flex;align-items:flex-start;gap:11px}
 .wa-icon{width:38px;height:38px;border-radius:0;background:var(--navy);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.wa-preview{margin:13px 18px;background:var(--blue);border-radius:0;overflow:hidden}
+.wa-preview{margin:13px 18px;background:var(--surface-deep);border-radius:0;overflow:hidden}
 .wa-bar{background:#26221E;padding:8px 13px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(240,235,225,.12)}
 .wa-bav{width:22px;height:22px;border-radius:0;background:rgba(240,235,225,.15);display:flex;align-items:center;justify-content:center;font-size:10px;color:#F0EBE1;font-weight:700;flex-shrink:0}
 .wa-bubble{margin:11px;background:rgba(240,235,225,.06);border-radius:0;padding:11px 13px;border:1px solid rgba(240,235,225,.12)}
@@ -644,7 +662,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .wa-bline .em{color:#C7D3CC;font-weight:600}
 .wa-bline .warn{color:#E8B27A;font-weight:600}
 .wa-bline .ok{color:#C7D3CC}
-.wa-bfoot{margin-top:7px;padding-top:7px;border-top:1px dashed rgba(240,235,225,.15);font-family:var(--font-m);font-size:8.5px;color:#6E675E;display:flex;justify-content:space-between}
+.wa-bfoot{margin-top:7px;padding-top:7px;border-top:1px dashed rgba(240,235,225,.15);font-family:var(--font-m);font-size:8.5px;color:var(--on-deep-dim);display:flex;justify-content:space-between}
 .wa-ctrl{padding:13px 18px 17px;display:flex;flex-direction:column;gap:9px}
 .wa-trow{display:flex;align-items:center;gap:9px}
 .wa-tlbl{font-size:12px;color:var(--text-2);flex:1}
@@ -672,7 +690,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .ml-flbl{font-family:var(--font-m);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .ml-fnum{width:18px;height:18px;border-radius:0;background:var(--blue);font-family:var(--font-m);font-size:9px;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .stepper{display:flex;align-items:center;gap:0;border-radius:0;overflow:hidden;border:1.5px solid var(--border-blue)}
-.step-btn{width:48px;height:52px;background:var(--navy);border:none;color:var(--text-1);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .14s}
+.step-btn{width:48px;height:52px;background-color:var(--navy);border:none;color:var(--text-1);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .14s}
 .step-btn:hover{background:var(--navy-mid)}
 .step-val{flex:1;text-align:center;font-family:var(--font-serif);font-size:30px;font-weight:500;color:var(--text-1);background:transparent}
 .temp-status{display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 11px;border-radius:0;font-size:12px;font-weight:500;border-left-width:3px;border-left-style:solid}
@@ -718,9 +736,10 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .rs-summ-item{background:var(--navy);border-radius:0;padding:8px;border:1px solid var(--border);text-align:center}
 .rs-summ-val{font-family:var(--font-m);font-size:13px;font-weight:600;color:var(--text-1);margin-bottom:2px}
 .rs-summ-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
-.rs-impact{background:var(--blue);border-radius:0;border:none;padding:18px 20px;position:relative;overflow:hidden}
+.rs-impact{background:var(--surface-deep);border-radius:0;border:none;padding:18px 20px;position:relative;overflow:hidden}
 .rs-impact::before{content:'';position:absolute;left:0;top:0;width:12px;height:12px;background:var(--emerald)}
-.rs-save-btn{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s}
+/* Lives inside .rs-impact, which is soot — so it inverts to read as a button */
+.rs-save-btn{width:100%;background:#F6F3EC;color:#1E1B18;font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s}
 .rs-save-btn.saved{background:var(--emerald);color:#F0EBE1;pointer-events:none}
 
 /* ── PRO MODAL ── */
@@ -774,7 +793,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .auth-btn{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:15.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s ease-out;margin-top:8px}
 .auth-btn:hover:not(:disabled){background:#332E28}
 .auth-btn:disabled{opacity:.4;pointer-events:none}
-.auth-error{background:rgba(176,58,46,.08);border:none;border-left:4px solid var(--red);border-radius:0;padding:10px 12px;font-size:13px;color:#8A2E22;margin-bottom:13px}
+.auth-error{background:rgba(176,58,46,.08);border:none;border-left:4px solid var(--red);border-radius:0;padding:10px 12px;font-size:13px;color:var(--bad-text);margin-bottom:13px}
 .auth-success{background:rgba(92,114,104,.12);border:none;border-left:4px solid var(--emerald);border-radius:0;padding:10px 12px;font-size:13px;color:var(--emerald-mid);margin-bottom:13px}
 .auth-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--text-2)}
 .auth-switch-btn{background:none;border:none;color:var(--rust);font-weight:600;cursor:pointer;font-size:13px;font-family:var(--font-b);text-decoration:none;padding:0}
@@ -833,7 +852,7 @@ const WASTE_CAUSES = [
   { label:"Over-Prep",  pct:54, color:"#5C7268" },
   { label:"Expiry",     pct:31, color:"#5C7268"  },
   { label:"Spill/Loss", pct:10, color:"#C9762E"  },
-  { label:"Other",      pct:5,  color:"#9C9184"  },
+  { label:"Other",      pct:5,  color: "var(--on-deep-dim)"  },
 ];
 
 const DOCS = [
@@ -847,9 +866,9 @@ const DOCS = [
 // Fixed status vocabulary — SAFE / DUE SOON / NEEDS ATTENTION / EXPIRED,
 // never rephrased per-screen (Operations Desk content rule)
 const DOC_CFG = {
-  valid:    { label:"Safe",            bg:"rgba(92,114,104,.14)",  border:"#5C7268", text:"#3E5449", bar:"#5C7268" },
-  expiring: { label:"Due soon",        bg:"rgba(201,118,46,.16)",  border:"#C9762E", text:"#8A4E1D", bar:"#C9762E" },
-  urgent:   { label:"Needs attention", bg:"rgba(176,58,46,.14)",   border:"#B03A2E", text:"#8A2E22", bar:"#B03A2E" },
+  valid:    { label:"Safe",            bg:"rgba(92,114,104,.14)",  border:"#5C7268", text:"var(--ok-text)", bar:"#5C7268" },
+  expiring: { label:"Due soon",        bg:"rgba(201,118,46,.16)",  border:"#C9762E", text:"var(--warn-text)", bar:"#C9762E" },
+  urgent:   { label:"Needs attention", bg:"rgba(176,58,46,.14)",   border:"#B03A2E", text:"var(--bad-text)", bar:"#B03A2E" },
   expired:  { label:"Expired",         bg:"#1E1B18",               border:"#1E1B18", text:"#F6F3EC", bar:"#1E1B18" },
 };
 
@@ -1149,9 +1168,9 @@ const INGREDIENTS = [
 ];
 
 const EXPIRY_CFG = {
-  valid:    { text:"#5C7268", bg:"rgba(92,114,104,.1)",  label:"Fresh"    },
-  expiring: { text:"#C9762E", bg:"rgba(201,118,46,.1)", label:"Expiring" },
-  urgent:   { text:"#B03A2E", bg:"rgba(176,58,46,.1)",  label:"Urgent"   },
+  valid:    { text:"var(--ok-text)",   bg:"rgba(92,114,104,.14)",  label:"Fresh"    },
+  expiring: { text:"var(--warn-text)", bg:"rgba(201,118,46,.16)",  label:"Expiring" },
+  urgent:   { text:"var(--bad-text)",  bg:"rgba(176,58,46,.14)",   label:"Urgent"   },
 };
 
 const SUPPLIERS = [
@@ -1614,7 +1633,7 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
               </div>
 
               {saveError && (
-                <div style={{borderLeft:"4px solid var(--red)",background:"rgba(176,58,46,.08)",padding:"12px 14px",fontSize:13,color:"#8A2E22",lineHeight:1.55}}>
+                <div style={{borderLeft:"4px solid var(--red)",background:"rgba(176,58,46,.08)",padding:"12px 14px",fontSize:13,color: "var(--bad-text)",lineHeight:1.55}}>
                   {saveError}
                 </div>
               )}
@@ -1817,7 +1836,7 @@ function SafeVault(){
         {[
           {val:docs.length,lbl:"Tracked",color:"var(--text-1)"},
           {val:valid.length,lbl:"Safe",color:"var(--emerald-mid)"},
-          {val:expiring.length,lbl:"Due soon",color:"#8A4E1D"},
+          {val:expiring.length,lbl:"Due soon",color: "var(--warn-text)"},
           {val:urgent.length,lbl:"Attention",color:"var(--red)"},
         ].map(({val,lbl,color})=>(
           <div key={lbl} className="sv-kpi-card">
@@ -1847,7 +1866,7 @@ function SafeVault(){
             background:"rgba(30,27,24,.08)",border:".5px solid rgba(30,27,24,.3)",
             borderRadius:10,padding:"11px 12px",marginBottom:4
           }}>
-            <div style={{fontSize:11,fontWeight:600,color:"#1E1B18",marginBottom:8,letterSpacing:".06em",textTransform:"uppercase"}}>
+            <div style={{fontSize:11,fontWeight:600,color: "var(--text-1)",marginBottom:8,letterSpacing:".06em",textTransform:"uppercase"}}>
               New staff health card
             </div>
             <input
@@ -2105,11 +2124,11 @@ function MonthlyAnalyticsContent(){
             <div>
               <div style={{fontSize:"9px",fontWeight:"700",letterSpacing:".12em",textTransform:"uppercase",color:"#C9762E",marginBottom:"4px",display:"flex",alignItems:"center",gap:"5px"}}><div style={{width:"4px",height:"4px",borderRadius:"50%",background:"#C9762E"}}/>Recovery Statement</div>
               <div style={{fontFamily:"var(--font-d)",fontSize:"15px",fontWeight:"800",color:"#E8E4DB",letterSpacing:"-.02em"}}>Ingredient Recovery Report</div>
-              <div style={{fontSize:"10px",color:"#9C9184",marginTop:"2px"}}>April 2026 · Dubai Municipality Compliant</div>
+              <div style={{fontSize:"10px",color: "var(--on-deep-dim)",marginTop:"2px"}}>April 2026 · Dubai Municipality Compliant</div>
             </div>
             <div style={{textAlign:"right"}}>
-              <div style={{fontFamily:"var(--font-d)",fontSize:"10px",fontWeight:"700",color:"#1E1B18",letterSpacing:".06em"}}>{refNum}</div>
-              <div style={{fontSize:"9px",color:"#6E675E",marginTop:"2px"}}>Generated {new Date().toLocaleDateString("en-AE",{day:"numeric",month:"long",year:"numeric"})}</div>
+              <div style={{fontFamily:"var(--font-d)",fontSize:"10px",fontWeight:"700",color: "var(--text-1)",letterSpacing:".06em"}}>{refNum}</div>
+              <div style={{fontSize:"9px",color: "var(--text-2)",marginTop:"2px"}}>Generated {new Date().toLocaleDateString("en-AE",{day:"numeric",month:"long",year:"numeric"})}</div>
               <div style={{marginTop:"6px"}}><span className="audit-badge" style={{fontSize:"8px"}}>Audit Ready</span></div>
             </div>
           </div>
@@ -2120,15 +2139,15 @@ function MonthlyAnalyticsContent(){
             <div key={item.name} className="inv-line" style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1.1fr"}}>
               <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
                 <div style={{width:"26px",height:"26px",borderRadius:"7px",background:item.iconBg,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:"14px"}}>{item.icon}</div>
-                <div><div style={{fontSize:"13px",fontWeight:"500",color:"#1E1B18"}}>{item.name}</div><div style={{fontSize:"10px",color:"#9C9184",marginTop:"1px"}}>{item.sub}</div></div>
+                <div><div style={{fontSize:"13px",fontWeight:"500",color: "var(--text-1)"}}>{item.name}</div><div style={{fontSize:"10px",color: "var(--on-deep-dim)",marginTop:"1px"}}>{item.sub}</div></div>
               </div>
-              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:"#1E1B18"}}>{item.qty}</div><div style={{fontSize:"9px",color:"#9C9184",marginTop:"1px"}}>{item.unit}</div></div>
+              <div><div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color: "var(--text-1)"}}>{item.qty}</div><div style={{fontSize:"9px",color: "var(--on-deep-dim)",marginTop:"1px"}}>{item.unit}</div></div>
               <div>
                 <div style={{fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",color:item.color}}>{item.pct}%</div>
                 <div style={{height:"3px",background:"#edf1f9",borderRadius:"2px",marginTop:"4px",overflow:"hidden"}}><div style={{height:"100%",borderRadius:"2px",width:`${item.pct}%`,background:item.color}}/></div>
               </div>
               <div style={{textAlign:"right"}}>
-                <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#3E5449"}}>{fmt(item.recovered)}</div>
+                <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color: "var(--ok-text)"}}>{fmt(item.recovered)}</div>
                 <div style={{fontSize:"9px",color:"#5C7268",marginTop:"1px"}}>{item.note}</div>
               </div>
             </div>
@@ -2136,13 +2155,13 @@ function MonthlyAnalyticsContent(){
           <div className="inv-totals">
             {INGREDIENT_RECOVERY.map(item=>(
               <div key={item.name} style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
-                <span style={{fontSize:"10px",color:"#9C9184"}}>Subtotal ({item.name})</span>
-                <span style={{fontSize:"11px",color:"#1E1B18",fontWeight:"600",fontFamily:"var(--font-d)"}}>AED {fmt(item.recovered)}</span>
+                <span style={{fontSize:"10px",color: "var(--on-deep-dim)"}}>Subtotal ({item.name})</span>
+                <span style={{fontSize:"11px",color: "var(--text-1)",fontWeight:"600",fontFamily:"var(--font-d)"}}>AED {fmt(item.recovered)}</span>
               </div>
             ))}
             <div className="inv-grand">
-              <span style={{fontFamily:"var(--font-d)",fontSize:"11px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color:"#1E1B18"}}>Total Recovered</span>
-              <span style={{fontFamily:"var(--font-d)",fontSize:"19px",fontWeight:"800",color:"#3E5449",letterSpacing:"-.03em"}}>AED {fmt(totalRec)}</span>
+              <span style={{fontFamily:"var(--font-d)",fontSize:"11px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color: "var(--text-1)"}}>Total Recovered</span>
+              <span style={{fontFamily:"var(--font-d)",fontSize:"19px",fontWeight:"800",color: "var(--ok-text)",letterSpacing:"-.03em"}}>AED {fmt(totalRec)}</span>
             </div>
             <div className="inv-stamp">
               <Lock size={10} color="#9C9184"/>
@@ -2312,15 +2331,17 @@ function RecipeSettings(){
 
       {/* impact */}
       <div className="rs-impact">
-        <div style={{fontSize:"10px",fontWeight:"600",letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-2)",marginBottom:"8px"}}>Smart Calibration Preview</div>
-        <div style={{fontSize:"12px",color:"var(--text-2)",fontStyle:"italic",lineHeight:"1.65",marginBottom:"14px"}}>
-          Based on these settings, your recommendation engine is now calibrated for <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>your cafe's specialty standards</strong> — using a <strong style={{color:"var(--emerald)",fontStyle:"normal"}}>{buffer}% steaming buffer</strong>, Latte at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.latte.milk}ml</strong>, Flat White at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.fw.milk}ml</strong>, Cappuccino at <strong style={{color:"var(--text-1)",fontStyle:"normal"}}>{drinks.capp.milk}ml</strong>.
+        {/* This card sits on soot, so its text is set against that surface
+            rather than the page tokens, which resolve to soot in light mode. */}
+        <div style={{fontFamily:"var(--font-m)",fontSize:"9.5px",fontWeight:"500",letterSpacing:".16em",textTransform:"uppercase",color:"#A3998B",marginBottom:"8px"}}>Smart Calibration Preview</div>
+        <div style={{fontSize:"13px",color:"#C4BBAE",fontStyle:"italic",lineHeight:"1.65",marginBottom:"14px"}}>
+          Based on these settings, your recommendation engine is now calibrated for <strong style={{color:"#F0EBE1",fontStyle:"normal"}}>your cafe's specialty standards</strong> — using a <strong style={{color:"#E8B27A",fontStyle:"normal"}}>{buffer}% steaming buffer</strong>, Latte at <strong style={{color:"#F0EBE1",fontStyle:"normal"}}>{drinks.latte.milk}ml</strong>, Flat White at <strong style={{color:"#F0EBE1",fontStyle:"normal"}}>{drinks.fw.milk}ml</strong>, Cappuccino at <strong style={{color:"#F0EBE1",fontStyle:"normal"}}>{drinks.capp.milk}ml</strong>.
         </div>
 
-        <div style={{background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.2)",borderRadius:10,padding:"11px 13px",marginBottom:14,display:"flex",gap:9,alignItems:"flex-start"}}>
-          <Info size={13} color="#C9762E" style={{flexShrink:0,marginTop:1}}/>
-          <div style={{fontSize:11,color:"var(--text-2)",lineHeight:1.55}}>
-            <strong style={{color:"var(--text-1)"}}>Adding new drinks?</strong> Go to <strong style={{color:"#1E1B18"}}>Sales Entry → + Add Your Own Item</strong> to create mochas, matchas, signature drinks. The engine learns them automatically.
+        <div style={{background:"rgba(240,235,225,.07)",borderLeft:"3px solid #C9762E",padding:"11px 13px",marginBottom:14,display:"flex",gap:9,alignItems:"flex-start"}}>
+          <Info size={13} color="#E8B27A" style={{flexShrink:0,marginTop:1}}/>
+          <div style={{fontSize:12,color:"#C4BBAE",lineHeight:1.55}}>
+            <strong style={{color:"#F0EBE1"}}>Adding new drinks?</strong> Go to <strong style={{color:"#F0EBE1"}}>Sales Entry → + Add Your Own Item</strong> to create mochas, matchas, signature drinks. The engine learns them automatically.
           </div>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px",marginBottom:"16px"}}>
@@ -2329,9 +2350,9 @@ function RecipeSettings(){
             {label:"Buffer Amount",val:`${Math.round((drinks.latte.milk+drinks.fw.milk+drinks.capp.milk)*(buffer/100))}ml`},
             {label:"Total Coffee Dose",val:`${drinks.latte.coffee+drinks.fw.coffee+drinks.capp.coffee}g`},
           ].map(({label,val})=>(
-            <div key={label} style={{background:"rgba(255,255,255,.03)",border:".5px solid var(--border)",borderRadius:"8px",padding:"9px 8px",textAlign:"center"}}>
-              <div style={{fontFamily:"var(--font-d)",fontSize:"14px",fontWeight:"700",color:"var(--text-1)",marginBottom:"2px"}}>{val}</div>
-              <div style={{fontSize:"9px",color:"var(--text-2)"}}>{label}</div>
+            <div key={label} style={{background:"rgba(240,235,225,.07)",border:"1px solid rgba(240,235,225,.18)",padding:"9px 8px",textAlign:"center"}}>
+              <div style={{fontFamily:"var(--font-m)",fontSize:"13px",fontWeight:"600",color:"#F0EBE1",marginBottom:"3px"}}>{val}</div>
+              <div style={{fontFamily:"var(--font-m)",fontSize:"8px",letterSpacing:".08em",textTransform:"uppercase",color:"#A3998B"}}>{label}</div>
             </div>
           ))}
         </div>
@@ -2445,8 +2466,8 @@ function HalalExpiryTracker({arabic}){
       <div className="ht-hd">
         <div className="ht-hicon"><Package size={16} color="var(--emerald)"/></div>
         <div style={{flex:1}}>
-          <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"var(--text-1)"}}>{T.title}</div>
-          <div style={{fontSize:"10px",color:"#5a9e7a",marginTop:"2px"}}>{T.sub}</div>
+          <div style={{fontFamily:"var(--font-b)",fontSize:"14px",fontWeight:"700",color:"var(--on-deep)",letterSpacing:"-.01em"}}>{T.title}</div>
+          <div style={{fontFamily:"var(--font-m)",fontSize:"9px",letterSpacing:".06em",color:"var(--on-deep-dim)",marginTop:"3px"}}>{T.sub}</div>
         </div>
         <span style={{background:"rgba(92,114,104,.12)",border:".5px solid rgba(92,114,104,.28)",borderRadius:"5px",padding:"3px 8px",fontSize:"9px",fontWeight:"700",color:"var(--emerald)",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>{T.badge}</span>
       </div>
@@ -2498,7 +2519,7 @@ function HalalExpiryTracker({arabic}){
           padding:"14px 16px"
         }}>
           <div style={{
-            fontSize:11,fontWeight:600,color:"#1E1B18",marginBottom:10,
+            fontSize:11,fontWeight:600,color: "var(--text-1)",marginBottom:10,
             letterSpacing:".06em",textTransform:"uppercase",
             display:"flex",alignItems:"center",gap:6
           }}>
@@ -2611,7 +2632,7 @@ function SupplierBook({arabic}){
           <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"var(--text-1)"}}>{arabic?"دفتر الموردين":"Supplier Book"}</div>
           <div style={{fontSize:"10px",color:"var(--text-2)",marginTop:"2px"}}>{arabic?"موصول بتوصيات الذكاء الاصطناعي":"Linked to AI order recommendations"}</div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(30,27,24,.1)",border:".5px solid rgba(30,27,24,.22)",borderRadius:"20px",padding:"4px 9px",fontSize:"9px",fontWeight:"700",color:"#1E1B18",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>
+        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(30,27,24,.1)",border:".5px solid rgba(30,27,24,.22)",borderRadius:"20px",padding:"4px 9px",fontSize:"9px",fontWeight:"700",color: "var(--text-1)",letterSpacing:".06em",textTransform:"uppercase",flexShrink:0}}>
           <Zap size={9}/>{arabic?"ذكاء":"AI"}
         </div>
       </div>
@@ -2651,7 +2672,7 @@ function WhatsAppReport({arabic}){
       <div className="wa-hd">
         <div className="wa-icon" style={{background:"rgba(201,118,46,.1)",border:".5px solid rgba(201,118,46,.25)"}}><MessageSquare size={17} color="#C9762E"/></div>
         <div style={{flex:1}}>
-          <div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#E8E4DB",marginBottom:"2px",display:"flex",alignItems:"center",gap:"8px"}}>
+          <div style={{fontFamily:"var(--font-b)",fontSize:"14px",fontWeight:"700",color:"var(--text-1)",marginBottom:"2px",display:"flex",alignItems:"center",gap:"8px"}}>
             {T.title}
             <span style={{fontSize:"8px",fontWeight:"700",letterSpacing:".08em",textTransform:"uppercase",color:"#C9762E",background:"rgba(201,118,46,.12)",border:".5px solid rgba(201,118,46,.3)",padding:"2px 6px",borderRadius:"4px"}}>{T.label}</span>
           </div>
@@ -2703,7 +2724,7 @@ function WhatsAppReport_OLD({arabic}){
     <div className="wa-card">
       <div className="wa-hd">
         <div className="wa-icon"><MessageSquare size={17} color="#25d366"/></div>
-        <div style={{flex:1}}><div style={{fontFamily:"var(--font-d)",fontSize:"13px",fontWeight:"700",color:"#E8E4DB",marginBottom:"2px"}}>{T.title}</div><div style={{fontSize:"10px",color:"#5a7a62"}}>{T.sub}</div></div>
+        <div style={{flex:1}}><div style={{fontFamily:"var(--font-b)",fontSize:"14px",fontWeight:"700",color:"var(--text-1)",marginBottom:"2px"}}>{T.title}</div><div style={{fontFamily:"var(--font-m)",fontSize:"9px",letterSpacing:".06em",color:"var(--text-2)"}}>{T.sub}</div></div>
         <button className="wa-copybtn" onClick={handleCopy} title="Copy">{copied?<Check size={12} color="#25d366"/>:<Copy size={12}/>}</button>
       </div>
       <div className="wa-preview">
@@ -2756,7 +2777,7 @@ function ToolsTab({arabic,setArabic}){
         {arabic&&(
           <div style={{marginTop:"7px",background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.14)",borderRadius:"9px",padding:"8px 13px",display:"flex",alignItems:"center",gap:"6px"}}>
             <Globe size={10} color="#C9762E"/>
-            <span style={{fontSize:"10px",color:"#1E1B18"}}>الوضع العربي مفعّل — الباريستا وتتبع المكونات يعملان بالعربية</span>
+            <span style={{fontSize:"10px",color: "var(--text-1)"}}>الوضع العربي مفعّل — الباريستا وتتبع المكونات يعملان بالعربية</span>
           </div>
         )}
       </div>
@@ -2882,29 +2903,15 @@ function useTheme() {
   return [preference, setPreference];
 }
 
-// Inline theme toggle component — 3 buttons: Light / Dark / System
-// HIDDEN during the Operations Desk reskin: the app ships light-first per the
-// design brief; the toggle returns once dark mode gets its own design pass.
+// Theme toggle — Day / Night / Auto, styled as a hard-ruled segmented control
 function ThemeToggle({ inline = false }) {
-  return null;
-  /* eslint-disable no-unreachable */
   const [preference, setPreference] = useTheme();
 
-  const wrapStyle = inline ? {
-    display: "inline-flex",
-    background: "var(--navy-mid)",
-    border: ".5px solid var(--border)",
-    borderRadius: "var(--r-md)",
-    padding: "3px",
-    gap: "2px"
-  } : {
-    display: "flex",
+  const wrapStyle = {
+    display: inline ? "inline-flex" : "flex",
+    border: "1.5px solid var(--border-blue)",
     background: "var(--navy-card)",
-    border: ".5px solid var(--border)",
-    borderRadius: "var(--r-md)",
-    padding: "3px",
-    gap: "2px",
-    width: "100%"
+    width: inline ? "auto" : "100%",
   };
 
   const btn = (val, label, icon) => {
@@ -2913,27 +2920,28 @@ function ThemeToggle({ inline = false }) {
       <button
         key={val}
         onClick={() => setPreference(val)}
+        aria-pressed={active}
         style={{
           flex: inline ? "0 0 auto" : 1,
           background: active ? "var(--blue)" : "transparent",
           color: active ? "var(--navy)" : "var(--text-2)",
           border: "none",
-          borderRadius: "calc(var(--r-md) - 2px)",
-          padding: inline ? "7px 12px" : "9px 12px",
+          borderRadius: 0,
+          padding: inline ? "9px 14px" : "11px 12px",
+          fontFamily: "var(--font-m)",
           fontSize: "10px",
           fontWeight: 500,
-          fontFamily: "var(--font-b)",
-          letterSpacing: ".08em",
+          letterSpacing: ".12em",
           textTransform: "uppercase",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "6px",
-          transition: "background .12s,color .12s"
+          gap: "7px",
+          transition: "background .15s ease-out,color .15s ease-out"
         }}
       >
-        <span style={{ fontSize: 13, lineHeight: 1 }}>{icon}</span>
+        <span style={{ fontSize: 12, lineHeight: 1 }}>{icon}</span>
         <span>{label}</span>
       </button>
     );
@@ -2941,9 +2949,9 @@ function ThemeToggle({ inline = false }) {
 
   return (
     <div style={wrapStyle}>
-      {btn("light", "Light", "☀")}
-      {btn("dark", "Dark", "☾")}
-      {btn("system", "Auto", "⚙")}
+      {btn("light", "Day", "☀")}
+      {btn("dark", "Night", "☾")}
+      {btn("system", "Auto", "◐")}
     </div>
   );
 }
@@ -3030,7 +3038,7 @@ function InstallPrompt() {
             Install Kaffelog on iPhone
           </div>
           <button onClick={handleDismiss} style={{
-            background: "transparent", border: "none", color: "#9C9184",
+            background: "transparent", border: "none", color: "var(--on-deep-dim)",
             cursor: "pointer", padding: 0, fontSize: 20, lineHeight: 1
           }}>×</button>
         </div>
@@ -3042,7 +3050,7 @@ function InstallPrompt() {
         </ol>
         <button onClick={handleDismiss} style={{
           marginTop: 16, width: "100%", padding: "12px 0",
-          background: "#F6F3EC", color: "#1E1B18",
+          background: "var(--navy)", color: "var(--text-1)",
           border: "none", borderRadius: 4,
           fontSize: 11, fontWeight: 500, cursor: "pointer",
           fontFamily: "'Inter',sans-serif", letterSpacing: ".1em", textTransform: "uppercase"
@@ -3086,7 +3094,7 @@ function InstallPrompt() {
         </div>
       </div>
       <button onClick={handleInstall} style={{
-        background: "#F6F3EC", color: "#1E1B18",
+        background: "var(--navy)", color: "var(--text-1)",
         border: "none", borderRadius: 4,
         padding: "9px 14px", fontSize: 11, fontWeight: 500,
         letterSpacing: ".1em", textTransform: "uppercase",
@@ -3333,7 +3341,7 @@ function StockTracker({ stock, setStock, compact = false }) {
                     <button
                       onClick={() => { setAddingTo(item.id); setAddAmount(""); }}
                       style={{
-                        background: "rgba(30,27,24,.12)", color: "#1E1B18",
+                        background: "rgba(30,27,24,.12)", color: "var(--text-1)",
                         border: ".5px solid rgba(30,27,24,.3)", borderRadius: 6,
                         padding: "4px 10px", fontSize: 10, fontWeight: 700,
                         letterSpacing: ".06em", textTransform: "uppercase",
@@ -3752,7 +3760,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                     <span style={{ fontSize: 13, color: "var(--text-1)", fontWeight: 500 }}>{item.name}</span>
                     {recipe.cup_size && recipe.cup_size !== "-" && (
                       <span style={{
-                        fontSize: 9, color: "#1E1B18",
+                        fontSize: 9, color: "var(--text-1)",
                         background: "rgba(30,27,24,.12)", padding: "2px 6px",
                         borderRadius: 4, fontWeight: 600
                       }}>{recipe.cup_size}</span>
@@ -3809,7 +3817,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                 }}>
                   <div style={{
                     fontSize: 10, fontWeight: 600, letterSpacing: ".06em",
-                    textTransform: "uppercase", color: "#1E1B18", marginBottom: 8,
+                    textTransform: "uppercase", color: "var(--text-1)", marginBottom: 8,
                     display: "flex", alignItems: "center", gap: 6
                   }}>
                     <Sparkles size={10}/>Recipe — what goes in each {item.name.toLowerCase()}
@@ -3903,7 +3911,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                     onClick={() => addIngredientToItem(item.id)}
                     style={{
                       width: "100%", marginTop: 8, padding: "7px 0",
-                      background: "transparent", color: "#1E1B18",
+                      background: "transparent", color: "var(--text-1)",
                       border: ".5px dashed rgba(30,27,24,.4)",
                       borderRadius: 6, fontSize: 11, fontWeight: 600,
                       cursor: "pointer", fontFamily: "var(--font-d)",
@@ -3929,7 +3937,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             onClick={() => setShowAddItem(true)}
             style={{
               width: "100%", padding: "10px 12px",
-              background: "rgba(30,27,24,.06)", color: "#1E1B18",
+              background: "rgba(30,27,24,.06)", color: "var(--text-1)",
               border: ".5px dashed rgba(30,27,24,.4)", borderRadius: 10,
               fontSize: 12, fontWeight: 600, cursor: "pointer",
               fontFamily: "var(--font-d)", letterSpacing: ".06em",
@@ -3941,7 +3949,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             background: "rgba(30,27,24,.08)", border: ".5px solid rgba(30,27,24,.3)",
             borderRadius: 10, padding: "11px 12px", marginTop: 4
           }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#1E1B18", marginBottom: 8, letterSpacing: ".06em", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-1)", marginBottom: 8, letterSpacing: ".06em", textTransform: "uppercase" }}>
               New menu item
             </div>
             <div style={{ display: "flex", gap: 7, marginBottom: 7 }}>
@@ -4385,7 +4393,7 @@ function LogsTab({ cafeName = "Your Cafe" }) {
                   onClick={() => downloadLog(log)}
                   title="Download this log"
                   style={{
-                    background:"rgba(30,27,24,.1)",color:"#1E1B18",
+                    background:"rgba(30,27,24,.1)",color: "var(--text-1)",
                     border:".5px solid rgba(30,27,24,.3)",borderRadius:7,
                     padding:"6px 10px",fontSize:10,cursor:"pointer",
                     fontFamily:"var(--font-d)",fontWeight:600,letterSpacing:".06em",
@@ -4445,8 +4453,8 @@ function LandingPage({ onGoLogin, onGoSignup }) {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#F6F3EC",
-      color: "#1E1B18",
+      background: "var(--navy)",
+      color: "var(--text-1)",
       fontFamily: "'Inter', 'DM Sans', -apple-system, sans-serif",
       WebkitFontSmoothing: "antialiased"
     }}>
@@ -4460,18 +4468,18 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         <div>
           <div style={{
             fontFamily: "'Fraunces','Playfair Display',Georgia,serif",
-            fontSize: "22px", fontWeight: 500, color: "#1E1B18",
+            fontSize: "22px", fontWeight: 500, color: "var(--text-1)",
             letterSpacing: "-0.3px", lineHeight: 1
           }}>Kaffelog</div>
           <div style={{
-            fontSize: "9.5px", color: "#6E675E",
+            fontSize: "9.5px", color: "var(--text-2)",
             textTransform: "uppercase", letterSpacing: "0.12em",
             marginTop: "4px", fontWeight: 500
           }}>Operations Software · UAE</div>
         </div>
         <div style={{ display: "flex", gap: "10px" }}>
           <button onClick={onGoLogin} style={{
-            background: "transparent", color: "#1E1B18",
+            background: "transparent", color: "var(--text-1)",
             border: "1px solid #1E1B18", borderRadius: "4px",
             padding: "9px 16px", fontSize: "11px", fontWeight: 500,
             cursor: "pointer", letterSpacing: "0.08em",
@@ -4495,7 +4503,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         <div style={{ maxWidth: "780px" }}>
           <div style={{
             fontSize: "10px", fontWeight: 500,
-            color: "#6E675E", textTransform: "uppercase",
+            color: "var(--text-2)", textTransform: "uppercase",
             letterSpacing: "0.15em", marginBottom: "24px"
           }}>
             Built for UAE Cafés · 14-Day Free Trial
@@ -4508,11 +4516,11 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             letterSpacing: "-1.5px",
             lineHeight: 1.02,
             marginBottom: "28px",
-            color: "#1E1B18"
+            color: "var(--text-1)"
           }}>
             Daily operations<br/>
             for cafés that<br/>
-            <em style={{ color: "#3E5449", fontStyle: "italic" }}>actually run.</em>
+            <em style={{ color: "var(--ok-text)", fontStyle: "italic" }}>actually run.</em>
           </h1>
 
           <p style={{
@@ -4532,14 +4540,14 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               textTransform: "uppercase", fontFamily: "inherit"
             }}>Start free trial</button>
             <button onClick={onGoLogin} style={{
-              background: "transparent", color: "#1E1B18",
+              background: "transparent", color: "var(--text-1)",
               border: "1px solid #DAD5C8", borderRadius: "4px",
               padding: "14px 24px", fontSize: "12px", fontWeight: 500,
               cursor: "pointer", letterSpacing: "0.1em",
               textTransform: "uppercase", fontFamily: "inherit"
             }}>Sign in →</button>
             <div style={{
-              fontSize: "11px", color: "#6E675E",
+              fontSize: "11px", color: "var(--text-2)",
               marginLeft: "8px", lineHeight: 1.4
             }}>No card · Cancel anytime</div>
           </div>
@@ -4550,7 +4558,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
       <section style={{
         borderTop: "1px solid #DAD5C8",
         borderBottom: "1px solid #DAD5C8",
-        background: "#E8E4DB"
+        background: "var(--navy-mid)"
       }}>
         <div style={{
           maxWidth: "1100px", margin: "0 auto",
@@ -4559,46 +4567,46 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         }}>
           <div style={{ padding: "28px 24px", borderRight: "1px solid #DAD5C8" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6E675E",
+              fontSize: "9.5px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Avg waste per day</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1E1B18"
+              letterSpacing: "-0.5px", color: "var(--text-1)"
             }}>AED 60–90</div>
-            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-2)", marginTop: "4px" }}>
               On milk alone, median UAE café
             </div>
           </div>
           <div style={{ padding: "28px 24px", borderRight: "1px solid #DAD5C8" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6E675E",
+              fontSize: "9.5px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Municipality fine range</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1E1B18"
+              letterSpacing: "-0.5px", color: "var(--text-1)"
             }}>AED 5K–50K</div>
-            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-2)", marginTop: "4px" }}>
               Per missed/lost record
             </div>
           </div>
           <div style={{ padding: "28px 24px" }}>
             <div style={{
-              fontSize: "9.5px", color: "#6E675E",
+              fontSize: "9.5px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "8px"
             }}>Daily admin time</div>
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "32px", fontWeight: 500,
-              letterSpacing: "-0.5px", color: "#1E1B18"
+              letterSpacing: "-0.5px", color: "var(--text-1)"
             }}>20 sec</div>
-            <div style={{ fontSize: "11px", color: "#6E675E", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-2)", marginTop: "4px" }}>
               With Kaffelog. From the phone.
             </div>
           </div>
@@ -4611,7 +4619,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
         padding: "80px 24px"
       }}>
         <div style={{
-          fontSize: "10px", color: "#6E675E",
+          fontSize: "10px", color: "var(--text-2)",
           textTransform: "uppercase", letterSpacing: "0.15em",
           fontWeight: 500, marginBottom: "16px"
         }}>What it actually does</div>
@@ -4621,9 +4629,9 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           fontSize: "clamp(28px, 4vw, 40px)",
           fontWeight: 500, letterSpacing: "-0.8px",
           lineHeight: 1.1, marginBottom: "56px",
-          color: "#1E1B18", maxWidth: "640px"
+          color: "var(--text-1)", maxWidth: "640px"
         }}>
-          Three things every UAE café fights every week. <em style={{color: "#3E5449"}}>Solved.</em>
+          Three things every UAE café fights every week. <em style={{color: "var(--ok-text)"}}>Solved.</em>
         </h2>
 
         <div style={{
@@ -4638,7 +4646,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             borderRight: "1px solid #DAD5C8"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6E675E",
+              fontSize: "10px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>01 · Daily orders</div>
@@ -4646,7 +4654,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1E1B18"
+              marginBottom: "12px", color: "var(--text-1)"
             }}>Stop guessing the milk order.</h3>
             <p style={{
               fontSize: "14px", color: "#332E28",
@@ -4660,7 +4668,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             borderRight: "1px solid #DAD5C8"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6E675E",
+              fontSize: "10px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>02 · Municipality</div>
@@ -4668,7 +4676,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1E1B18"
+              marginBottom: "12px", color: "var(--text-1)"
             }}>Inspector walks in. You tap once.</h3>
             <p style={{
               fontSize: "14px", color: "#332E28",
@@ -4681,7 +4689,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             padding: "32px 28px"
           }}>
             <div style={{
-              fontSize: "10px", color: "#6E675E",
+              fontSize: "10px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.12em",
               fontWeight: 500, marginBottom: "12px"
             }}>03 · SafeVault</div>
@@ -4689,7 +4697,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
               letterSpacing: "-0.3px", lineHeight: 1.2,
-              marginBottom: "12px", color: "#1E1B18"
+              marginBottom: "12px", color: "var(--text-1)"
             }}>Never miss a renewal.</h3>
             <p style={{
               fontSize: "14px", color: "#332E28",
@@ -4708,7 +4716,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
       }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{
-            fontSize: "10px", color: "#9C9184",
+            fontSize: "10px", color: "var(--on-deep-dim)",
             textTransform: "uppercase", letterSpacing: "0.15em",
             fontWeight: 500, marginBottom: "16px"
           }}>Pricing</div>
@@ -4735,7 +4743,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               background: "#1E1B18", padding: "32px 28px"
             }}>
               <div style={{
-                fontSize: "10px", color: "#9C9184",
+                fontSize: "10px", color: "var(--on-deep-dim)",
                 textTransform: "uppercase", letterSpacing: "0.12em",
                 fontWeight: 500, marginBottom: "16px"
               }}>Starter</div>
@@ -4745,7 +4753,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
                 letterSpacing: "-1px", color: "#F6F3EC",
                 marginBottom: "4px"
               }}>AED 99
-                <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
+                <span style={{ fontSize: "14px", color: "var(--on-deep-dim)", fontWeight: 400 }}> /mo</span>
               </div>
               <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                 Compliance only. Logs, SafeVault, audit downloads. Stops the AED 5,000+ fines.
@@ -4774,7 +4782,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               }}>Most cafés pick this</div>
               <div style={{ marginTop: "12px" }}>
                 <div style={{
-                  fontSize: "10px", color: "#9C9184",
+                  fontSize: "10px", color: "var(--on-deep-dim)",
                   textTransform: "uppercase", letterSpacing: "0.12em",
                   fontWeight: 500, marginBottom: "16px"
                 }}>Pro</div>
@@ -4784,13 +4792,13 @@ function LandingPage({ onGoLogin, onGoSignup }) {
                   letterSpacing: "-1px", color: "#F6F3EC",
                   marginBottom: "4px"
                 }}>AED 199
-                  <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
+                  <span style={{ fontSize: "14px", color: "var(--on-deep-dim)", fontWeight: 400 }}> /mo</span>
                 </div>
                 <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                   Everything + smart milk recommendations. Pays for itself in 3 days.
                 </div>
                 <button onClick={onGoSignup} style={{
-                  background: "#F6F3EC", color: "#1E1B18",
+                  background: "var(--navy)", color: "var(--text-1)",
                   border: "1px solid #F6F3EC", borderRadius: "4px",
                   padding: "10px 18px", fontSize: "11px", fontWeight: 500,
                   cursor: "pointer", letterSpacing: "0.1em",
@@ -4805,7 +4813,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
               background: "#1E1B18", padding: "32px 28px"
             }}>
               <div style={{
-                fontSize: "10px", color: "#9C9184",
+                fontSize: "10px", color: "var(--on-deep-dim)",
                 textTransform: "uppercase", letterSpacing: "0.12em",
                 fontWeight: 500, marginBottom: "16px"
               }}>Chain</div>
@@ -4815,7 +4823,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
                 letterSpacing: "-1px", color: "#F6F3EC",
                 marginBottom: "4px"
               }}>AED 499
-                <span style={{ fontSize: "14px", color: "#9C9184", fontWeight: 400 }}> /mo</span>
+                <span style={{ fontSize: "14px", color: "var(--on-deep-dim)", fontWeight: 400 }}> /mo</span>
               </div>
               <div style={{ fontSize: "13px", color: "#A3998B", lineHeight: 1.5, marginBottom: "24px" }}>
                 3+ locations. Centralized dashboard, per-location reports.
@@ -4835,7 +4843,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
       {/* FOOTER */}
       <footer style={{
-        background: "#F6F3EC",
+        background: "var(--navy)",
         padding: "60px 24px 40px"
       }}>
         <div style={{
@@ -4848,11 +4856,11 @@ function LandingPage({ onGoLogin, onGoSignup }) {
             <div style={{
               fontFamily: "'Fraunces',Georgia,serif",
               fontSize: "22px", fontWeight: 500,
-              color: "#1E1B18", marginBottom: "8px",
+              color: "var(--text-1)", marginBottom: "8px",
               letterSpacing: "-0.3px"
             }}>Kaffelog</div>
             <div style={{
-              fontSize: "12px", color: "#6E675E",
+              fontSize: "12px", color: "var(--text-2)",
               lineHeight: 1.6
             }}>
               Daily operations software.<br/>
@@ -4862,37 +4870,37 @@ function LandingPage({ onGoLogin, onGoSignup }) {
 
           <div>
             <div style={{
-              fontSize: "9.5px", color: "#6E675E",
+              fontSize: "9.5px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.15em",
               fontWeight: 500, marginBottom: "14px"
             }}>Contact</div>
             <a href="mailto:info@kaffelog.com" style={{
-              display: "block", color: "#1E1B18",
+              display: "block", color: "var(--text-1)",
               textDecoration: "none", fontSize: "13px",
               marginBottom: "8px"
             }}>info@kaffelog.com</a>
             <a href="https://www.instagram.com/logkaffe/" target="_blank" rel="noopener noreferrer" style={{
-              display: "block", color: "#1E1B18",
+              display: "block", color: "var(--text-1)",
               textDecoration: "none", fontSize: "13px"
             }}>Instagram → @logkaffe</a>
           </div>
 
           <div>
             <div style={{
-              fontSize: "9.5px", color: "#6E675E",
+              fontSize: "9.5px", color: "var(--text-2)",
               textTransform: "uppercase", letterSpacing: "0.15em",
               fontWeight: 500, marginBottom: "14px"
             }}>Get started</div>
             <button onClick={onGoSignup} style={{
               background: "none", border: "none",
-              color: "#1E1B18", cursor: "pointer",
+              color: "var(--text-1)", cursor: "pointer",
               textAlign: "left", padding: 0,
               fontSize: "13px", fontFamily: "inherit",
               display: "block", marginBottom: "8px"
             }}>Start 14-day trial →</button>
             <button onClick={onGoLogin} style={{
               background: "none", border: "none",
-              color: "#1E1B18", cursor: "pointer",
+              color: "var(--text-1)", cursor: "pointer",
               textAlign: "left", padding: 0,
               fontSize: "13px", fontFamily: "inherit",
               display: "block"
@@ -4904,7 +4912,7 @@ function LandingPage({ onGoLogin, onGoSignup }) {
           maxWidth: "1100px", margin: "40px auto 0",
           paddingTop: "24px",
           borderTop: "1px solid #DAD5C8",
-          fontSize: "11px", color: "#6E675E",
+          fontSize: "11px", color: "var(--text-2)",
           display: "flex", justifyContent: "space-between",
           flexWrap: "wrap", gap: "12px"
         }}>
@@ -5232,7 +5240,7 @@ function OnboardingFlow({ session, onComplete }) {
     <label className="ob-label">Owner WhatsApp <span style={{color:"var(--text-3)",fontWeight:400,textTransform:"none"}}>(receives 7am daily report)</span></label>
     <input className="ob-input" type="tel" placeholder="+971 50 XXX XXXX" value={phone} onChange={e=>setPhone(e.target.value)}/>
     <div style={{marginTop:14,background:"rgba(30,27,24,.06)",border:".5px solid rgba(30,27,24,.18)",borderRadius:"var(--r-md)",padding:"11px 13px",fontSize:12,color:"var(--text-2)",lineHeight:1.5}}>
-      <span style={{color:"#1E1B18",fontWeight:600}}>Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
+      <span style={{color: "var(--text-1)",fontWeight:600}}>Daily WhatsApp report</span> — Every morning at 7am you'll receive waste savings, checklist status, and any document alerts. Nothing else.
     </div></>,
 
     // Step 4
@@ -5281,14 +5289,14 @@ class KaffelogErrorBoundary extends React.Component {
   render(){
     if (!this.state.err) return this.props.children;
     return (
-      <div style={{minHeight:"100vh",background:"#F6F3EC",color:"#1E1B18",display:"flex",flexDirection:"column",fontFamily:"'IBM Plex Sans',system-ui,sans-serif"}}>
+      <div style={{minHeight:"100vh",background: "var(--navy)",color: "var(--text-1)",display:"flex",flexDirection:"column",fontFamily:"'IBM Plex Sans',system-ui,sans-serif"}}>
         <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:32,textAlign:"center"}}>
           <div style={{width:56,height:56,background:"#1E1B18",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
-            <div style={{width:24,height:14,borderRadius:"50%",background:"#F6F3EC"}}/>
+            <div style={{width:24,height:14,borderRadius:"50%",background: "var(--navy)"}}/>
             <div style={{position:"absolute",right:7,bottom:7,width:14,height:14,background:"#B03A2E"}}/>
           </div>
           <div style={{fontWeight:700,fontSize:22,marginTop:20,letterSpacing:"-0.02em"}}>Something broke on our side</div>
-          <div style={{fontSize:14.5,color:"#6E675E",lineHeight:1.65,marginTop:8,maxWidth:"30ch"}}>
+          <div style={{fontSize:14.5,color: "var(--text-2)",lineHeight:1.65,marginTop:8,maxWidth:"30ch"}}>
             Your data is saved. Reload and you'll be exactly where you were.
           </div>
           <button onClick={()=>window.location.reload()}
@@ -5299,7 +5307,7 @@ class KaffelogErrorBoundary extends React.Component {
             Message us on WhatsApp
           </a>
         </div>
-        <div style={{padding:14,textAlign:"center",fontFamily:"'IBM Plex Mono',monospace",fontSize:9,letterSpacing:".14em",color:"#9C9184"}}>
+        <div style={{padding:14,textAlign:"center",fontFamily:"'IBM Plex Mono',monospace",fontSize:9,letterSpacing:".14em",color: "var(--on-deep-dim)"}}>
           NOTHING WAS LOST · YOUR LOGS ARE SAFE ON THIS DEVICE
         </div>
       </div>
@@ -5414,7 +5422,7 @@ function Kaffelog(){
           ))}
         </div>
         <div className="kf-side-foot">
-          <button className="kf-side-item" onClick={handleLogout} style={{color:"#8A2E22",width:"100%"}}>
+          <button className="kf-side-item" onClick={handleLogout} style={{color: "var(--bad-text)",width:"100%"}}>
             Log out
           </button>
         </div>
@@ -5436,12 +5444,12 @@ function Kaffelog(){
 
           <div className="pg-body">
             {/* Tomorrow's milk — the hero number */}
-            <div className="fade-in" style={{background:"var(--blue)",color:"#F0EBE1",padding:20,position:"relative"}}>
+            <div className="fade-in" style={{background: "var(--surface-deep)", color: "var(--on-deep)",padding:20,position:"relative"}}>
               <div style={{position:"absolute",right:0,top:0,width:14,height:14,background:"var(--emerald)"}}/>
-              <div style={{fontFamily:"var(--font-m)",fontSize:9,letterSpacing:".16em",color:"#9C9184"}}>TOMORROW'S MILK</div>
-              <div style={{fontFamily:"var(--font-serif)",fontSize:52,lineHeight:1,marginTop:6}}>54 <span style={{fontSize:19,color:"#9C9184"}}>L</span></div>
-              <div style={{fontFamily:"var(--font-m)",fontSize:10,color:"#9C9184",marginTop:8}}>WHOLE 38 · OAT 12 · ALMOND 4</div>
-              <button onClick={()=>setTab("sales")} style={{marginTop:14,background:"var(--paper-100,#F6F3EC)",backgroundColor:"#F6F3EC",color:"#1E1B18",border:"none",borderRadius:999,padding:"10px 20px",fontWeight:700,fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
+              <div style={{fontFamily:"var(--font-m)",fontSize:9,letterSpacing:".16em",color: "var(--on-deep-dim)"}}>TOMORROW'S MILK</div>
+              <div style={{fontFamily:"var(--font-serif)",fontSize:52,lineHeight:1,marginTop:6}}>54 <span style={{fontSize:19,color: "var(--on-deep-dim)"}}>L</span></div>
+              <div style={{fontFamily:"var(--font-m)",fontSize:10,color: "var(--on-deep-dim)",marginTop:8}}>WHOLE 38 · OAT 12 · ALMOND 4</div>
+              <button onClick={()=>setTab("sales")} style={{marginTop:14,background:"var(--paper-100,#F6F3EC)",backgroundColor: "var(--navy)",color: "var(--text-1)",border:"none",borderRadius:999,padding:"10px 20px",fontWeight:700,fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
                 Log yesterday's count →
               </button>
             </div>
@@ -5482,7 +5490,7 @@ function Kaffelog(){
                     <div style={{fontWeight:600,fontSize:14}}>Ahmed — Food Handler Card</div>
                     <div style={{fontFamily:"var(--font-m)",fontSize:10,color:"var(--text-2)",marginTop:3}}>14 DAYS REMAINING</div>
                   </div>
-                  <button onClick={()=>setTab("vault")} style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".1em",padding:"5px 10px",background:"rgba(201,118,46,.16)",color:"#8A4E1D",border:"1px solid var(--gold)",cursor:"pointer"}}>DUE SOON</button>
+                  <button onClick={()=>setTab("vault")} style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".1em",padding:"5px 10px",background:"rgba(201,118,46,.16)",color: "var(--warn-text)",border:"1px solid var(--gold)",cursor:"pointer"}}>DUE SOON</button>
                 </div>
               </div>
             </div>
@@ -5499,7 +5507,7 @@ function Kaffelog(){
               <div className="card-white" style={{padding:"18px"}}>
                 <div style={{display:"flex",alignItems:"center",gap:"9px",marginBottom:"12px"}}>
                   <div className="ai-chip"><div className="ai-blink"/>Smart Insight</div>
-                  <div style={{marginLeft:"auto",fontSize:"10px",color:"#9C9184"}}>Confidence: <span style={{color:"var(--emerald)",fontWeight:"600"}}>97%</span></div>
+                  <div style={{marginLeft:"auto",fontSize:"10px",color: "var(--on-deep-dim)"}}>Confidence: <span style={{color:"var(--emerald)",fontWeight:"600"}}>97%</span></div>
                 </div>
                 <p className="ai-text">
                   <strong>Reduce tomorrow's milk order by 30 litres.</strong> Today's surplus fully covers Tuesday's projected demand — ordering your standard 60L would result in <strong>AED 184.50 in avoidable losses.</strong> This pattern holds across 11 of the last 13 weeks.
