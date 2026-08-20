@@ -740,8 +740,11 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .pro-submit{width:100%;background:var(--blue);color:var(--navy);font-family:var(--font-b);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;border:none;border-radius:999px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .14s}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(70px);background:#1E1B18;border:none;border-radius:0;padding:12px 16px;display:flex;align-items:center;gap:9px;font-size:13px;color:#F0EBE1;font-weight:500;box-shadow:0 12px 28px rgba(30,27,24,.3);transition:transform .18s ease-out,opacity .18s ease-out;opacity:0;z-index:300;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+/* The toast carries no controls, so it must never take a click. It sits above
+   the modal layer, and without this it silently eats taps on whatever is
+   underneath it — which is how it swallowed part of the log submit button. */
+.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(70px);background:#1E1B18;border:none;border-radius:0;padding:12px 16px;display:flex;align-items:center;gap:9px;font-size:13px;color:#F0EBE1;font-weight:500;box-shadow:0 12px 28px rgba(30,27,24,.3);transition:transform .18s ease-out,opacity .18s ease-out;opacity:0;visibility:hidden;pointer-events:none;z-index:300;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 .toast-icon{width:8px;height:8px;border-radius:0;background:var(--emerald);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:transparent;overflow:hidden}
 
 /* ── ANIMATIONS ── */
@@ -1618,7 +1621,7 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
               </button>
 
               {!canSubmit && !saving && (
-                <div style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".08em",color:"var(--text-2)",textAlign:"center",marginTop:-10}}>
+                <div style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".08em",color:"var(--text-2)",textAlign:"center",marginTop:-10,pointerEvents:"none"}}>
                   {checkedCount===0
                     ? (arabic ? "أكمل مهمة واحدة على الأقل" : "TICK AT LEAST ONE TASK TO SUBMIT")
                     : (arabic ? "أدخل اسم الموظف" : "ADD THE STAFF NAME TO SUBMIT")}
