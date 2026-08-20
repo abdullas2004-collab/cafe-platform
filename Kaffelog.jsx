@@ -1851,13 +1851,13 @@ function SafeVault(){
               placeholder="Staff name (e.g. Ahmed Hassan)"
               value={newStaff.name}
               onChange={e => setNewStaff({...newStaff, name: e.target.value})}
-              style={{width:"100%",padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",marginBottom:7}}
+              style={{width:"100%",padding:"8px 10px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",marginBottom:7}}
             />
             <input
               type="date"
               value={newStaff.expiry}
               onChange={e => setNewStaff({...newStaff, expiry: e.target.value})}
-              style={{width:"100%",padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark",marginBottom:9}}
+              style={{width:"100%",padding:"8px 10px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:8,fontSize:13,outline:"none",fontFamily:"var(--font-b)",colorScheme: "light",marginBottom:9}}
             />
             <div style={{display:"flex",gap:7}}>
               <button onClick={handleAddStaff} disabled={newStaff.name.trim().length<2 || !newStaff.expiry} style={{
@@ -2508,14 +2508,14 @@ function HalalExpiryTracker({arabic}){
               placeholder="Icon"
               value={newIng.icon}
               onChange={e => setNewIng({...newIng, icon: e.target.value.slice(0,2)})}
-              style={{width:50,padding:"8px 6px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:16,textAlign:"center",outline:"none"}}
+              style={{width:50,padding:"8px 6px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:7,fontSize:16,textAlign:"center",outline:"none"}}
             />
             <input
               type="text"
               placeholder="Ingredient name (e.g. Condensed milk)"
               value={newIng.name}
               onChange={e => setNewIng({...newIng, name: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
+              style={{flex:1,padding:"8px 10px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
             />
           </div>
 
@@ -2526,13 +2526,13 @@ function HalalExpiryTracker({arabic}){
               placeholder="Batch # (optional)"
               value={newIng.batch}
               onChange={e => setNewIng({...newIng, batch: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
+              style={{flex:1,padding:"8px 10px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)"}}
             />
             <input
               type="date"
               value={newIng.expiry}
               onChange={e => setNewIng({...newIng, expiry: e.target.value})}
-              style={{flex:1,padding:"8px 10px",background:"#1E1B18",color:"var(--text-1)",border:".5px solid var(--border)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)",colorScheme:"dark"}}
+              style={{flex:1,padding:"8px 10px",background: "var(--navy-card)",color: "var(--text-1)",border:"1.5px solid var(--border-blue)",borderRadius:7,fontSize:12,outline:"none",fontFamily:"var(--font-b)",colorScheme: "light"}}
             />
           </div>
 
@@ -3300,8 +3300,7 @@ function StockTracker({ stock, setStock, compact = false }) {
                         onChange={e => setAddAmount(e.target.value)}
                         onKeyDown={e => e.key === "Enter" && handleAddStock(item.id)}
                         style={{
-                          width: 60, padding: "4px 8px", background: "#1E1B18",
-                          color: "var(--text-1)", border: ".5px solid var(--blue)",
+                          width: 60, padding: "4px 8px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)",
                           borderRadius: 6, fontSize: 12, outline: "none",
                           fontFamily: "var(--font-b)", textAlign: "center"
                         }}
@@ -3790,8 +3789,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   value={sales[item.id] || ""}
                   onChange={(e) => updateSale(item.id, e.target.value)}
                   style={{
-                    width: 64, padding: "8px 10px", background: "#1E1B18",
-                    color: "var(--text-1)", border: ".5px solid var(--border)",
+                    width: 64, padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)",
                     borderRadius: 8, fontSize: 15, fontWeight: 600,
                     textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
                   }}
@@ -3847,8 +3845,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         placeholder="Ingredient"
                         style={{
                           flex: 1, padding: "6px 9px", fontSize: 12,
-                          background: "#1E1B18", color: "var(--text-1)",
-                          border: ".5px solid var(--border)", borderRadius: 6,
+                          background: "var(--navy-card)",color: "var(--text-1)",
+                          border: "1.5px solid var(--border-blue)", borderRadius: 6,
                           outline: "none", fontFamily: "var(--font-b)", minWidth: 0
                         }}
                       />
@@ -3859,8 +3857,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         placeholder="0"
                         style={{
                           width: 60, padding: "6px 8px", fontSize: 12,
-                          background: "#1E1B18", color: "var(--text-1)",
-                          border: ".5px solid var(--border)", borderRadius: 6,
+                          background: "var(--navy-card)",color: "var(--text-1)",
+                          border: "1.5px solid var(--border-blue)", borderRadius: 6,
                           textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
                         }}
                       />
@@ -3869,8 +3867,8 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                         onChange={(e) => updateIngredient(item.id, idx, "unit", e.target.value)}
                         style={{
                           width: 56, padding: "6px 6px", fontSize: 11,
-                          background: "#1E1B18", color: "var(--text-1)",
-                          border: ".5px solid var(--border)", borderRadius: 6,
+                          background: "var(--navy-card)",color: "var(--text-1)",
+                          border: "1.5px solid var(--border-blue)", borderRadius: 6,
                           outline: "none", fontFamily: "var(--font-b)",
                           appearance: "none", cursor: "pointer"
                         }}
@@ -3948,14 +3946,14 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                 placeholder="Icon (emoji)"
                 value={newItem.icon}
                 onChange={e => setNewItem({ ...newItem, icon: e.target.value.slice(0, 2) })}
-                style={{ width: 60, padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 14, textAlign: "center", outline: "none" }}
+                style={{ width: 60, padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)", borderRadius: 8, fontSize: 14, textAlign: "center", outline: "none" }}
               />
               <input
                 type="text"
                 placeholder="Item name (e.g. Mocha)"
                 value={newItem.name}
                 onChange={e => setNewItem({ ...newItem, name: e.target.value })}
-                style={{ flex: 1, padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, outline: "none", fontFamily: "var(--font-b)" }}
+                style={{ flex: 1, padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)", borderRadius: 8, fontSize: 13, outline: "none", fontFamily: "var(--font-b)" }}
               />
             </div>
             <div style={{ display: "flex", gap: 7, marginBottom: 9 }}>
@@ -3966,7 +3964,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   placeholder="0"
                   value={newItem.milk_ml || ""}
                   onChange={e => setNewItem({ ...newItem, milk_ml: parseInt(e.target.value) || 0 })}
-                  style={{ width: "100%", padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
+                  style={{ width: "100%", padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -3976,7 +3974,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
                   placeholder="15"
                   value={newItem.cost_aed || ""}
                   onChange={e => setNewItem({ ...newItem, cost_aed: parseInt(e.target.value) || 0 })}
-                  style={{ width: "100%", padding: "8px 10px", background: "#1E1B18", color: "var(--text-1)", border: ".5px solid var(--border)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
+                  style={{ width: "100%", padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)", borderRadius: 8, fontSize: 13, textAlign: "center", outline: "none" }}
                 />
               </div>
             </div>
@@ -4027,8 +4025,7 @@ function SalesEntry({ cafeName = "Your Cafe", ownerWhatsApp = "", stock, setStoc
             value={standardOrder}
             onChange={(e) => setStandardOrder(Math.max(0, parseInt(e.target.value) || 0))}
             style={{
-              width: 64, padding: "8px 10px", background: "#1E1B18",
-              color: "var(--text-1)", border: ".5px solid var(--border)",
+              width: 64, padding: "8px 10px", background: "var(--navy-card)",color: "var(--text-1)", border: "1.5px solid var(--border-blue)",
               borderRadius: 8, fontSize: 15, fontWeight: 600,
               textAlign: "center", outline: "none", fontFamily: "var(--font-b)"
             }}
