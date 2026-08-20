@@ -704,6 +704,7 @@ html,body{background:var(--navy);font-family:var(--font-b);color:var(--text-1);-
 .range-unit{font-family:var(--font-m);font-size:12px;color:var(--text-2);margin-left:3px;font-weight:400}
 .range-input{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:0;outline:none;cursor:pointer}
 .range-input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:0;background:var(--blue);cursor:pointer;border:2px solid var(--navy-card)}
+.range-input::-moz-range-thumb{width:18px;height:18px;border-radius:0;background:var(--blue);cursor:pointer;border:2px solid var(--navy-card)}
 .range-ticks{display:flex;justify-content:space-between;margin-top:8px}
 .range-tick{font-family:var(--font-m);font-size:8.5px;color:var(--text-3)}
 .rs-drink{background:var(--navy-card);border-radius:0;border:1.5px solid var(--border-blue);overflow:hidden}
@@ -1278,11 +1279,14 @@ function FineRiskGauge({score}){
 
 function RangeSlider({value,min,max,onChange,color="#5C7268"}){
   const pct=((value-min)/(max-min))*100;
+  // `color` may itself be a var(). Redeclaring that same custom property here
+  // would make it reference itself, which voids the whole gradient — so the
+  // track colour is only ever consumed, never re-assigned.
   const bg=`linear-gradient(to right, ${color} ${pct}%, var(--navy-mid) ${pct}%)`;
   return(
     <input type="range" className="range-input" min={min} max={max} value={value}
       onChange={e=>onChange(Number(e.target.value))}
-      style={{background:bg,"--emerald":color}}/>
+      style={{background:bg}}/>
   );
 }
 
