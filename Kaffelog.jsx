@@ -130,6 +130,13 @@ let _cafe    = null;
 const getSession = () => _session;
 const getCafe    = () => _cafe;
 
+// A stalled network request must never freeze a save flow — the counter is a
+// bad place to discover your connection dropped. Rejects instead of hanging.
+const withTimeout = (promise, ms = 8000) => Promise.race([
+  promise,
+  new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+]);
+
 const setSession = (s) => {
   _session = s;
   try {
@@ -1405,7 +1412,7 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
   const timeStr=now.toLocaleTimeString(arabic?"ar-AE":"en-AE",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
   const dateStr=now.toLocaleDateString(arabic?"ar-AE":"en-AE",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
 
-  useEffect(()=>{ if(!open){setTimeout(()=>{setPhase("form");setChecks({});setTemp(3);setStaff("");},400);} },[open]);
+  useEffect(()=>{ if(!open){setTimeout(()=>{setPhase("form");setChecks({});setTemp(3);setStaff("");setSaveError("");setSynced(true);savingRef.current=false;},400);} },[open]);
 
   const toggle=id=>setChecks(c=>({...c,[id]:!c[id]}));
   const checkedCount=Object.values(checks).filter(Boolean).length;
@@ -1414,60 +1421,79 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
   const uncheckedCritical=CHECKLIST.filter(c=>c.critical&&!checks[c.id]);
   const showRisk=checkedCount>0&&checkedCount<CHECKLIST.length;
 
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving]       = useState(false);
+  const [saveError, setSaveError] = useState("");
+  const [synced, setSynced]       = useState(true);
+  // State updates are batched, so rapid taps would all read saving===false and
+  // file duplicate logs. A ref flips synchronously on the first tap.
+  const savingRef = useRef(false);
 
   const submit = async () => {
+    if (savingRef.current) return;
+    savingRef.current = true;
     setSaving(true);
+    setSaveError("");
+
+    const cafe = getCafe();
+    const logData = {
+      cafe_id: cafe?.id || null,
+      staff_name: staff.trim(),
+      fridge_temp_c: temp,
+      checklist: checks,
+      tasks_completed: checkedCount,
+      tasks_total: CHECKLIST.length,
+      risk_flag: showRisk,
+      risk_details: showRisk ? `${uncheckedCritical.length} critical task(s) skipped` : null,
+      logged_at: new Date().toISOString(),
+    };
+
+    // 1. Cloud sync — best effort, capped, and never allowed to stall the flow.
+    let cloudSynced = false;
     try {
-      const session = getSession();
-      const cafe = getCafe();
-      const token = session?.access_token;
-
-      // Build the log record
-      const logData = {
-        cafe_id: cafe?.id || null,
-        staff_name: staff.trim(),
-        fridge_temp_c: temp,
-        checklist: checks,
-        tasks_completed: checkedCount,
-        tasks_total: CHECKLIST.length,
-        risk_flag: showRisk,
-        risk_details: showRisk ? `${uncheckedCritical.length} critical task(s) skipped` : null,
-        logged_at: new Date().toISOString(),
-      };
-
-      // Save to Supabase (skips silently if no session — for demo mode)
+      const token = getSession()?.access_token;
       if (token && cafe?.id) {
-        await sb.insert("municipality_logs", logData, token);
+        const res = await withTimeout(sb.insert("municipality_logs", logData, token));
+        // PostgREST returns a row array on success, an error object on failure
+        cloudSynced = Array.isArray(res);
+        if (!cloudSynced) console.warn("Municipality log not synced:", res);
       }
+    } catch (e) {
+      console.warn("Municipality log cloud sync failed:", e);
+    }
 
-      // ALSO save to localStorage so the Logs tab can show it
-      try {
-        const existing = JSON.parse(localStorage.getItem("pg_logs") || "[]");
-        const localLog = {
-          ...logData,
-          id: "log_" + Date.now(),
-          ref_number: "PG-" + new Date().toISOString().slice(0,10).replace(/-/g,"") + "-" + Math.floor(Math.random()*9999).toString().padStart(4,"0"),
-          temp_compliant: temp <= 4,
-          all_clear: checkedCount === CHECKLIST.length && temp <= 4,
-        };
-        existing.unshift(localLog);
-        // Keep last 90 days only
-        const trimmed = existing.slice(0, 100);
-        localStorage.setItem("pg_logs", JSON.stringify(trimmed));
-      } catch {}
+    // 2. Device save is the source of truth for the Logs tab and the PDF export.
+    //    If this fails the log is genuinely lost, so say so and keep the form.
+    try {
+      const existing = JSON.parse(localStorage.getItem("pg_logs") || "[]");
+      existing.unshift({
+        ...logData,
+        id: "log_" + Date.now(),
+        ref_number: "PG-" + new Date().toISOString().slice(0,10).replace(/-/g,"") + "-" + Math.floor(Math.random()*9999).toString().padStart(4,"0"),
+        temp_compliant: temp <= 4,
+        all_clear: checkedCount === CHECKLIST.length && temp <= 4,
+        synced: cloudSynced,
+      });
+      localStorage.setItem("pg_logs", JSON.stringify(existing.slice(0, 100)));
+    } catch (e) {
+      console.error("Municipality log device save failed:", e);
+      savingRef.current = false;
+      setSaving(false);
+      setSaveError("Couldn't save on this device — your browser storage may be full or in private mode. Nothing was lost; try again.");
+      return;
+    }
 
-      // Fire notification confirming save
+    try {
       if (notif.state() === "granted") {
         notif.send(
-          "✓ Municipality log saved",
+          "Municipality log saved",
           `Inspector-ready. ${checkedCount}/${CHECKLIST.length} tasks logged by ${staff.trim()}.`,
           { tag: "log-saved" }
         );
       }
-    } catch (e) {
-      console.error("Log save error:", e);
-    }
+    } catch {}
+
+    savingRef.current = false;
+    setSynced(cloudSynced);
     setSaving(false);
     setPhase("success");
     onSuccess?.();
@@ -1580,24 +1606,38 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
                 />
               </div>
 
-              <button className="ml-submit" disabled={!canSubmit} onClick={submit}>
-                <CheckCircle2 size={15}/>
-                {L.submit}
+              {saveError && (
+                <div style={{borderLeft:"4px solid var(--red)",background:"rgba(176,58,46,.08)",padding:"12px 14px",fontSize:13,color:"#8A2E22",lineHeight:1.55}}>
+                  {saveError}
+                </div>
+              )}
+
+              <button className="ml-submit" disabled={!canSubmit||saving} onClick={submit}>
+                {saving ? null : <CheckCircle2 size={15}/>}
+                {saving ? (arabic ? "جارٍ الحفظ…" : "Saving…") : L.submit}
               </button>
+
+              {!canSubmit && !saving && (
+                <div style={{fontFamily:"var(--font-m)",fontSize:10,letterSpacing:".08em",color:"var(--text-2)",textAlign:"center",marginTop:-10}}>
+                  {checkedCount===0
+                    ? (arabic ? "أكمل مهمة واحدة على الأقل" : "TICK AT LEAST ONE TASK TO SUBMIT")
+                    : (arabic ? "أدخل اسم الموظف" : "ADD THE STAFF NAME TO SUBMIT")}
+                </div>
+              )}
             </div>
           </>
         ):(
           <div className="ml-success">
             <div className="ml-ring"><CheckCircle2 size={36} color="var(--emerald)"/></div>
-            <div style={{fontFamily:"var(--font-d)",fontSize:"20px",fontWeight:"800",color:"var(--text-1)",marginBottom:"6px"}}>{L.success}</div>
-            <div style={{fontSize:"12px",color:"var(--text-2)",marginBottom:"4px"}}>{dateStr} · {timeStr}</div>
+            <div style={{fontSize:"22px",fontWeight:700,letterSpacing:"-0.02em",color:"var(--text-1)",marginBottom:"6px"}}>{L.success}</div>
+            <div style={{fontFamily:"var(--font-m)",fontSize:"10px",letterSpacing:".1em",color:"var(--text-2)",marginBottom:"4px"}}>{dateStr} · {timeStr}</div>
             <div className="ml-receipt">
               {[
                 ["Fridge Temp",`${temp}°C — ${ts.label}`],
                 ["Tasks Completed",`${checkedCount}/${CHECKLIST.length}`],
                 ["Staff",staff],
                 ["Log Ref",`PG-${Date.now().toString(36).toUpperCase().slice(-6)}`],
-                ["Status","Submitted to DM Audit Trail"],
+                ["Status", synced ? "Saved · synced to your account" : "Saved on this device"],
               ].map(([k,v])=>(
                 <div className="ml-receipt-row" key={k}>
                   <span style={{fontSize:"11px",color:"var(--text-2)"}}>{k}</span>
@@ -1605,7 +1645,12 @@ function MunicipalityLog({open,onClose,arabic,onSuccess}){
                 </div>
               ))}
             </div>
-            <button style={{marginTop:"18px",background:"var(--navy-card)",border:".5px solid var(--border)",borderRadius:"var(--r-md)",padding:"12px 28px",color:"var(--text-1)",fontFamily:"var(--font-d)",fontSize:"12px",fontWeight:"600",cursor:"pointer",letterSpacing:".06em",textTransform:"uppercase"}}
+            {!synced && (
+              <div style={{marginTop:14,borderLeft:"3px solid var(--gold)",background:"rgba(201,118,46,.12)",padding:"10px 13px",fontSize:12,color:"var(--text-2)",lineHeight:1.55,textAlign:"left"}}>
+                Couldn't reach your account just now, so this log is stored on this device. It stays in your Logs and exports normally — reconnect and it'll sync.
+              </div>
+            )}
+            <button style={{marginTop:"18px",background:"var(--blue)",border:"none",borderRadius:999,padding:"14px 32px",color:"var(--navy)",fontFamily:"var(--font-b)",fontSize:"15px",fontWeight:700,cursor:"pointer"}}
               onClick={()=>{onClose();setPhase("form");}}>
               Done
             </button>
